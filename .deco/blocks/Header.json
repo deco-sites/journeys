@@ -11,7 +11,7 @@
     "<p>Get 10% off today: <strong>NEW10</strong></p>"
   ],
   "logo": {
-    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/ed9f7e80-86a8-4b72-9809-2e4e2e5f0e53",
+    "src": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/4da000a7-5db9-40c4-8766-2d9d0504d6ea/journeys-logo.webp",
     "alt": "Deco Storefront",
     "width": 160,
     "height": 40
@@ -32,33 +32,120 @@
       ],
       "@type": "SiteNavigationElement",
       "url": "/deals",
-      "name": "Deals"
+      "name": "Deals",
+      "subItems": [
+        {
+          "name": "ADIDAS",
+          "url": "/adidas",
+          "isBrand": true
+        },
+        {
+          "name": "CONVERSE",
+          "url": "/converse",
+          "isBrand": true
+        },
+        {
+          "name": "NEW BALANCE",
+          "url": "new-balance"
+        },
+        {
+          "name": "BIRKENSTOCK",
+          "url": "/birkenstock"
+        },
+        {
+          "name": "VANS",
+          "url": "/vans"
+        },
+        {
+          "name": "CROCS",
+          "url": "/crocs"
+        }
+      ],
+      "item": "BRANDS"
     },
     {
       "@type": "SiteNavigationElement",
       "url": "/valentines-day",
       "name": "Valentine's Day",
-      "children": []
+      "children": [],
+      "subItems": [
+        {
+          "name": "SHOP BY SHOE SIZE",
+          "url": "#"
+        },
+        {
+          "name": "SHOES",
+          "url": "#"
+        },
+        {
+          "name": "CLOTHING",
+          "url": "#"
+        },
+        {
+          "name": "ACCESSORIES",
+          "url": "#"
+        },
+        {
+          "name": "COLLECTIONS",
+          "url": "#"
+        }
+      ],
+      "item": "WOMEN"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/valentines-day",
+      "name": "Valentine's Day",
+      "children": [],
+      "subItems": [
+        {
+          "name": "SHOP BY SHOE SIZE",
+          "url": "#"
+        },
+        {
+          "name": "SHOES",
+          "url": "#"
+        },
+        {
+          "name": "CLOTHING",
+          "url": "#"
+        },
+        {
+          "name": "ACCESSORIES",
+          "url": "#"
+        },
+        {
+          "name": "COLLECTIONS",
+          "url": "#"
+        }
+      ],
+      "item": "MEN"
     },
     {
       "@type": "SiteNavigationElement",
       "url": "/women",
       "name": "Women",
-      "children": []
+      "children": [],
+      "subItems": [],
+      "item": "KIDZ",
+      "itemUrl": "/kidz"
     },
     {
       "@type": "SiteNavigationElement",
       "url": "/men",
       "name": "Men",
-      "children": []
+      "children": [],
+      "subItems": []
     },
     {
       "@type": "SiteNavigationElement",
       "url": "/clearance",
       "name": "Clearance",
-      "children": []
+      "children": [],
+      "subItems": []
     },
     {
+      "subItems": [],
       "@type": "SiteNavigationElement",
       "url": "/activities",
       "name": "Activities",

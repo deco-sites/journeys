@@ -1,23 +1,72 @@
-import Icon from "../../components/ui/Icon.tsx";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
+import { clx } from "../../sdk/clx.ts";
 
-export interface Props {
-  navItems?: SiteNavigationElement[];
+/** @title {{ name }} */
+export interface MenuSubItemProps {
+  name: string;
+  subItemUrl: string;
+  isBrand?: boolean;
 }
 
-function MenuItem({ item }: { item: SiteNavigationElement }) {
-  return (
+/** @title {{ item }} */
+export interface MenuItemProps {
+  item: string;
+  itemUrl?: string;
+  subItems?: MenuSubItemProps[];
+}
+
+export interface Props {
+  navItems?: MenuItemProps[];
+}
+
+function MenuItem({ item, subItems, itemUrl }: MenuItemProps) {
+  console.log(itemUrl, subItems);
+
+  return (itemUrl && (subItems?.length === 0)) ? (
+    <a
+      class={clx(
+        "block border-b border-b-/.1 p-2.5 pl-8 bg-white w-full",
+        "font-primary font-bold text-gray-100 text-base/4 uppercase"
+      )}
+      href={itemUrl}
+    >
+      {item}
+    </a>
+  ) : (
     <div class="collapse collapse-plus">
-      <input type="checkbox" />
-      <div class="collapse-title">{item.name}</div>
-      <div class="collapse-content">
+      <input class="group h-auto min-h-fit" type="checkbox" />
+      <div class={clx(
+        "collapse-title",
+        "p-2.5 pl-8 font-primary font-bold text-gray-100 text-base/4 uppercase min-h-fit h-fit",
+        "after:font-bold after:text-xl/none after:text-orange-100",
+        "group-checked:after:text-gray-100 group-checked:bg-gray-200"
+      )}>
+        {item}
+      </div>
+      <div class="collapse-content px-0">
         <ul>
-          <li>
-            <a class="underline text-sm" href={item.url}>Ver todos</a>
-          </li>
-          {item.children?.map((node) => (
+          {subItems?.map(({ name, subItemUrl, isBrand }) => (
             <li>
-              <MenuItem item={node} />
+              {isBrand ? (
+                <a
+                  class={clx(
+                    "block border-b border-b-/.1 p-2.5 pl-20 bg-white w-full",
+                    "font-primary font-medium text-gray-100 text-base/4 uppercase"
+                  )}
+                  href={subItemUrl}
+                >
+                  {name}
+                </a>
+              ) : (
+                <a
+                  class={clx(
+                    "block border-b border-b-/.1 p-2.5 pl-20 bg-gray-200 w-full",
+                    "font-primary font-bold text-gray-100 text-base/4 uppercase"
+                  )}
+                  href={subItemUrl}
+                >
+                  {name}
+                </a>
+              )}
             </li>
           ))}
         </ul>
@@ -32,51 +81,12 @@ function Menu({ navItems = [] }: Props) {
       class="flex flex-col h-full overflow-y-auto"
       style={{ minWidth: "100vw" }}
     >
-      <ul class="px-4 flex-grow flex flex-col divide-y divide-base-200 overflow-y-auto">
-        {navItems.map((item) => (
+      <ul class="flex-grow flex flex-col divide-y divide-base-200 overflow-y-auto">
+        {navItems?.map(({ item, subItems, itemUrl }) => (
           <li>
-            <MenuItem item={item} />
+            <MenuItem item={item} subItems={subItems} itemUrl={itemUrl} />
           </li>
         ))}
-      </ul>
-
-      <ul class="flex flex-col py-2 bg-base-200">
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="/wishlist"
-          >
-            <Icon id="favorite" />
-            <span class="text-sm">Lista de desejos</span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="home_pin" />
-            <span class="text-sm">Nossas lojas</span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="call" />
-            <span class="text-sm">Fale conosco</span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="account_circle" />
-            <span class="text-sm">Minha conta</span>
-          </a>
-        </li>
       </ul>
     </div>
   );

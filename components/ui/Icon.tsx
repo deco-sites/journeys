@@ -3,7 +3,7 @@ import type { JSX } from "preact";
 
 export type AvailableIcons =
   | "search"
-  | "shopping_bag"
+  | "shopping-bag"
   | "menu"
   | "account_circle"
   | "close"
