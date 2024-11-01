@@ -66,41 +66,27 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
       </div>
     </Modal>
 
-    <div class="flex flex-col gap-4 pt-5 container border-b border-gray-300">
-      <div class="grid grid-cols-3 place-items-center">
-        <div class="place-self-start">
+    <div class="flex flex-col items-center pt-1">
+      <div class="flex justify-center items-center w-full px-2.5 max-w-[992px]">
+        <div class="pr-9">
           <a href="/" aria-label="Store logo">
             <Image
               src={logo.src}
               alt={logo.alt}
-              width={logo.width || 100}
-              height={logo.height || 23}
+              width={71}
+              height={30}
             />
           </a>
         </div>
-
-        <label
-          for={SEARCHBAR_POPUP_ID}
-          class="input input-bordered flex items-center gap-2 w-full"
-          aria-label="search icon button"
-        >
-          <Icon id="search" />
-          <span class="text-base-400 truncate">
-            Search products, brands...
-          </span>
-        </label>
-
-        <div class="flex gap-4 place-self-end">
-          <Bag />
-        </div>
-      </div>
-
-      <div class="flex justify-between items-center">
-        <ul class="flex">
+        <ul class="flex gap-8">
           {navItems?.slice(0, 10).map(({ item, subItems, itemUrl }) => <NavItem item={item} itemUrl={itemUrl} subItems={subItems} />)}
         </ul>
-        <div>
-          {/* ship to */}
+
+        <div class="flex gap-8 items-center ml-auto">
+          <Icon id="search" size={17} />
+          <Image src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/4a55a936-708c-46ad-983f-00bfc9ed0701/location-pointer-2961.png" width={17} height={17} />
+          <Image src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d42ce836-76b5-41fd-a500-314061658361/user-6769-(1).png" width={17} height={17} />
+          <Bag />
         </div>
       </div>
     </div>
@@ -111,16 +97,17 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
   <>
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
+      class=""
       aside={
         <Drawer.Aside title="Search" drawer={SEARCHBAR_DRAWER_ID}>
-          <div class="w-screen overflow-y-auto">
-            {loading === "lazy"
-              ? (
-                <div class="h-full w-full flex items-center justify-center">
-                  <span class="loading loading-spinner" />
-                </div>
-              )
-              : <Searchbar {...searchbar} />}
+          <div
+            class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto"
+            style={{
+              minWidth: "calc(min(80vw, 425px))",
+              maxWidth: "425px",
+            }}
+          >
+            <Searchbar {...searchbar} />
           </div>
         </Drawer.Aside>
       }
@@ -145,7 +132,7 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
     />
 
     <div
-      class="flex justify-between items-center w-full px-2.5 shadow-header-mobile"
+      class="flex justify-between items-center w-full px-2.5 shadow-mobile"
       style={{
         height: NAVBAR_HEIGHT_MOBILE
       }}
@@ -210,7 +197,7 @@ function Header({
           : HEADER_HEIGHT_MOBILE,
       }}
     >
-      <div class="bg-base-100 fixed w-full z-40">
+      <div class="bg-white fixed w-full z-40 shadow-header">
         <Preheader />
         {device === "desktop"
           ? <Desktop logo={logo} {...props} />

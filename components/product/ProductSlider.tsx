@@ -4,6 +4,8 @@ import Icon from "../ui/Icon.tsx";
 import Slider from "../ui/Slider.tsx";
 import ProductCard from "./ProductCard.tsx";
 import { useId } from "../../sdk/useId.ts";
+import { useDevice } from "jsr:@deco/deco@1.102.3/hooks";
+import { splitArray } from "../../sdk/splitArray.ts";
 
 interface Props {
   products: Product[];
@@ -12,6 +14,15 @@ interface Props {
 
 function ProductSlider({ products, itemListName }: Props) {
   const id = useId();
+  const device = useDevice();
+
+  const productsPerPage = splitArray(products,
+    device === "desktop"
+    ? 5
+    : device === "tablet"
+      ? 3
+      : 2
+  )
 
   return (
     <>
@@ -24,39 +35,51 @@ function ProductSlider({ products, itemListName }: Props) {
       >
         <div class="col-start-1 col-span-3 row-start-1 row-span-1">
           <Slider class="carousel carousel-center sm:carousel-end gap-5 sm:gap-10 w-full">
-            {products?.map((product, index) => (
+            {productsPerPage?.map((page: Product[], index: number) => (
               <Slider.Item
                 index={index}
                 class={clx(
-                  "carousel-item",
-                  "first:pl-5 first:sm:pl-0",
-                  "last:pr-5 last:sm:pr-0",
+                  "carousel-item justify-center w-full",
                 )}
               >
-                <ProductCard
-                  index={index}
-                  product={product}
-                  itemListName={itemListName}
-                  class="w-[287px] sm:w-[300px]"
-                />
+                {page.map((product) => (
+                  <ProductCard
+                    index={index}
+                    product={product}
+                    itemListName={itemListName}
+                    class="w-full lg:max-w-72"
+                  />
+                ))}
               </Slider.Item>
             ))}
           </Slider>
         </div>
 
         <div class="col-start-1 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative bottom-[15%]">
-          <Slider.PrevButton class="hidden sm:flex disabled:invisible btn btn-outline btn-sm btn-circle no-animation">
+          <Slider.PrevButton class="flex btn btn-outline btn-sm btn-circle no-animation">
             <Icon id="chevron-right" class="rotate-180" />
           </Slider.PrevButton>
         </div>
 
         <div class="col-start-3 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative bottom-[15%]">
-          <Slider.NextButton class="hidden sm:flex disabled:invisible btn btn-outline btn-sm btn-circle no-animation">
+          <Slider.NextButton class="flex btn btn-outline btn-sm btn-circle no-animation">
             <Icon id="chevron-right" />
           </Slider.NextButton>
         </div>
+
+        <div class="flex flex-grow" />
+
+        <div class="flex gap-2 justify-center items-center">
+          {productsPerPage.map((_: Product[], index: number) => (
+            <Slider.Dot
+              class="group size-2.5 p-[3px] rounded-full border border-gray-400 disabled:bg-gray-400"
+              index={index}
+              key={index}
+            />
+          ))}
+        </div>
       </div>
-      <Slider.JS rootId={id} />
+      <Slider.JS rootId={id} infinite={true} />
     </>
   );
 }

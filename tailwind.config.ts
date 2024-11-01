@@ -12,11 +12,15 @@ export default {
         slide: 'slide 6s infinite',
       },
       boxShadow: {
-        "header-mobile": "0 3px 3px 0 rgba(235, 235, 235, 0.4)",
+        "header": "0 3px 3px 0 rgba(235, 235, 235, 0.4)",
       },
       colors: {
+        "white": "#FFFFFF",
+        "black": "#000000",
         "gray-100": "#202020",
         "gray-200": "#EBEBEB",
+        "gray-300": "#cfcfcf",
+        "gray-400": "#aaaaaa",
         "green-100": "#8BC43E",
         "orange-100": "#FF8C00",
       },

@@ -31,43 +31,49 @@
         }
       ],
       "@type": "SiteNavigationElement",
-      "url": "/deals",
-      "name": "Deals",
       "subItems": [
         {
           "name": "ADIDAS",
-          "url": "/adidas",
-          "isBrand": true
+          "url": "",
+          "isBrand": true,
+          "subItemUrl": "/adidas"
         },
         {
           "name": "CONVERSE",
-          "url": "/converse",
-          "isBrand": true
+          "url": "",
+          "isBrand": true,
+          "subItemUrl": "/converse"
         },
         {
           "name": "NEW BALANCE",
-          "url": "new-balance"
+          "url": "",
+          "isBrand": true,
+          "subItemUrl": "/new-balance"
         },
         {
           "name": "BIRKENSTOCK",
-          "url": "/birkenstock"
+          "url": "/birkenstock",
+          "isBrand": true,
+          "subItemUrl": "/birkenstock"
         },
         {
           "name": "VANS",
-          "url": "/vans"
+          "url": "",
+          "isBrand": true,
+          "subItemUrl": "/vans"
         },
         {
           "name": "CROCS",
-          "url": "/crocs"
+          "url": "",
+          "isBrand": true,
+          "subItemUrl": "/crocs"
         }
       ],
-      "item": "BRANDS"
+      "item": "Brands",
+      "itemUrl": "/brands"
     },
     {
       "@type": "SiteNavigationElement",
-      "url": "/valentines-day",
-      "name": "Valentine's Day",
-      "children": [],
       "subItems": [
         {
           "name": "SHOP BY SHOE SIZE",
@@ -90,13 +96,10 @@
           "url": "#"
         }
       ],
-      "item": "WOMEN"
+      "item": "Women"
     },
     {
       "@type": "SiteNavigationElement",
-      "url": "/valentines-day",
-      "name": "Valentine's Day",
-      "children": [],
       "subItems": [
         {
           "name": "SHOP BY SHOE SIZE",
@@ -119,37 +122,13 @@
           "url": "#"
         }
       ],
-      "item": "MEN"
+      "item": "Men"
     },
     {
       "@type": "SiteNavigationElement",
-      "url": "/women",
-      "name": "Women",
-      "children": [],
       "subItems": [],
-      "item": "KIDZ",
+      "item": "Kidz",
       "itemUrl": "/kidz"
-    },
-    {
-      "@type": "SiteNavigationElement",
-      "url": "/men",
-      "name": "Men",
-      "children": [],
-      "subItems": []
-    },
-    {
-      "@type": "SiteNavigationElement",
-      "url": "/clearance",
-      "name": "Clearance",
-      "children": [],
-      "subItems": []
-    },
-    {
-      "subItems": [],
-      "@type": "SiteNavigationElement",
-      "url": "/activities",
-      "name": "Activities",
-      "children": []
     }
   ],
   "loading": "eager"
