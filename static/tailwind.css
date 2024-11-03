@@ -4086,9 +4086,6 @@ details.collapse summary::-webkit-details-marker {
 .max-w-\[80px\] {
   max-width: 80px;
 }
-.max-w-\[992px\] {
-  max-width: 992px;
-}
 .max-w-full {
   max-width: 100%;
 }

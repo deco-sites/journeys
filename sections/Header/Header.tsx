@@ -67,14 +67,14 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
     </Modal>
 
     <div class="flex flex-col items-center pt-1">
-      <div class="flex justify-center items-center w-full px-2.5 max-w-[992px]">
+      <div class="flex justify-center items-center w-full px-2.5 container">
         <div class="pr-9">
           <a href="/" aria-label="Store logo">
             <Image
               src={logo.src}
               alt={logo.alt}
-              width={71}
-              height={30}
+              width={91}
+              height={38}
             />
           </a>
         </div>

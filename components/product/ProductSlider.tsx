@@ -4,7 +4,7 @@ import Icon from "../ui/Icon.tsx";
 import Slider from "../ui/Slider.tsx";
 import ProductCard from "./ProductCard.tsx";
 import { useId } from "../../sdk/useId.ts";
-import { useDevice } from "jsr:@deco/deco@1.102.3/hooks";
+import { useDevice } from "@deco/deco/hooks";
 import { splitArray } from "../../sdk/splitArray.ts";
 
 interface Props {
@@ -15,6 +15,7 @@ interface Props {
 function ProductSlider({ products, itemListName }: Props) {
   const id = useId();
   const device = useDevice();
+  console.log("device >>> ", device)
 
   const productsPerPage = splitArray(products,
     device === "desktop"
