@@ -24,7 +24,6 @@ function Item({ index, ...props }: JSX.IntrinsicElements["li"] & {
 function NextButton(props: JSX.IntrinsicElements["button"]) {
   return (
     <button
-      disabled
       data-slide="next"
       aria-label="Next item"
       {...props}
@@ -33,7 +32,7 @@ function NextButton(props: JSX.IntrinsicElements["button"]) {
 }
 function PrevButton(props: JSX.IntrinsicElements["button"]) {
   return (
-    <button disabled data-slide="prev" aria-label="Previous item" {...props} />
+    <button data-slide="prev" aria-label="Previous item" {...props} />
   );
 }
 export interface Props {

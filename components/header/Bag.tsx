@@ -15,21 +15,21 @@ const onLoad = (id: string) =>
     } else {
       counter.classList.remove("hidden");
     }
-    counter.innerText = count > 9 ? "9+" : count.toString();
+    counter.innerText = count > 99 ? "99+" : count.toString();
   });
 function Bag() {
   const id = useId();
   return (
     <>
-      <label class="indicator" for={MINICART_DRAWER_ID} aria-label="open cart">
+      <label class="indicator items-baseline" for={MINICART_DRAWER_ID} aria-label="open cart">
+        <span class="flex items-center justify-center size-6">
+          <Icon id="shopping-bag" size={17} />
+        </span>
+
         <span
           id={id}
-          class="hidden indicator-item badge badge-primary badge-sm font-thin"
+          class="hidden text-base/none ml-0.5 text-gray-100"
         />
-
-        <span class="btn btn-square btn-sm btn-ghost no-animation">
-          <Icon id="shopping_bag" />
-        </span>
       </label>
       <script
         type="module"

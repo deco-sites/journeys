@@ -1,67 +1,62 @@
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
-import Image from "apps/website/components/Image.tsx";
+
 import {
   HEADER_HEIGHT_DESKTOP,
   NAVBAR_HEIGHT_DESKTOP,
 } from "../../constants.ts";
+import { clx } from "../../sdk/clx.ts";
 
-function NavItem({ item }: { item: SiteNavigationElement }) {
-  const { url, name, children } = item;
-  const image = item?.image?.[0];
+export interface MenuSubItemProps {
+  name: string;
+  subItemUrl: string;
+  isBrand?: boolean;
+}
+
+export interface MenuItemProps {
+  item: string;
+  itemUrl?: string;
+  subItems?: MenuSubItemProps[];
+}
+
+
+function NavItem({ item, subItems }: MenuItemProps) {
 
   return (
     <li
-      class="group flex items-center pr-5"
+      class="group flex items-center pr-5 lg:pr-0 "
       style={{ height: NAVBAR_HEIGHT_DESKTOP }}
     >
-      <a
-        href={url}
-        class="group-hover:underline text-sm font-medium"
-      >
-        {name}
-      </a>
-
-      {children && children.length > 0 &&
-        (
-          <div
-            class="fixed hidden hover:flex group-hover:flex bg-base-100 z-40 items-start justify-center gap-6 border-t-2 border-b-2 border-base-200 w-screen"
-            style={{
-              top: "0px",
-              left: "0px",
-              marginTop: HEADER_HEIGHT_DESKTOP,
-            }}
-          >
-            {image?.url && (
-              <Image
-                class="p-6"
-                src={image.url}
-                alt={image.alternateName}
-                width={300}
-                height={332}
-                loading="lazy"
-              />
-            )}
-            <ul class="flex items-start justify-start gap-6 container">
-              {children.map((node) => (
-                <li class="p-6 pl-0">
-                  <a class="hover:underline" href={node.url}>
-                    <span>{node.name}</span>
-                  </a>
-
-                  <ul class="flex flex-col gap-1 mt-4">
-                    {node.children?.map((leaf) => (
-                      <li>
-                        <a class="hover:underline" href={leaf.url}>
-                          <span class="text-xs">{leaf.name}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <span
+        class={clx(
+          "font-primary text-sm font-medium",
+          "relative lg:group-hover:after:content-[''] lg:group-hover:after:absolute",
+          "lg:group-hover:after:top-9 lg:group-hover:after:left-0 lg:group-hover:after:w-full",
+          "lg:group-hover:after:border-b-[3px] lg:group-hover:after:border-b-green-100",
+          "lg:py-4 lg:capitalize lg:cursor-pointer"
         )}
+      >
+        {item}
+      </span>
+        <div
+          class={clx(
+            "fixed hidden hover:flex bg-base-100 z-40 items-start justify-center gap-6 border-t-2 border-b-2 border-base-200 w-full",
+            (subItems && subItems?.length > 0) ? "group-hover:flex" : ""
+          )}
+          style={{
+            top: "0px",
+            left: "0px",
+            marginTop: HEADER_HEIGHT_DESKTOP,
+          }}
+        >
+          <ul class="flex items-start justify-start gap-6 container">
+            {subItems?.map(({ name, subItemUrl }) => (
+              <li class="p-6 pl-0">
+                <a class="hover:border-b border-b-green-100" href={subItemUrl}>
+                  <span>{name}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
     </li>
   );
 }

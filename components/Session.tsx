@@ -267,6 +267,7 @@ export default function Session(
             type="module"
             dangerouslySetInnerHTML={{ __html: useScript(sdk) }}
           />
+          <script src="https://kit.fontawesome.com/b5e84d0a6b.js" crossorigin="anonymous"></script>
         </Head>
         <div hx-trigger="load" hx-post={useComponent(import.meta.url)} />
       </>
@@ -275,6 +276,23 @@ export default function Session(
   return (
     <>
       {/* Minicart Drawer */}
+      <Drawer
+        id={MINICART_DRAWER_ID}
+        class="drawer-end z-50"
+        aside={
+          <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
+            <div
+              class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto"
+              style={{
+                minWidth: "calc(min(100vw, 425px))",
+                maxWidth: "425px",
+              }}
+            >
+              <CartProvider cart={minicart!} />
+            </div>
+          </Drawer.Aside>
+        }
+      />
       <Drawer
         id={MINICART_DRAWER_ID}
         class="drawer-end z-50"
