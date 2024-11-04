@@ -57,7 +57,12 @@
         "title": "Featured Products",
         "cta": "/mono",
         "products": {
-          "__resolveType": "Product List Loader"
+          "__resolveType": "vtex/loaders/legacy/productList.ts",
+          "props": {
+            "count": 6,
+            "term": "shoe",
+            "sort": "OrderByPriceDESC"
+          }
         }
       }
     },

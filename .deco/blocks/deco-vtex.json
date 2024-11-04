@@ -1,0 +1,10 @@
+{
+  "__resolveType": "site/apps/deco/vtex.ts",
+  "salesChannel": "1",
+  "defaultSegment": {
+    "channelPrivacy": "public"
+  },
+  "platform": "vtex",
+  "account": "demoaccount20",
+  "publicUrl": "https://demoaccount20.myvtex.com/"
+}
