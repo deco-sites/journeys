@@ -3915,9 +3915,6 @@ details.collapse summary::-webkit-details-marker {
 .min-h-\[42px\] {
   min-height: 42px;
 }
-.min-h-\[660px\] {
-  min-height: 660px;
-}
 .min-h-fit {
   min-height: -moz-fit-content;
   min-height: fit-content;
