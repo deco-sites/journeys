@@ -38,7 +38,7 @@ function CartItem({ item, index, locale, currency }: Props) {
     >
       <Image
         alt={name}
-        src={image}
+        src={image?.replace("55-55", "255-255")}
         style={{ aspectRatio: "108 / 150" }}
         width={108}
         height={150}
