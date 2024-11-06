@@ -131,5 +131,10 @@
       "itemUrl": "/kidz"
     }
   ],
-  "loading": "eager"
+  "loading": "eager",
+  "preheader": {
+    "langs": {
+      "__resolveType": "Global Language Options"
+    }
+  }
 }

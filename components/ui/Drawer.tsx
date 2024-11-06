@@ -3,7 +3,7 @@ import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "./Icon.tsx";
 import { useScript } from "@deco/deco/hooks";
-import { NAVBAR_HEIGHT_MOBILE } from "../../constants.ts";
+// import { NAVBAR_HEIGHT_MOBILE } from "../../constants.ts";
 
 export interface Props {
   open?: boolean;
@@ -93,7 +93,7 @@ function Aside({ title, drawer, children }: {
   );
 }
 
-function Menu({ title, drawer, children }: {
+function Menu({ drawer, children }: {
   title: string;
   drawer: string;
   children: ComponentChildren;

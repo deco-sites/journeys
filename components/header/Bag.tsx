@@ -21,7 +21,11 @@ function Bag() {
   const id = useId();
   return (
     <>
-      <label class="indicator items-baseline" for={MINICART_DRAWER_ID} aria-label="open cart">
+      <label
+        class="indicator items-baseline"
+        for={MINICART_DRAWER_ID}
+        aria-label="open cart"
+      >
         <span class="flex items-center justify-center size-6">
           <Icon id="shopping-bag" size={17} />
         </span>

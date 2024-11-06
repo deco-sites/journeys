@@ -80,7 +80,11 @@ _docker_deps.ts
 .metadata/*
 .deco/metadata/*
 
+# Local env
 .env
 
 # Deno files
 deno.*.tmp
+
+# Tailwind file
+static/tailwind.css

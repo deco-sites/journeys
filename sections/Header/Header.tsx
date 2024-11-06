@@ -19,10 +19,13 @@ import {
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
 import { useDevice } from "@deco/deco/hooks";
-import { type LoadingFallbackProps } from "@deco/deco";
+import { type LoadingFallbackProps, SectionProps } from "@deco/deco";
 import { clx } from "../../sdk/clx.ts";
-import Preheader from "../../components/header/Preheader.tsx";
+import Preheader, { ONE_YEAR_MS } from "../../components/header/Preheader.tsx";
 import type { MenuItemProps } from "../../components/header/Menu.tsx";
+import { getCookies, setCookie } from "std/http/cookie.ts";
+import { AppContext } from "../../apps/site.ts";
+import { Lang, Langs } from "../../loaders/languages.ts";
 
 export interface Logo {
   src: ImageWidget;
@@ -30,7 +33,23 @@ export interface Logo {
   width?: number;
   height?: number;
 }
-export interface SectionProps {
+
+export interface PreheaderProps {
+  /**
+   * @title Language Options
+   */
+  langs?: Langs;
+  /**
+   * @ignore
+   */
+  currentLang?: Lang;
+}
+
+export interface HeaderProps {
+  /**
+   * @title Preheader
+   */
+  preheader?: PreheaderProps;
   /**
    * @title Navigation items
    * @description Navigation items used both on mobile and desktop menus
@@ -48,7 +67,7 @@ export interface SectionProps {
    * @hide true */
   loading?: "eager" | "lazy";
 }
-type Props = Omit<SectionProps, "alert">;
+type Props = Omit<HeaderProps, "preheader">;
 const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
@@ -79,13 +98,23 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
           </a>
         </div>
         <ul class="flex gap-8">
-          {navItems?.slice(0, 10).map(({ item, subItems, itemUrl }) => <NavItem item={item} itemUrl={itemUrl} subItems={subItems} />)}
+          {navItems?.slice(0, 10).map(({ item, subItems, itemUrl }) => (
+            <NavItem item={item} itemUrl={itemUrl} subItems={subItems} />
+          ))}
         </ul>
 
         <div class="flex gap-8 items-center ml-auto">
           <Icon id="search" size={17} />
-          <Image src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/4a55a936-708c-46ad-983f-00bfc9ed0701/location-pointer-2961.png" width={17} height={17} />
-          <Image src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d42ce836-76b5-41fd-a500-314061658361/user-6769-(1).png" width={17} height={17} />
+          <Image
+            src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/4a55a936-708c-46ad-983f-00bfc9ed0701/location-pointer-2961.png"
+            width={17}
+            height={17}
+          />
+          <Image
+            src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d42ce836-76b5-41fd-a500-314061658361/user-6769-(1).png"
+            width={17}
+            height={17}
+          />
           <Bag />
         </div>
       </div>
@@ -134,7 +163,7 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
     <div
       class="flex justify-between items-center w-full px-2.5 shadow-mobile"
       style={{
-        height: NAVBAR_HEIGHT_MOBILE
+        height: NAVBAR_HEIGHT_MOBILE,
       }}
     >
       <label
@@ -178,6 +207,29 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
   </>
 );
 
+export const loader = (props: HeaderProps, req: Request, ctx: AppContext) => {
+  const cookies = getCookies(req.headers);
+  const langParamValue = new URL(req.url)?.searchParams?.get("language");
+  if (langParamValue) {
+    setCookie(ctx.response.headers, {
+      name: "language",
+      value: langParamValue,
+      path: "/",
+      expires: new Date(Date.now() + ONE_YEAR_MS),
+    });
+  }
+  const currentCookieLang = langParamValue ?? cookies?.["language"] ?? "";
+
+  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort((a) =>
+    a?.value === currentCookieLang ? -1 : 1
+  );
+
+  return {
+    ...props,
+    preheader: { ...props.preheader, langs: langsOrderedWithSelectedFirst },
+  };
+};
+
 function Header({
   logo = {
     src:
@@ -187,7 +239,7 @@ function Header({
     alt: "Logo",
   },
   ...props
-}: Props) {
+}: SectionProps<typeof loader>) {
   const device = useDevice();
   return (
     <header
@@ -198,7 +250,7 @@ function Header({
       }}
     >
       <div class="bg-white fixed w-full z-40 shadow-header">
-        <Preheader />
+        <Preheader {...props.preheader} />
         {device === "desktop"
           ? <Desktop logo={logo} {...props} />
           : <Mobile logo={logo} {...props} />}
@@ -206,7 +258,7 @@ function Header({
     </header>
   );
 }
-export const LoadingFallback = (props: LoadingFallbackProps<Props>) => (
+export const LoadingFallback = (props: LoadingFallbackProps<HeaderProps>) => (
   // deno-lint-ignore no-explicit-any
   <Header {...props as any} loading="lazy" />
 );

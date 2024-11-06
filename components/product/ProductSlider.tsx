@@ -15,15 +15,12 @@ interface Props {
 function ProductSlider({ products, itemListName }: Props) {
   const id = useId();
   const device = useDevice();
-  console.log("device >>> ", device)
+  console.log("device >>> ", device);
 
-  const productsPerPage = splitArray(products,
-    device === "desktop"
-    ? 5
-    : device === "tablet"
-      ? 3
-      : 2
-  )
+  const productsPerPage = splitArray(
+    products,
+    device === "desktop" ? 5 : device === "tablet" ? 3 : 2,
+  );
 
   return (
     <>

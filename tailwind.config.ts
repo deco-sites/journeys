@@ -9,7 +9,7 @@ export default {
     extend: {
       animation: {
         sliding: "sliding 30s linear infinite",
-        slide: 'slide 6s infinite',
+        slide: "slide 6s infinite",
       },
       boxShadow: {
         "header": "0 3px 3px 0 rgba(235, 235, 235, 0.4)",
@@ -30,11 +30,11 @@ export default {
           "100%": { transform: "translateX(-50%)" },
         },
         slide: {
-          '0%': { transform: 'translateY(100%)', opacity: '0' },
-          '10%': { transform: 'translateY(0)', opacity: '1' },
-          '40%': { opacity: '1' },
-          '50%': { transform: 'translateY(-100%)', opacity: '0' },
-        }
+          "0%": { transform: "translateY(100%)", opacity: "0" },
+          "10%": { transform: "translateY(0)", opacity: "1" },
+          "40%": { opacity: "1" },
+          "50%": { transform: "translateY(-100%)", opacity: "0" },
+        },
       },
     },
     fontFamily: {
