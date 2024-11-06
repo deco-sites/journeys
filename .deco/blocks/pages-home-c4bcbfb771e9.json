@@ -38,7 +38,7 @@
             "op": "or",
             "matchers": [
               {
-                "__resolveType": "Matcher - Canada - French"
+                "__resolveType": "Matcher  - Canada/French"
               }
             ]
           }
