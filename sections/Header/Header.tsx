@@ -223,7 +223,11 @@ const Mobile = (
       aside={
         <Drawer.AsideHeaderMenu
           header={url && (
-            <Preheader url={new URL(url)} alerts={preheader.alerts ?? []} />
+            <Preheader
+              url={new URL(url)}
+              alerts={preheader.alerts ?? []}
+              langs={preheader.langs}
+            />
           )}
           drawer={SIDEMENU_DRAWER_ID}
         >
@@ -329,6 +333,7 @@ export default function Header(props: ReturnType<typeof loader>) {
               <Preheader
                 url={new URL(props.url)}
                 alerts={props.preheader.alerts ?? []}
+                langs={props.preheader.langs}
               />
             )}
           </div>
