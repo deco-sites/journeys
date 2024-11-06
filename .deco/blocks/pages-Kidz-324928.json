@@ -2,14 +2,6 @@
   "name": "Kidz",
   "sections": [
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "website/sections/Seo/SeoV2.tsx",
-        "title": "Kids Shoes | Kids Clothing & Accessories | Journeys Kidz",
-        "description": "Shop for Kids Shoes, Clothing and Accessories at the new Journeys Kidz. Find Shoes and Outfits from the Hottest Kids Brands. Find Styles of Athletic Sneakers, Boots, and Sandals for Kids. Shop Now!"
-      }
-    },
-    {
       "__resolveType": "website/flags/multivariate/section.ts",
       "variants": [
         {
@@ -1216,6 +1208,11 @@
       "section": {
         "__resolveType": "Footer"
       }
+    },
+    {
+      "__resolveType": "website/sections/Seo/SeoV2.tsx",
+      "title": "Kids Shoes | Kids Clothing & Accessories | Journeys Kidz",
+      "description": "Shop for Kids Shoes, Clothing and Accessories at the new Journeys Kidz. Find Shoes and Outfits from the Hottest Kids Brands. Find Styles of Athletic Sneakers, Boots, and Sandals for Kids. Shop Now!"
     }
   ],
   "__resolveType": "website/pages/Page.tsx",
