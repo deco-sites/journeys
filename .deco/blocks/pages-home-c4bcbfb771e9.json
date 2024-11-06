@@ -92,23 +92,28 @@
                 "subItems": [
                   {
                     "name": "SHOP BY SHOE SIZE",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   },
                   {
                     "name": "SHOES",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   },
                   {
                     "name": "CLOTHING",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   },
                   {
                     "name": "ACCESSORIES",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   },
                   {
                     "name": "COLLECTIONS",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   }
                 ],
                 "item": "Femmes"
@@ -118,23 +123,28 @@
                 "subItems": [
                   {
                     "name": "SHOP BY SHOE SIZE",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   },
                   {
                     "name": "SHOES",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   },
                   {
                     "name": "CLOTHING",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   },
                   {
                     "name": "ACCESSORIES",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   },
                   {
                     "name": "COLLECTIONS",
-                    "url": "#"
+                    "url": "#",
+                    "subItemUrl": "#"
                   }
                 ],
                 "item": "Hommes"
@@ -236,22 +246,94 @@
       ]
     },
     {
-      "__resolveType": "site/sections/Images/Carousel.tsx",
-      "images": [
+      "__resolveType": "website/flags/multivariate/section.ts",
+      "variants": [
         {
-          "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
-          "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
-          "alt": "Birkenstock"
+          "value": {
+            "__resolveType": "site/sections/Images/Carousel.tsx",
+            "images": [
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/352bd890-2c9f-47a9-a89b-2fccc50e01f9/020b28d9-52ad-444f-b624-aea332400b4d.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/2d39671c-c492-46aa-964e-30fa96e0d892/dbfd735c-f0c7-4a4f-aad6-1e33027786b4.jpg",
+                "alt": "Tasman"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
+                "alt": "Birkenstock"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
+                "alt": "Stand out this season"
+              }
+            ]
+          },
+          "rule": {
+            "__resolveType": "website/matchers/multi.ts",
+            "op": "or",
+            "matchers": [
+              {
+                "__resolveType": "Matcher - Canada"
+              }
+            ]
+          }
         },
         {
-          "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/b373f85d-b1c9-4b1f-9d0a-c8818b2f5b6a/second.jpg",
-          "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/bff0b88b-5295-4f52-9806-2b1b570bc21e/firstmobile.jpg",
-          "alt": "Tasman"
+          "value": {
+            "__resolveType": "site/sections/Images/Carousel.tsx",
+            "images": [
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/26c84523-535c-4d05-82b5-a60264a05434/e5090b7f-67eb-4b38-91d8-4ea17a8792c4.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/10234eef-2581-4647-9a9f-476962f4908f/cb872da4-08c0-4f73-991d-b29a9a03892c.jpg",
+                "alt": "Tasman"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
+                "alt": "Birkenstock"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
+                "alt": "Stand out this season"
+              }
+            ]
+          },
+          "rule": {
+            "__resolveType": "website/matchers/multi.ts",
+            "op": "or",
+            "matchers": [
+              {
+                "__resolveType": "Matcher  - Canada/French"
+              }
+            ]
+          }
         },
         {
-          "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
-          "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
-          "alt": "Stand out this season"
+          "value": {
+            "__resolveType": "site/sections/Images/Carousel.tsx",
+            "images": [
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/b373f85d-b1c9-4b1f-9d0a-c8818b2f5b6a/second.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/bff0b88b-5295-4f52-9806-2b1b570bc21e/firstmobile.jpg",
+                "alt": "Tasman"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
+                "alt": "Birkenstock"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
+                "alt": "Stand out this season"
+              }
+            ]
+          },
+          "rule": {
+            "__resolveType": "website/matchers/always.ts"
+          }
         }
       ]
     },
@@ -261,28 +343,92 @@
         {
           "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/f102588e-e0e0-44dd-b1a5-a258a6817954/women-shop.jpg",
           "href": "#",
-          "label": "Shop Women",
           "width": 400,
-          "height": 400
+          "height": 400,
+          "label": {
+            "__resolveType": "website/flags/multivariate/message.ts",
+            "variants": [
+              {
+                "value": "Magasiner pour femmes",
+                "rule": {
+                  "__resolveType": "Matcher  - Canada/French"
+                }
+              },
+              {
+                "value": "Shop Women",
+                "rule": {
+                  "__resolveType": "website/matchers/always.ts"
+                }
+              }
+            ]
+          }
         },
         {
           "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/88c9381f-0c48-4286-af3c-9e504ca7b7fc/shop-men.jpg",
           "href": "#",
-          "label": "Shop Men",
+          "label": {
+            "__resolveType": "website/flags/multivariate/message.ts",
+            "variants": [
+              {
+                "value": "Magasiner pour hommes",
+                "rule": {
+                  "__resolveType": "Matcher  - Canada/French"
+                }
+              },
+              {
+                "value": "Shop Men",
+                "rule": {
+                  "__resolveType": "website/matchers/always.ts"
+                }
+              }
+            ]
+          },
           "width": 400,
           "height": 400
         },
         {
           "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/46f23dff-7aed-4669-b331-8d35be78bd7a/shop-kids.jpg",
           "href": "#",
-          "label": "Shop Kids",
+          "label": {
+            "__resolveType": "website/flags/multivariate/message.ts",
+            "variants": [
+              {
+                "value": "Magasiner pour enfants",
+                "rule": {
+                  "__resolveType": "Matcher  - Canada/French"
+                }
+              },
+              {
+                "value": "Shop Kids",
+                "rule": {
+                  "__resolveType": "website/matchers/always.ts"
+                }
+              }
+            ]
+          },
           "width": 400,
           "height": 400
         },
         {
           "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/5284aa51-ae17-4747-801c-1030f359fcd0/shop-new-arrivals.jpg",
           "href": "#",
-          "label": "Shop New Arrivals",
+          "label": {
+            "__resolveType": "website/flags/multivariate/message.ts",
+            "variants": [
+              {
+                "value": "Magasiner les nouveautés",
+                "rule": {
+                  "__resolveType": "Matcher  - Canada/French"
+                }
+              },
+              {
+                "value": "Shop New Arrivals",
+                "rule": {
+                  "__resolveType": "website/matchers/always.ts"
+                }
+              }
+            ]
+          },
           "width": 400,
           "height": 400
         }

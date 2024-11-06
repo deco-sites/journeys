@@ -1,10 +1,11 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
+import { Message } from "apps/website/flags/multivariate/message.ts";
 
 interface CategoryItem {
   image: ImageWidget;
   href: string;
-  label: string;
+  label: Message;
   width: number;
   height: number;
 }
