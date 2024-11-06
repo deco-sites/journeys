@@ -1,9 +1,10 @@
 import { JSX } from "preact";
 import { clx } from "../../sdk/clx.ts";
+import { Message } from "apps/website/flags/multivariate/message.ts";
 
 export interface Props {
   /** @description Section title */
-  title?: string;
+  title?: Message;
 
   /** @description See all link */
   cta?: string;
