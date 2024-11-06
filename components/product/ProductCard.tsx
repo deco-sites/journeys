@@ -53,9 +53,9 @@ function ProductCard({
     },
   });
 
-  const USDollar = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  const USDollar = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
   });
 
   return (

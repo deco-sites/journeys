@@ -267,7 +267,13 @@ export default function Session(
             type="module"
             dangerouslySetInnerHTML={{ __html: useScript(sdk) }}
           />
-          <script src="https://kit.fontawesome.com/b5e84d0a6b.js" crossorigin="anonymous"></script>
+          {
+            /* <script
+            src="https://kit.fontawesome.com/b5e84d0a6b.js"
+            crossorigin="anonymous"
+          >
+          </script> */
+          }
         </Head>
         <div hx-trigger="load" hx-post={useComponent(import.meta.url)} />
       </>
