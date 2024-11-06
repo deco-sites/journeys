@@ -1,8 +1,12 @@
+import type { LoadingFallbackProps } from "@deco/deco";
+import { useDevice, useScript } from "@deco/deco/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import Bag from "../../components/header/Bag.tsx";
+import type { MenuItemProps } from "../../components/header/Menu.tsx";
 import Menu from "../../components/header/Menu.tsx";
 import NavItem from "../../components/header/NavItem.tsx";
+import Preheader, { ONE_YEAR_MS } from "../../components/header/Preheader.tsx";
 import Searchbar, {
   type SearchbarProps,
 } from "../../components/search/Searchbar/Form.tsx";
@@ -18,17 +22,15 @@ import {
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
-import { useDevice } from "@deco/deco/hooks";
-import { type LoadingFallbackProps, SectionProps } from "@deco/deco";
 import { clx } from "../../sdk/clx.ts";
-import Preheader, { ONE_YEAR_MS } from "../../components/header/Preheader.tsx";
-import type { MenuItemProps } from "../../components/header/Menu.tsx";
+import type { AppContext } from "../../apps/site.ts";
 import { getCookies, setCookie } from "std/http/cookie.ts";
-import { AppContext } from "../../apps/site.ts";
-import { Lang, Langs } from "../../loaders/languages.ts";
+import type { Lang, Langs } from "../../loaders/languages.ts";
 
 export interface Logo {
+  /** @title Image */
   src: ImageWidget;
+  /** @title Describe the image */
   alt: string;
   width?: number;
   height?: number;
@@ -43,9 +45,23 @@ export interface PreheaderProps {
    * @ignore
    */
   currentLang?: Lang;
+  alerts: Alert[];
+  /**
+   * @ignore
+   */
+  url: URL;
 }
 
-export interface HeaderProps {
+/**
+ * @titleBy text
+ */
+interface Alert {
+  text: string;
+  /** @title Link  */
+  href: string;
+}
+
+export interface Props {
   /**
    * @title Preheader
    */
@@ -67,8 +83,70 @@ export interface HeaderProps {
    * @hide true */
   loading?: "eager" | "lazy";
 }
-type Props = Omit<HeaderProps, "preheader">;
-const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
+
+export function Alerts({ alerts }: { alerts: Alert[] }) {
+  return (
+    <>
+      <div class="w-full mx-auto bg-[#202020] relative h-10">
+        {alerts.map(({ text, href }, index) => (
+          <a
+            href={href}
+            class="text-center text-white h-10 hover:underline text-xs absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity opacity-0 pointer-events-none flex justify-center items-center uppercase truncate"
+            data-index={index}
+            data-alert
+          >
+            {text}
+          </a>
+        ))}
+      </div>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: useScript(() => {
+            const alerts = document.querySelectorAll<HTMLAnchorElement>(
+              "[data-alert]",
+            );
+
+            // @ts-ignore -
+            for (const alert of alerts) {
+              alert.ontransitionend = () => {
+                // Appear
+                if (alert.classList.contains("opacity-100")) {
+                  alert.classList.remove("pointer-events-none");
+
+                  // Disappear
+                  setTimeout(() => {
+                    alert.classList.add("pointer-events-none");
+                    alert.classList.replace("opacity-100", "opacity-0");
+                  }, 5000);
+                }
+
+                if (alert.classList.contains("opacity-0")) {
+                  const index = Number(alert.dataset.index);
+
+                  // 1, 2, 3, 1, 2 ....
+                  transition(
+                    (index + 1) %
+                      document.querySelectorAll("[data-alert]").length,
+                  );
+                }
+              };
+            }
+
+            function transition(index: number) {
+              alerts[index].classList.replace("opacity-0", "opacity-100");
+            }
+
+            setTimeout(() => transition(0), 0);
+          }),
+        }}
+      />
+    </>
+  );
+}
+
+const Desktop = (
+  { navItems, logo, searchbar, loading }: ReturnType<typeof loader>,
+) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
       <div
@@ -89,12 +167,7 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
       <div class="flex justify-center items-center w-full px-2.5 container">
         <div class="pr-9">
           <a href="/" aria-label="Store logo">
-            <Image
-              src={logo.src}
-              alt={logo.alt}
-              width={91}
-              height={38}
-            />
+            <Image src={logo.src} alt={logo.alt} width={91} height={38} />
           </a>
         </div>
         <ul class="flex gap-8">
@@ -122,7 +195,11 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
   </>
 );
 
-const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
+const Mobile = (
+  { logo, searchbar, navItems, loading, url, preheader }: ReturnType<
+    typeof loader
+  >,
+) => (
   <>
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
@@ -144,7 +221,12 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
     <Drawer
       id={SIDEMENU_DRAWER_ID}
       aside={
-        <Drawer.Aside title="Menu" drawer={SIDEMENU_DRAWER_ID}>
+        <Drawer.AsideHeaderMenu
+          header={url && (
+            <Preheader url={new URL(url)} alerts={preheader.alerts ?? []} />
+          )}
+          drawer={SIDEMENU_DRAWER_ID}
+        >
           {loading === "lazy"
             ? (
               <div
@@ -156,7 +238,7 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
               </div>
             )
             : <Menu navItems={navItems ?? []} />}
-        </Drawer.Aside>
+        </Drawer.AsideHeaderMenu>
       }
     />
 
@@ -168,9 +250,7 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
     >
       <label
         for={SIDEMENU_DRAWER_ID}
-        class={clx(
-          "w-[68px] flex items-center justify-start",
-        )}
+        class={clx("w-[68px] flex items-center justify-start")}
         aria-label="open menu"
       >
         <Icon id="menu" width={22} height={27} />
@@ -207,9 +287,10 @@ const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
   </>
 );
 
-export const loader = (props: HeaderProps, req: Request, ctx: AppContext) => {
+export const loader = (props: Props, req: Request, ctx: AppContext) => {
   const cookies = getCookies(req.headers);
   const langParamValue = new URL(req.url)?.searchParams?.get("language");
+
   if (langParamValue) {
     setCookie(ctx.response.headers, {
       name: "language",
@@ -218,48 +299,46 @@ export const loader = (props: HeaderProps, req: Request, ctx: AppContext) => {
       expires: new Date(Date.now() + ONE_YEAR_MS),
     });
   }
-  const currentCookieLang = langParamValue ?? cookies?.["language"] ?? "";
 
-  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort((a) =>
-    a?.value === currentCookieLang ? -1 : 1
+  const currentCookieLang = langParamValue ?? cookies?.language ?? "";
+  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort(
+    (a) => (a?.value === currentCookieLang ? -1 : 1),
   );
 
   return {
     ...props,
     preheader: { ...props.preheader, langs: langsOrderedWithSelectedFirst },
+    url: req.url,
   };
 };
 
-function Header({
-  logo = {
-    src:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
-    width: 100,
-    height: 16,
-    alt: "Logo",
-  },
-  ...props
-}: SectionProps<typeof loader>) {
-  const device = useDevice();
+export default function Header(props: ReturnType<typeof loader>) {
+  const isDesktop = useDevice() === "desktop";
+
   return (
     <header
       style={{
-        height: device === "desktop"
-          ? HEADER_HEIGHT_DESKTOP
-          : HEADER_HEIGHT_MOBILE,
+        height: isDesktop ? HEADER_HEIGHT_DESKTOP : HEADER_HEIGHT_MOBILE,
       }}
     >
       <div class="bg-white fixed w-full z-40 shadow-header">
-        <Preheader {...props.preheader} />
-        {device === "desktop"
-          ? <Desktop logo={logo} {...props} />
-          : <Mobile logo={logo} {...props} />}
+        <div class="w-full h-full flex items-center">
+          <div class="flex items-center h-full w-full border-b-[3px] border-b-green-100 bg-gray-100">
+            {!isDesktop && <Alerts alerts={props.preheader.alerts ?? []} />}
+            {props.url && isDesktop && (
+              <Preheader
+                url={new URL(props.url)}
+                alerts={props.preheader.alerts ?? []}
+              />
+            )}
+          </div>
+        </div>
+        {isDesktop ? <Desktop {...props} /> : <Mobile {...props} />}
       </div>
     </header>
   );
 }
-export const LoadingFallback = (props: LoadingFallbackProps<HeaderProps>) => (
+export const LoadingFallback = (props: LoadingFallbackProps<Props>) => (
   // deno-lint-ignore no-explicit-any
-  <Header {...props as any} loading="lazy" />
+  <Header {...(props as any)} loading="lazy" />
 );
-export default Header;

@@ -15,7 +15,6 @@ interface Props {
 function ProductSlider({ products, itemListName }: Props) {
   const id = useId();
   const device = useDevice();
-  console.log("device >>> ", device);
 
   const productsPerPage = splitArray(
     products,
@@ -36,9 +35,7 @@ function ProductSlider({ products, itemListName }: Props) {
             {productsPerPage?.map((page: Product[], index: number) => (
               <Slider.Item
                 index={index}
-                class={clx(
-                  "carousel-item justify-center w-full",
-                )}
+                class={clx("carousel-item justify-center w-full")}
               >
                 {page.map((product) => (
                   <ProductCard

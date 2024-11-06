@@ -22,9 +22,6 @@
                 "data": null
               }
             },
-            "alerts": [
-              "<p>Get 10% off today: <strong>NEW10</strong></p>"
-            ],
             "logo": {
               "src": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/4da000a7-5db9-40c4-8766-2d9d0504d6ea/journeys-logo.webp",
               "alt": "Deco Storefront",
@@ -175,7 +172,21 @@
             "preheader": {
               "langs": {
                 "__resolveType": "Global Language Options"
-              }
+              },
+              "alerts": [
+                {
+                  "text": "Inscris-toi à Journeys All Access et obtiens 10$ de rabais sur 75$ d'achat ET L'EXPÉDITION GRATUITE",
+                  "href": "https://www.journeys.ca/fr/account/login"
+                },
+                {
+                  "text": "Acheter en ligne, Ramasser en magasin",
+                  "href": "https://www.journeys.ca/fr/pages/pickup"
+                },
+                {
+                  "text": "ÉCONOMISER AVEC LA CARTE SPC",
+                  "href": "https://www.journeys.ca/fr/promotions"
+                }
+              ]
             }
           },
           "rule": {
@@ -472,26 +483,26 @@
         "__resolveType": "site/sections/Content/CollectionList.tsx",
         "collections": [
           {
-            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/56a2f987-72ac-494a-abe9-8758538a9d44/shop-adidas.jpg",
+            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/dcc0e95f-c031-4395-9514-005e68596783/1_10274.jpg",
             "href": "#",
-            "title": "STEP INTO THE LEGACY",
-            "label": "Shop Adidas",
+            "title": "STEP INTO YOUR BEST",
+            "label": "SHOP ADIDAS",
             "width": 700,
             "height": 700
           },
           {
-            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/aa0b1921-1c05-4315-ae6b-0fc0716a771a/shop-new-balance.jpg",
+            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/5528381e-65c0-49e6-899b-b7e432ab600a/1_10284.jpg",
             "href": "#",
-            "title": "ADD TO YOUR SNEAKER ROTATION",
-            "label": "shop New Balance",
+            "title": "A GIFT TO GO BOLD",
+            "label": "SHOP NEW BALANCE",
             "width": 700,
             "height": 700
           },
           {
             "href": "#",
-            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ca1dcbd6-cae3-4ae6-a402-c7243d535366/shop-puma.jpg",
-            "title": "ALWAYS IN MOTION",
-            "label": "Shop Puma",
+            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/a7d22a32-9296-4590-a903-c932751971c5/1_10285.jpg",
+            "title": "ALL EYES ON PUMA",
+            "label": "SHOP PUMA",
             "width": 700,
             "height": 700
           }

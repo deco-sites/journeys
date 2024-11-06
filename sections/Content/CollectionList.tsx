@@ -1,13 +1,12 @@
-import { ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 
 interface CollectionItem {
   image: ImageWidget;
+  /**  @title Link */
   href: string;
   title: string;
   label: string;
-  width: number;
-  height: number;
 }
 
 export interface Props {
@@ -20,14 +19,14 @@ export interface Props {
 
 const CollectionList = ({ collections }: Props) => (
   <div class="flex flex-wrap gap-y-9 mt-12 max-w-[1560px] mx-auto md:mt-20 md:flex-nowrap">
-    {collections.map(({ image, href, title, label, width, height }) => (
+    {collections.map(({ image, href, title, label }) => (
       <a href={href} class="flex flex-col w-full px-2 md:max-w-none ">
         <div class="flex">
           <Image
             src={image}
             alt={label}
-            width={width}
-            height={height}
+            width={700}
+            height={700}
             loading="lazy"
             class="w-full"
           />

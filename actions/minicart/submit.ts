@@ -50,6 +50,7 @@ const cartFrom = (form: FormData) => {
     addToCart: null,
   };
 
+  // @ts-ignore -
   for (const [name, value] of form.entries()) {
     if (name === "coupon") {
       cart.coupon = value.toString();

@@ -6,7 +6,7 @@ export interface Props {
 }
 
 const TextBar = ({ linkBar, linkText, linkUrl, text }: Props) => (
-  <div class="flex flex-col justify-center p-2 bg-green-100 text-center text-black text-sm font-medium font-primary md:flex-row">
+  <div class="flex flex-col justify-center items-center h-10 bg-green-100 text-center text-black text-sm font-medium font-primary md:flex-row">
     <a href={linkBar}>
       <span>
         {text}

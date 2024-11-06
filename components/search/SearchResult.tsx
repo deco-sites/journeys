@@ -41,6 +41,7 @@ const useUrlRebased = (overrides: string | undefined, base: string) => {
     const temp = new URL(overrides, base);
     const final = new URL(base);
     final.pathname = temp.pathname;
+    // @ts-ignore -
     for (const [key, value] of temp.searchParams.entries()) {
       final.searchParams.set(key, value);
     }
@@ -80,9 +81,7 @@ function PageResult(props: SectionProps<typeof loader>) {
           hx-swap="outerHTML show:parent:top"
           hx-get={partialPrev}
         >
-          <span class="inline [.htmx-request_&]:hidden">
-            Show Less
-          </span>
+          <span class="inline [.htmx-request_&]:hidden">Show Less</span>
           <span class="loading loading-spinner hidden [.htmx-request_&]:block" />
         </a>
       </div>
@@ -120,9 +119,7 @@ function PageResult(props: SectionProps<typeof loader>) {
                 hx-swap="outerHTML show:parent:top"
                 hx-get={partialNext}
               >
-                <span class="inline [.htmx-request_&]:hidden">
-                  Show More
-                </span>
+                <span class="inline [.htmx-request_&]:hidden">Show More</span>
                 <span class="loading loading-spinner hidden [.htmx-request_&]:block" />
               </a>
             </div>
@@ -199,7 +196,7 @@ function Result(props: SectionProps<typeof loader>) {
         item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
         items: page.products?.map((product, index) =>
           mapProductToAnalyticsItem({
-            ...(useOffer(product.offers)),
+            ...useOffer(product.offers),
             index: offset + index,
             product,
             breadcrumbList: page.breadcrumb,
@@ -272,9 +269,7 @@ function Result(props: SectionProps<typeof loader>) {
                   {device === "desktop" && (
                     <div class="flex justify-between items-center">
                       {results}
-                      <div>
-                        {sortBy}
-                      </div>
+                      <div>{sortBy}</div>
                     </div>
                   )}
                   <PageResult {...props} />

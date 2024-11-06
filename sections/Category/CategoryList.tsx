@@ -1,13 +1,12 @@
-import { ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import { Message } from "apps/website/flags/multivariate/message.ts";
+import type { Message } from "apps/website/flags/multivariate/message.ts";
 
 interface CategoryItem {
   image: ImageWidget;
-  href: string;
   label: Message;
-  width: number;
-  height: number;
+  /** @title Link */
+  href: string;
 }
 
 export interface Props {
@@ -20,7 +19,7 @@ export interface Props {
 
 const CategoryList = ({ categories }: Props) => (
   <div class="flex flex-wrap gap-y-9 mt-12 max-w-[1560px] mx-auto md:mt-20 md:flex-nowrap">
-    {categories.map(({ image, href, label, width, height }) => (
+    {categories.map(({ image, href, label }) => (
       <a
         href={href}
         class="flex flex-col max-w-[50%] w-full px-2 md:max-w-none "
@@ -29,9 +28,8 @@ const CategoryList = ({ categories }: Props) => (
           <Image
             src={image}
             alt={label}
-            width={width}
-            height={height}
-            loading="lazy"
+            width={400}
+            height={400}
             class="w-full"
           />
         </div>

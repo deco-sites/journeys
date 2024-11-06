@@ -1,9 +1,8 @@
-import { type ComponentChildren } from "preact";
+import type { ComponentChildren } from "preact";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "./Icon.tsx";
 import { useScript } from "@deco/deco/hooks";
-// import { NAVBAR_HEIGHT_MOBILE } from "../../constants.ts";
 
 export interface Props {
   open?: boolean;
@@ -46,9 +45,7 @@ function Drawer(
           aria-label={open ? "open drawer" : "closed drawer"}
         />
 
-        <div class="drawer-content">
-          {children}
-        </div>
+        <div class="drawer-content">{children}</div>
 
         <aside
           data-aside
@@ -69,7 +66,11 @@ function Drawer(
   );
 }
 
-function Aside({ title, drawer, children }: {
+function Aside({
+  title,
+  drawer,
+  children,
+}: {
   title: string;
   drawer: string;
   children: ComponentChildren;
@@ -93,8 +94,36 @@ function Aside({ title, drawer, children }: {
   );
 }
 
-function Menu({ drawer, children }: {
-  title: string;
+function AsideHeaderMenu({
+  drawer,
+  header,
+  children,
+}: {
+  drawer: string;
+  header: ComponentChildren;
+  children: ComponentChildren;
+}) {
+  return (
+    <div
+      data-aside
+      class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y"
+      style={{ maxWidth: "100vw" }}
+    >
+      <div class="flex justify-between items-center bg-[#cfcfcf]">
+        {header}
+        <label for={drawer} aria-label="X" class="btn btn-ghost">
+          <Icon id="close" />
+        </label>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function Menu({
+  drawer,
+  children,
+}: {
   drawer: string;
   children: ComponentChildren;
 }) {
@@ -123,7 +152,7 @@ function Menu({ drawer, children }: {
 }
 
 Drawer.Menu = Menu;
-
+Drawer.AsideHeaderMenu = AsideHeaderMenu;
 Drawer.Aside = Aside;
 
 export default Drawer;

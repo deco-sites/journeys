@@ -1,0 +1,1226 @@
+{
+  "name": "Kidz",
+  "sections": [
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "website/sections/Seo/SeoV2.tsx",
+        "title": "Kids Shoes | Kids Clothing & Accessories | Journeys Kidz",
+        "description": "Shop for Kids Shoes, Clothing and Accessories at the new Journeys Kidz. Find Shoes and Outfits from the Hottest Kids Brands. Find Styles of Athletic Sneakers, Boots, and Sandals for Kids. Shop Now!"
+      }
+    },
+    {
+      "__resolveType": "website/flags/multivariate/section.ts",
+      "variants": [
+        {
+          "value": {
+            "__resolveType": "site/sections/Header/Header.tsx",
+            "searchbar": {
+              "placeholder": "What are you looking for?",
+              "loader": {
+                "__resolveType": "resolved",
+                "data": null
+              }
+            },
+            "alerts": [
+              {
+                "text": "Afterpay it. In-Store and Online",
+                "href": "https://www.journeys.com/pages/afterpay"
+              },
+              {
+                "text": "Cash App Pay. A new way to pay with just the app",
+                "href": "https://help.journeys.com/s/article/About-Cash-App-Pay"
+              },
+              {
+                "text": "Buy Online, Pick Up in Store",
+                "href": "https://www.journeys.com/pages/pickup"
+              }
+            ],
+            "logo": {
+              "src": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c70caee9-de64-4b56-af09-a17268a37761/logo-kidz-main.webp",
+              "alt": "Deco Storefront",
+              "width": 160,
+              "height": 40
+            },
+            "navItems": [
+              {
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "item": "Brands",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Girls",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Boys",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Sale",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Kidz Releases",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Kidz Gift Guide",
+                "itemUrl": "/brands"
+              }
+            ],
+            "loading": "eager",
+            "preheader": {
+              "langs": {
+                "__resolveType": "Global Language Options"
+              },
+              "url": {},
+              "alerts": [
+                {
+                  "text": "Afterpay it. In-Store and Online",
+                  "href": "https://www.journeys.com/pages/afterpay"
+                },
+                {
+                  "text": "Cash App Pay. A new way to pay with just the app",
+                  "href": "https://help.journeys.com/s/article/About-Cash-App-Pay"
+                },
+                {
+                  "text": "Buy Online, Pick Up in Store",
+                  "href": "https://www.journeys.com/pages/pickup"
+                }
+              ]
+            }
+          },
+          "rule": {
+            "__resolveType": "Matcher - Canada"
+          }
+        },
+        {
+          "value": {
+            "__resolveType": "site/sections/Header/Header.tsx",
+            "searchbar": {
+              "placeholder": "What are you looking for?",
+              "loader": {
+                "__resolveType": "resolved",
+                "data": null
+              }
+            },
+            "alerts": [
+              {
+                "text": "Afterpay it. In-Store and Online",
+                "href": "https://www.journeys.com/pages/afterpay"
+              },
+              {
+                "text": "Cash App Pay. A new way to pay with just the app",
+                "href": "https://help.journeys.com/s/article/About-Cash-App-Pay"
+              },
+              {
+                "text": "Buy Online, Pick Up in Store",
+                "href": "https://www.journeys.com/pages/pickup"
+              }
+            ],
+            "logo": {
+              "src": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c70caee9-de64-4b56-af09-a17268a37761/logo-kidz-main.webp",
+              "alt": "Deco Storefront",
+              "width": 160,
+              "height": 40
+            },
+            "navItems": [
+              {
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "item": "Marques",
+                "itemUrl": "/"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "subItems": [
+                  {
+                    "name": "SHOP BY SHOE SIZE",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "SHOES",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "CLOTHING",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "ACCESSORIES",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "COLLECTIONS",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  }
+                ],
+                "item": "Femmes"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "subItems": [
+                  {
+                    "name": "SHOP BY SHOE SIZE",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "SHOES",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "CLOTHING",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "ACCESSORIES",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "COLLECTIONS",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  }
+                ],
+                "item": "Hommes"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "subItems": [],
+                "item": "Enfants",
+                "itemUrl": "/kidz"
+              },
+              {
+                "subItems": [],
+                "item": "Soled",
+                "itemUrl": "/"
+              },
+              {
+                "subItems": [],
+                "item": "Nouveautés",
+                "itemUrl": "/"
+              },
+              {
+                "subItems": [],
+                "item": "Cadeaux",
+                "itemUrl": "/"
+              }
+            ],
+            "loading": "eager",
+            "preheader": {
+              "langs": {
+                "__resolveType": "Global Language Options"
+              },
+              "alerts": [
+                {
+                  "text": "Inscris-toi à Journeys All Access et obtiens 10$ de rabais sur 75$ d'achat ET L'EXPÉDITION GRATUITE",
+                  "href": "https://www.journeys.ca/fr/account/login"
+                },
+                {
+                  "text": "Acheter en ligne, Ramasser en magasin",
+                  "href": "https://www.journeys.ca/fr/pages/pickup"
+                },
+                {
+                  "text": "ÉCONOMISER AVEC LA CARTE SPC",
+                  "href": "https://www.journeys.ca/fr/promotions"
+                }
+              ]
+            }
+          },
+          "rule": {
+            "__resolveType": "Matcher  - Canada/French"
+          }
+        },
+        {
+          "value": {
+            "__resolveType": "site/sections/Header/Header.tsx",
+            "searchbar": {
+              "placeholder": "What are you looking for?",
+              "loader": {
+                "__resolveType": "resolved",
+                "data": null
+              }
+            },
+            "alerts": [
+              {
+                "text": "Afterpay it. In-Store and Online",
+                "href": "https://www.journeys.com/pages/afterpay"
+              },
+              {
+                "text": "Cash App Pay. A new way to pay with just the app",
+                "href": "https://help.journeys.com/s/article/About-Cash-App-Pay"
+              },
+              {
+                "text": "Buy Online, Pick Up in Store",
+                "href": "https://www.journeys.com/pages/pickup"
+              }
+            ],
+            "logo": {
+              "src": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c70caee9-de64-4b56-af09-a17268a37761/logo-kidz-main.webp",
+              "alt": "Deco Storefront",
+              "width": 160,
+              "height": 40
+            },
+            "navItems": [
+              {
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "item": "Brands",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Girls",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Boys",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Sale",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Kidz Releases",
+                "itemUrl": "/brands"
+              },
+              {
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "item": "Kidz Gift Guide",
+                "itemUrl": "/brands"
+              }
+            ],
+            "loading": "eager",
+            "preheader": {
+              "langs": {
+                "__resolveType": "Global Language Options"
+              },
+              "url": {},
+              "alerts": [
+                {
+                  "text": "Afterpay it. In-Store and Online",
+                  "href": "https://www.journeys.com/pages/afterpay"
+                },
+                {
+                  "text": "Cash App Pay. A new way to pay with just the app",
+                  "href": "https://help.journeys.com/s/article/About-Cash-App-Pay"
+                },
+                {
+                  "text": "Buy Online, Pick Up in Store",
+                  "href": "https://www.journeys.com/pages/pickup"
+                }
+              ]
+            }
+          },
+          "rule": {
+            "__resolveType": "website/matchers/always.ts"
+          }
+        }
+      ]
+    },
+    {
+      "__resolveType": "website/flags/multivariate/section.ts",
+      "variants": [
+        {
+          "value": {
+            "__resolveType": "site/sections/Content/TextBar.tsx",
+            "text": "Get $10 off $75 + Free Shipping with",
+            "linkBar": "#",
+            "linkText": "Journeys All Access! Sign Up Now!",
+            "linkUrl": "#"
+          },
+          "rule": {
+            "__resolveType": "website/matchers/multi.ts",
+            "op": "or",
+            "matchers": [
+              {
+                "__resolveType": "Matcher - Canada"
+              }
+            ]
+          }
+        },
+        {
+          "value": {
+            "__resolveType": "site/sections/Content/TextBar.tsx",
+            "text": "Obtiens 10$ de rabais sur 75$ d’achat et la livraison",
+            "linkBar": "#",
+            "linkText": "gratuite avec Journeys All Access! Inscris-toi!",
+            "linkUrl": "#"
+          },
+          "rule": {
+            "__resolveType": "website/matchers/multi.ts",
+            "op": "or",
+            "matchers": [
+              {
+                "__resolveType": "Matcher  - Canada/French"
+              }
+            ]
+          }
+        },
+        {
+          "value": {
+            "__resolveType": "site/sections/Content/TextBar.tsx",
+            "text": "Get $10 off $75 + Free Shipping with Journeys All Access!",
+            "linkBar": "#",
+            "linkText": "Sign Up",
+            "linkUrl": "#"
+          },
+          "rule": {
+            "__resolveType": "website/matchers/always.ts"
+          }
+        }
+      ]
+    },
+    {
+      "__resolveType": "website/flags/multivariate/section.ts",
+      "variants": [
+        {
+          "value": {
+            "__resolveType": "site/sections/Images/Carousel.tsx",
+            "images": [
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/352bd890-2c9f-47a9-a89b-2fccc50e01f9/020b28d9-52ad-444f-b624-aea332400b4d.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/2d39671c-c492-46aa-964e-30fa96e0d892/dbfd735c-f0c7-4a4f-aad6-1e33027786b4.jpg",
+                "alt": "Tasman"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
+                "alt": "Birkenstock"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
+                "alt": "Stand out this season"
+              }
+            ]
+          },
+          "rule": {
+            "__resolveType": "website/matchers/multi.ts",
+            "op": "or",
+            "matchers": [
+              {
+                "__resolveType": "Matcher - Canada"
+              }
+            ]
+          }
+        },
+        {
+          "value": {
+            "__resolveType": "site/sections/Images/Carousel.tsx",
+            "images": [
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/26c84523-535c-4d05-82b5-a60264a05434/e5090b7f-67eb-4b38-91d8-4ea17a8792c4.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/10234eef-2581-4647-9a9f-476962f4908f/cb872da4-08c0-4f73-991d-b29a9a03892c.jpg",
+                "alt": "Tasman"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
+                "alt": "Birkenstock"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
+                "alt": "Stand out this season"
+              }
+            ]
+          },
+          "rule": {
+            "__resolveType": "website/matchers/multi.ts",
+            "op": "or",
+            "matchers": [
+              {
+                "__resolveType": "Matcher  - Canada/French"
+              }
+            ]
+          }
+        },
+        {
+          "value": {
+            "__resolveType": "site/sections/Images/Carousel.tsx",
+            "images": [
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/b373f85d-b1c9-4b1f-9d0a-c8818b2f5b6a/second.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/bff0b88b-5295-4f52-9806-2b1b570bc21e/firstmobile.jpg",
+                "alt": "Tasman"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
+                "alt": "Birkenstock"
+              },
+              {
+                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
+                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
+                "alt": "Stand out this season"
+              }
+            ]
+          },
+          "rule": {
+            "__resolveType": "website/matchers/always.ts"
+          }
+        }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/Category/CategoryList.tsx",
+      "categories": [
+        {
+          "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d8e46b35-46b5-42b4-8f03-b5a259824390/1_10262.jpg",
+          "href": "#",
+          "label": "SHOP GIRLS",
+          "width": 400,
+          "height": 400
+        },
+        {
+          "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c63ad60c-2f1c-425d-986e-0dbbd723bf52/1_10263.jpg",
+          "href": "#",
+          "label": "SHOP BOYS",
+          "width": 400,
+          "height": 400
+        },
+        {
+          "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/fd5cf587-1472-4e66-a873-f627c9792c57/1_10264.jpg",
+          "href": "#",
+          "label": "SHOP BEST SELLERS",
+          "width": 400,
+          "height": 400
+        },
+        {
+          "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/9adb0334-b876-4d26-9a94-953fb9ecccb2/1_10265.jpg",
+          "href": "#",
+          "label": "SHOP NEW ARRIVALS",
+          "width": 400,
+          "height": 400
+        }
+      ]
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Product/ProductShelf.tsx",
+        "title": "Kidz New Arrivals",
+        "cta": "/mono",
+        "products": {
+          "__resolveType": "vtex/loaders/legacy/productList.ts",
+          "props": {
+            "count": 6,
+            "term": "shoe",
+            "sort": "OrderByPriceDESC"
+          }
+        }
+      }
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Content/CollectionList.tsx",
+        "collections": [
+          {
+            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/f69e7dec-28b9-4888-bb8a-951b85631ad7/1_10286.jpg",
+            "href": "#",
+            "title": "BRIGHTEN THEIR SEASON WITH UGG",
+            "label": "SHOP UGG",
+            "width": 700,
+            "height": 700
+          },
+          {
+            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c9b88f45-69a5-4d47-acaa-8ce7c60bdafa/1_10287.jpg",
+            "href": "#",
+            "title": "LET YOUR STYLE SPARKLE",
+            "label": "SHOP DR. MARTENS",
+            "width": 700,
+            "height": 700
+          },
+          {
+            "href": "#",
+            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/332bcebe-4a24-4733-b219-b6c2070de044/1_10288.jpg",
+            "title": "BOOT GIFTS THEY'LL LOVE",
+            "label": "SHOP TIMBERLAND",
+            "width": 700,
+            "height": 700
+          }
+        ]
+      }
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "Footer"
+      }
+    }
+  ],
+  "__resolveType": "website/pages/Page.tsx",
+  "path": "/kidz",
+  "seo": {
+    "__resolveType": "website/sections/Seo/SeoV2.tsx"
+  }
+}
