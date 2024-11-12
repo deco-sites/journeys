@@ -6,13 +6,15 @@ import Section, {
 } from "../../components/ui/Section.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
-import { type LoadingFallbackProps } from "@deco/deco";
+import { SectionProps, type LoadingFallbackProps } from "@deco/deco";
+import { getCookies } from "std/http/cookie.ts";
 
 export interface Props extends SectionHeaderProps {
   products: Product[] | null;
+  
 }
 
-export default function ProductShelf({ products, title }: Props) {
+export default function ProductShelf({ products, title, currencyCode, locale }: SectionProps<typeof loader>) {
   if (!products || products.length === 0) {
     return null;
   }
@@ -40,9 +42,19 @@ export default function ProductShelf({ products, title }: Props) {
         {title}
       </h1>
 
-      <ProductSlider products={products} itemListName={title} />
+      <ProductSlider products={products} itemListName={title} currencyCode={currencyCode} locale={locale} />
     </Section.Container>
   );
+}
+
+export const loader = (props: Props, req: Request) => {
+  const cookies = getCookies(req.headers);
+  const vtexSegment = JSON.parse(atob(cookies["vtex_segment"]));
+  return {
+    ...props,
+    currencyCode: vtexSegment.currencyCode,
+    locale: vtexSegment.cultureInfo,
+  }
 }
 
 export const LoadingFallback = (

@@ -33,8 +33,9 @@ export default ({
       alt: "United States",
       flag:
         "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/f5044d94-348f-4a63-aa15-76949855d78d/us-flag.webp",
-      label: "EN                                ",
+      label: "EN",
       value: "en",
+      salesChannel: "1"
     },
     {
       alt: "Canada",
@@ -42,6 +43,7 @@ export default ({
         "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d83429c1-3a7a-4751-8056-e26c7f33bd0a/ca-flag.webp",
       label: "EN",
       value: "en-ca",
+      salesChannel: "2"
     },
     {
       flag:
@@ -49,6 +51,7 @@ export default ({
       alt: "Canada - French",
       label: "FR",
       value: "fr-ca",
+      salesChannel: "3"
     },
   ],
   url,

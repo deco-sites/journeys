@@ -5,19 +5,22 @@
       "label": "EN",
       "value": "en",
       "flag": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/f5044d94-348f-4a63-aa15-76949855d78d/us-flag.webp",
-      "alt": "United States"
+      "alt": "United States",
+      "salesChannel": "1"
     },
     {
       "alt": "Canada",
       "flag": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d83429c1-3a7a-4751-8056-e26c7f33bd0a/ca-flag.webp",
       "value": "en-ca",
-      "label": "EN"
+      "label": "EN",
+      "salesChannel": "2"
     },
     {
       "label": "FR",
       "value": "fr-ca",
       "flag": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d83429c1-3a7a-4751-8056-e26c7f33bd0a/ca-flag.webp",
-      "alt": "Canada - French"
+      "alt": "Canada - French",
+      "salesChannel": "3"
     }
   ]
 }
