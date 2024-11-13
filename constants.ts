@@ -16,3 +16,6 @@ export const HEADER_HEIGHT_MOBILE = "92px";
 export const NAVBAR_HEIGHT_MOBILE = "49px";
 export const HEADER_HEIGHT_DESKTOP = "107px";
 export const NAVBAR_HEIGHT_DESKTOP = "60px";
+
+export const STORE_SELECTOR_DRAWER_ID = "store-selector-drawer";
+export const STORE_SELECTOR_CONTAINER_ID = "store-selector-container";
