@@ -1,0 +1,13 @@
+{
+  "__resolveType": "vtex/actions/cart/simulation.ts",
+  "items": [
+    {
+      "id": 15,
+      "quantity": 1,
+      "seller": "1"
+    }
+  ],
+  "RnbBehavior": 0,
+  "country": "USA",
+  "postalCode": "00501"
+}

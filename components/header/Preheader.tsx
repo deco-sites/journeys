@@ -2,16 +2,29 @@ import { clx } from "../../sdk/clx.ts";
 import Image from "apps/website/components/Image.tsx";
 import { Alerts, PreheaderProps } from "../../sections/Header/Header.tsx";
 import { useComponent } from "../../sections/Component.tsx";
-import { AppContext } from "../../apps/site.ts";
 import { setCookie } from "std/http/cookie.ts";
 import { useDevice } from "@deco/deco/hooks";
+import Icon from "../ui/Icon.tsx";
+import StoreList from "./StoreSelector/List.tsx";
+import Drawer from "../ui/Drawer.tsx";
+import { AppContext } from "../../apps/deco/vtex.ts";
+import { groupStoresByState } from "../../sdk/stores.ts";
 
 export const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
-export const action = (
+export const action = async (
   props: PreheaderProps,
   _req: Request,
   ctx: AppContext,
 ) => {
+  if (props.variant === "stores") {
+    const stores = await ctx.invoke.vtex.loaders.logistics.listPickupPoints();
+
+    return {
+      ...props,
+      stores,
+    };
+  }
+
   if (props.currentLang) {
     setCookie(ctx.response.headers, {
       name: "language",
@@ -26,6 +39,8 @@ export const action = (
   }
   return { ...props };
 };
+
+const STORE_SELECTOR = "store-selector";
 
 export default ({
   langs = [
@@ -51,11 +66,77 @@ export default ({
       value: "fr-ca",
     },
   ],
-  url,
   ...props
 }: PreheaderProps) => {
   const [currentLang, ...otherLanguages] = langs;
-  const isKidzHome = url.pathname === "/kidz";
+
+  if (props?.variant === "stores") {
+    const groupedStores = groupStoresByState({
+      places: props?.stores ?? [],
+      language: currentLang?.value,
+    });
+    return (
+      <>
+        <Drawer
+          id={STORE_SELECTOR}
+          class="drawer-end z-50"
+          open
+          aside={
+            <Drawer.Aside title="Journeys Stores" drawer={STORE_SELECTOR}>
+              <div
+                class="h-full flex flex-col bg-base-100 items-center justify-start overflow-auto"
+                style={{
+                  minWidth: "calc(min(100vw, 425px))",
+                  maxWidth: "425px",
+                }}
+              >
+                <div class="flex flex-col gap-4 w-full px-4 mt-2">
+                  <h3 class="text-lg font-primary font-medium">Find a store</h3>
+                  <form class="flex gap-2 items-end">
+                    <div class="flex flex-col gap-1 flex-1">
+                      <label
+                        htmlFor="PostalCode"
+                        class="font-primary text-sm font-bold"
+                      >
+                        Zip/Postal Code
+                      </label>
+                      <input
+                        name="PostalCode"
+                        type="tel"
+                        id="PostalCode"
+                        aria-label="Zip/Postal Code"
+                        placeholder="Enter zip/postal code"
+                        autocomplete="postal-code"
+                        pattern="(?=.*[A-Za-z]).{6,}|[0-9]{5}"
+                        class="input input-bordered input-sm w-full rounded-none outline-none focus:outline-none"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      class={clx(
+                        "min-w-0 flex-shrink-0",
+                        "text-white bg-gray-100 border-gray-100",
+                        "select-none",
+                        "font-primary font-normal uppercase btn-sm",
+                      )}
+                    >
+                      Search
+                    </button>
+                  </form>
+                </div>
+                <StoreList stores={groupedStores} />
+              </div>
+            </Drawer.Aside>
+          }
+        />
+        <div id="stores-data" class="hidden">
+          {JSON.stringify(groupedStores)}
+        </div>
+      </>
+    );
+  }
+
+  const isKidzHome = props?.url?.pathname === "/kidz";
   const isDesktop = useDevice() === "desktop";
 
   if (!isDesktop) {
@@ -111,7 +192,28 @@ export default ({
 
       <Alerts alerts={props.alerts} />
 
-      <div class="justify-end items-center hidden lg:flex">
+      <div class="justify-end items-center hidden gap-2 lg:flex flex-shrink-0 relative">
+        <label
+          class="flex items-center gap-1 group cursor-pointer"
+          hx-target={`#${STORE_SELECTOR}-container`}
+          hx-swap="outerHTML"
+          hx-trigger="click once"
+          hx-get={useComponent(import.meta.url, {
+            langs,
+            variant: "stores",
+          })}
+          htmlFor={STORE_SELECTOR}
+        >
+          <Icon id="Location" width={12} height={12} class="text-white" />
+          <span
+            class="text-white group-hover:underline transition-all duration-300 font-primary"
+            style={{
+              fontSize: "10.71px",
+            }}
+          >
+            Find Your Store
+          </span>
+        </label>
         <div className="dropdown">
           <div
             tabIndex={0}
@@ -122,7 +224,6 @@ export default ({
               fontSize: "10.71px",
               padding: "4.59px 6px",
             }}
-            aria-selected={true}
             className={clx(
               "flex items-center text-white uppercase group cursor-pointer select-none",
               "border border-transparent",
@@ -182,6 +283,25 @@ export default ({
             ))}
           </ul>
         </div>
+      </div>
+      <div id={STORE_SELECTOR + "-container"} class="">
+        <Drawer
+          id={STORE_SELECTOR}
+          class="drawer-end z-50"
+          aside={
+            <Drawer.Aside title="Journeys Stores" drawer={STORE_SELECTOR}>
+              <div
+                class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto"
+                style={{
+                  minWidth: "calc(min(100vw, 425px))",
+                  maxWidth: "425px",
+                }}
+              >
+                Em loading meu parceiro....
+              </div>
+            </Drawer.Aside>
+          }
+        />
       </div>
     </div>
   );

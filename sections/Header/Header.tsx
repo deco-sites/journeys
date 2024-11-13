@@ -26,6 +26,7 @@ import { clx } from "../../sdk/clx.ts";
 import type { AppContext } from "../../apps/site.ts";
 import { getCookies, setCookie } from "std/http/cookie.ts";
 import type { Lang, Langs } from "../../loaders/languages.ts";
+import { Place } from "apps/commerce/types.ts";
 
 export interface Logo {
   /** @title Image */
@@ -50,6 +51,14 @@ export interface PreheaderProps {
    * @ignore
    */
   url: URL;
+  /**
+   * @ignore
+   */
+  variant?: "stores";
+  /**
+   * @ignore
+   */
+  stores?: Place[];
 }
 
 /**
