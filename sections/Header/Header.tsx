@@ -28,6 +28,7 @@ import { getCookies, setCookie } from "std/http/cookie.ts";
 import type { Lang, Langs } from "../../loaders/languages.ts";
 import { removeNonLatin1Chars } from "apps/utils/normalize.ts";
 import { Segment } from "apps/vtex/utils/types.ts";
+import { Place } from "apps/commerce/types.ts";
 
 export interface Logo {
   /** @title Image */
@@ -52,6 +53,14 @@ export interface PreheaderProps {
    * @ignore
    */
   url?: URL;
+  /**
+   * @ignore
+   */
+  variant?: "stores" | "get-stores";
+  /**
+   * @ignore
+   */
+  stores?: Place[];
 }
 
 /**

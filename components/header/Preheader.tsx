@@ -2,9 +2,15 @@ import { clx } from "../../sdk/clx.ts";
 import Image from "apps/website/components/Image.tsx";
 import { Alerts, PreheaderProps } from "../../sections/Header/Header.tsx";
 import { useComponent } from "../../sections/Component.tsx";
-import { AppContext } from "../../apps/site.ts";
 import { setCookie } from "std/http/cookie.ts";
 import { useDevice } from "@deco/deco/hooks";
+import Drawer from "../ui/Drawer.tsx";
+import { AppContext } from "../../apps/deco/vtex.ts";
+import StoreSelector from "./StoreSelector/StoreSelector.tsx";
+import {
+  STORE_SELECTOR_CONTAINER_ID,
+  STORE_SELECTOR_DRAWER_ID,
+} from "../../constants.ts";
 
 export const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
 export const action = (
@@ -54,11 +60,11 @@ export default ({
       salesChannel: "3",
     },
   ],
-  url,
   ...props
 }: PreheaderProps) => {
   const [currentLang, ...otherLanguages] = langs;
-  const isKidzHome = url?.pathname === "/kidz";
+
+  const isKidzHome = props?.url?.pathname === "/kidz";
   const isDesktop = useDevice() === "desktop";
 
   if (!isDesktop) {
@@ -114,7 +120,8 @@ export default ({
 
       <Alerts alerts={props?.alerts ?? []} />
 
-      <div class="justify-end items-center hidden lg:flex">
+      <div class="justify-end items-center hidden gap-2 lg:flex flex-shrink-0 relative">
+        <StoreSelector currentLang={currentLang} />
         <div className="dropdown">
           <div
             tabIndex={0}
@@ -125,7 +132,6 @@ export default ({
               fontSize: "10.71px",
               padding: "4.59px 6px",
             }}
-            aria-selected={true}
             className={clx(
               "flex items-center text-white uppercase group cursor-pointer select-none",
               "border border-transparent",
@@ -185,6 +191,29 @@ export default ({
             ))}
           </ul>
         </div>
+      </div>
+      {/* Store selector - Initial Loading state */}
+      <div id={STORE_SELECTOR_CONTAINER_ID} class="">
+        <Drawer
+          id={STORE_SELECTOR_DRAWER_ID}
+          class="drawer-end z-50"
+          aside={
+            <Drawer.Aside
+              title="Journeys Stores"
+              drawer={STORE_SELECTOR_DRAWER_ID}
+            >
+              <div
+                class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto"
+                style={{
+                  minWidth: "calc(min(100vw, 425px))",
+                  maxWidth: "425px",
+                }}
+              >
+                Em loading meu parceiro....
+              </div>
+            </Drawer.Aside>
+          }
+        />
       </div>
     </div>
   );
