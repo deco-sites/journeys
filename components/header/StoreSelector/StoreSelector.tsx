@@ -2,7 +2,10 @@ import { Place } from "apps/commerce/types.ts";
 import { AppContext } from "../../../apps/deco/vtex.ts";
 import { Lang } from "../../../loaders/languages.ts";
 import { clx } from "../../../sdk/clx.ts";
-import { groupStoresByState } from "../../../sdk/stores.ts";
+import {
+  getCountryFromLanguage,
+  groupStoresByState,
+} from "../../../sdk/stores.ts";
 import { useComponent } from "../../../sections/Component.tsx";
 import Drawer from "../../ui/Drawer.tsx";
 import Icon from "../../ui/Icon.tsx";
@@ -11,6 +14,7 @@ import {
   STORE_SELECTOR_CONTAINER_ID,
   STORE_SELECTOR_DRAWER_ID,
 } from "../../../constants.ts";
+import { getCookies } from "std/http/cookie.ts";
 
 export interface StoreSelectorProps {
   /**
@@ -25,6 +29,10 @@ export interface StoreSelectorProps {
    * @ignore
    */
   stores?: Place[];
+  /**
+   * @ignore
+   */
+  error?: string;
 }
 
 export const action = async (
@@ -43,9 +51,31 @@ export const action = async (
 
   if (props.variant === "get-stores") {
     const form = await req.formData();
-    const _postalCode = form.get("PostalCode");
+    const postalCode = form.get("PostalCode")?.toString()?.replace(/\s+/g, "");
+    const cookies = getCookies(req.headers);
+    const vtexSegment = cookies?.["vtex_segment"]
+      ? JSON.parse(atob(cookies["vtex_segment"]))
+      : {};
 
-    const stores = await ctx.invoke.vtex.loaders.logistics.listPickupPoints();
+    if (!postalCode) {
+      return {
+        ...props,
+        stores: [],
+        error:
+          "No stores in your area. Please modify your location and search again.",
+      };
+    }
+
+    const countryCode = vtexSegment.countryCode ??
+      getCountryFromLanguage(props?.currentLang?.value ?? "en");
+
+    console.log({ postalCode, countryCode });
+
+    const stores = await ctx.invoke.vtex.loaders.logistics
+      .listPickupPointsByLocation({
+        postalCode,
+        countryCode,
+      });
     return {
       ...props,
       stores,
@@ -60,7 +90,7 @@ export default function StoreSelector({
   ...props
 }: StoreSelectorProps) {
   if (props?.variant === "get-stores") {
-    return <StoreList stores={props.stores} />;
+    return <StoreList stores={props.stores} error={props.error} />;
   }
 
   if (props?.variant === "stores") {
@@ -115,7 +145,8 @@ export default function StoreSelector({
                         aria-label="Zip/Postal Code"
                         placeholder="Enter zip/postal code"
                         autocomplete="postal-code"
-                        pattern="(?=.*[A-Za-z]).{6,}|[0-9]{5}"
+                        // pattern="(?=.*[A-Za-z]).{6,}|[0-9]{5}"
+                        pattern="^(\d{5}(-\d{4})?)|([A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d)$"
                         class="input input-bordered input-sm w-full rounded-none outline-none focus:outline-none"
                       />
                     </div>

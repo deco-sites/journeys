@@ -1,9 +1,11 @@
 import { Place } from "apps/commerce/types.ts";
 import { StoresByState } from "../../../sdk/stores.ts";
+import Icon from "../../ui/Icon.tsx";
 
 interface StoreListProps {
   groupedStores?: StoresByState;
   stores?: Place[];
+  error?: string;
 }
 
 function StoreItem({ store }: { store: Place }) {
@@ -85,16 +87,34 @@ function StoreItem({ store }: { store: Place }) {
 export default function StoreList({
   groupedStores = {},
   stores = [],
+  error,
 }: StoreListProps) {
-  if (stores.length > 0) {
+  if (Object.keys(groupedStores).length > 0) {
     return (
       <div class="flex flex-col gap-4 w-full px-4 mt-4">
         <h3 class="text-lg font-primary font-medium pb-3 border-b border-gray-200">
-          Stores matching your search
+          Stores by state
         </h3>
-        <ul class="mt-1 flex flex-col gap-4">
-          {stores.map((store) => <StoreItem store={store} />)}
-        </ul>
+        {Object.entries(groupedStores).map(([state, stores]) => (
+          <div key={state}>
+            <h3 class="text-lg font-primary font-medium">{state}</h3>
+            <ul class="mt-1">
+              {stores.map((store) => <StoreItem store={store} />)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (error || stores.length === 0) {
+    return (
+      <div class="flex flex-col gap-4 w-full px-4 mt-4">
+        <div class="text-[#c30b21] mt-1 flex gap-1 items-center">
+          <Icon id="Info" width={40} height={40} />
+          {error ??
+            "No stores in your area. Please modify your location and search again."}
+        </div>
       </div>
     );
   }
@@ -102,16 +122,11 @@ export default function StoreList({
   return (
     <div class="flex flex-col gap-4 w-full px-4 mt-4">
       <h3 class="text-lg font-primary font-medium pb-3 border-b border-gray-200">
-        Stores by state
+        Stores matching your search
       </h3>
-      {Object.entries(groupedStores).map(([state, stores]) => (
-        <div key={state}>
-          <h3 class="text-lg font-primary font-medium">{state}</h3>
-          <ul class="mt-1">
-            {stores.map((store) => <StoreItem store={store} />)}
-          </ul>
-        </div>
-      ))}
+      <ul class="mt-1 flex flex-col gap-4">
+        {stores.map((store) => <StoreItem store={store} />)}
+      </ul>
     </div>
   );
 }

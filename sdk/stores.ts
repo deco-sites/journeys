@@ -96,14 +96,17 @@ const languageToCountry = {
   "fr-ca": "CAN",
 } as const;
 
+export const getCountryFromLanguage = (language: string): string => {
+  return languageToCountry[language as keyof typeof languageToCountry] || "USA";
+};
+
 export const groupStoresByState = ({
   places,
   storesPerState = 1,
   language = "en",
 }: GroupStoresByStateParams): StoresByState => {
   const stateMap: StoresByState = {};
-  const countryFilter =
-    languageToCountry[language as keyof typeof languageToCountry] || "USA";
+  const countryFilter = getCountryFromLanguage(language);
 
   places.forEach((place) => {
     const stateCode = place?.address?.addressRegion;

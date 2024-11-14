@@ -5109,6 +5109,10 @@ details.collapse summary::-webkit-details-marker {
   --tw-text-opacity: 1;
   color: rgb(112 112 112 / var(--tw-text-opacity));
 }
+.text-\[\#c30b21\] {
+  --tw-text-opacity: 1;
+  color: rgb(195 11 33 / var(--tw-text-opacity));
+}
 .text-accent {
   --tw-text-opacity: 1;
   color: var(--fallback-a,oklch(var(--a)/var(--tw-text-opacity)));
