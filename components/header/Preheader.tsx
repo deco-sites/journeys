@@ -209,7 +209,7 @@ export default ({
                   maxWidth: "425px",
                 }}
               >
-                Em loading meu parceiro....
+                <span class="loading loading-spinner" />
               </div>
             </Drawer.Aside>
           }
