@@ -13,7 +13,7 @@ import Sort from "./Sort.tsx";
 import { useDevice, useScript, useSection } from "@deco/deco/hooks";
 import { type SectionProps } from "@deco/deco";
 import { getCookies } from "std/http/cookie.ts";
-import { CurrencyCode } from "apps/shopify/utils/enums.ts";
+// import { CurrencyCode } from "apps/shopify/utils/enums.ts";
 export interface Layout {
   /**
    * @title Pagination
@@ -301,7 +301,6 @@ function SearchResult({ page, ...props }: SectionProps<typeof loader>) {
     return <NotFound />;
   }
   return <Result {...props} page={page} />;
-  
 }
 
 export const loader = (props: Props, req: Request) => {
@@ -312,6 +311,6 @@ export const loader = (props: Props, req: Request) => {
     currencyCode: vtexSegment.currencyCode,
     locale: vtexSegment.cultureInfo,
     url: req.url,
-  }
-}
+  };
+};
 export default SearchResult;

@@ -1,4 +1,4 @@
-import type { LoadingFallbackProps } from "@deco/deco";
+import type { LoadingFallbackProps, SectionProps } from "@deco/deco";
 import { useDevice, useScript } from "@deco/deco/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
@@ -47,11 +47,11 @@ export interface PreheaderProps {
    * @ignore
    */
   currentLang?: Lang;
-  alerts: Alert[];
+  alerts?: Alert[];
   /**
    * @ignore
    */
-  url: URL;
+  url?: URL;
 }
 
 /**
@@ -84,6 +84,10 @@ export interface Props {
    * @description Usefull for lazy loading hidden elements, like hamburguer menus etc
    * @hide true */
   loading?: "eager" | "lazy";
+  /**
+   * @ignore
+   */
+  url?: string;
 }
 
 export function Alerts({ alerts }: { alerts: Alert[] }) {
@@ -146,9 +150,7 @@ export function Alerts({ alerts }: { alerts: Alert[] }) {
   );
 }
 
-const Desktop = (
-  { navItems, logo, searchbar, loading }: ReturnType<typeof loader>,
-) => (
+const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
       <div
@@ -203,11 +205,14 @@ const Desktop = (
   </>
 );
 
-const Mobile = (
-  { logo, searchbar, navItems, loading, url, preheader }: ReturnType<
-    typeof loader
-  >,
-) => (
+const Mobile = ({
+  logo,
+  searchbar,
+  navItems,
+  loading,
+  url,
+  preheader,
+}: Props) => (
   <>
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
@@ -233,8 +238,8 @@ const Mobile = (
           header={url && (
             <Preheader
               url={new URL(url)}
-              alerts={preheader.alerts ?? []}
-              langs={preheader.langs}
+              alerts={preheader?.alerts ?? []}
+              langs={preheader?.langs}
             />
           )}
           drawer={SIDEMENU_DRAWER_ID}
@@ -313,13 +318,12 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   }
 
   const currentCookieLang = langParamValue ?? cookies?.language ?? "";
-  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort(
-    (a) => (a?.value === currentCookieLang ? -1 : 1),
+  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort((a) =>
+    a?.value === currentCookieLang ? -1 : 1
   );
 
-  const vtexCookie = cookies["vtex_segment"]
-  if(!vtexCookie){
-
+  const vtexCookie = cookies["vtex_segment"];
+  if (!vtexCookie) {
     return {
       ...props,
       preheader: { ...props.preheader, langs: langsOrderedWithSelectedFirst },
@@ -329,7 +333,10 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   const vtexSegment = JSON.parse(atob(vtexCookie));
 
   const lang = langsOrderedWithSelectedFirst?.[0];
-  const salesChannelInfo = await ctx.invoke.vtex.loaders.logistics.getSalesChannelById({id: lang?.salesChannel});
+  const salesChannelInfo = await ctx.invoke.vtex.loaders.logistics
+    .getSalesChannelById({
+      id: lang?.salesChannel,
+    });
 
   const newVtexSegment = {
     ...vtexSegment,
@@ -337,7 +344,7 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
     currencySymbol: salesChannelInfo.CurrencySymbol,
     countryCode: salesChannelInfo.CountryCode,
     cultureInfo: salesChannelInfo.CultureInfo,
-  }
+  };
   const token = serialize(newVtexSegment);
 
   setCookie(ctx.response.headers, {
@@ -355,7 +362,6 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
     secure: true,
     httpOnly: true,
   });
-
 
   return {
     ...props,
@@ -404,8 +410,7 @@ const serialize = ({
   return btoa(JSON.stringify(seg));
 };
 
-
-export default function Header(props: ReturnType<typeof loader>) {
+export default function Header(props: SectionProps<typeof loader>) {
   const isDesktop = useDevice() === "desktop";
 
   return (

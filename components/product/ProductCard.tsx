@@ -34,7 +34,7 @@ function ProductCard({
   index,
   class: _class,
   currencyCode,
-  locale
+  locale,
 }: Props) {
   const { url, image: images, offers, isVariantOf } = product;
   const title = isVariantOf?.name ?? product.name;
@@ -58,10 +58,10 @@ function ProductCard({
     },
   });
 
-  const USDollar = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
+  // const USDollar = new Intl.NumberFormat("en-US", {
+  //   style: "currency",
+  //   currency: "USD",
+  // });
 
   return (
     <div
@@ -109,7 +109,7 @@ function ProductCard({
 
         <div class="flex gap-2">
           <span class="font-primary font-bold text-gray-100 text-sm">
-           {formatPrice(price, currencyCode, locale)}
+            {formatPrice(price, currencyCode, locale)}
           </span>
         </div>
       </a>

@@ -66,8 +66,8 @@ export default function Results({ result }: ComponentProps<typeof action>) {
         </li>
       ))}
       <span class="text-xs font-thin">
-        Delivery times start counting from confirmation of the order payment and may vary according to the quantity of products in the
-        bag.
+        Delivery times start counting from confirmation of the order payment and
+        may vary according to the quantity of products in the bag.
       </span>
     </ul>
   );

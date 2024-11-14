@@ -12,7 +12,9 @@ export interface Props {
   page: ProductDetailsPage | null;
 }
 
-export default function ProductDetails({ page, currencyCode, locale }: SectionProps<typeof loader>) {
+export default function ProductDetails(
+  { page, currencyCode, locale }: SectionProps<typeof loader>,
+) {
   /**
    * Rendered when a not found is returned by any of the loaders run on this page
    */
@@ -44,7 +46,11 @@ export default function ProductDetails({ page, currencyCode, locale }: SectionPr
           <ImageGallerySlider page={page} />
         </div>
         <div class="sm:col-span-2">
-          <ProductInfo page={page} currencyCode={currencyCode} locale={locale}/>
+          <ProductInfo
+            page={page}
+            currencyCode={currencyCode}
+            locale={locale}
+          />
         </div>
       </div>
     </div>
@@ -58,7 +64,7 @@ export const loader = (props: Props, req: Request) => {
     ...props,
     currencyCode: vtexSegment.currencyCode,
     locale: vtexSegment.cultureInfo,
-  }
-}
+  };
+};
 
 export const LoadingFallback = () => <Section.Placeholder height="635px" />;

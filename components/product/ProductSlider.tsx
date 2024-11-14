@@ -14,7 +14,9 @@ interface Props {
   locale: string;
 }
 
-function ProductSlider({ products, itemListName, currencyCode, locale }: Props) {
+function ProductSlider(
+  { products, itemListName, currencyCode, locale }: Props,
+) {
   const id = useId();
   const device = useDevice();
 
