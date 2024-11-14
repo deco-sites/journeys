@@ -6,7 +6,8 @@ import Section, {
 } from "../../components/ui/Section.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
-import { type LoadingFallbackProps } from "@deco/deco";
+import { type LoadingFallbackProps, SectionProps } from "@deco/deco";
+import { getCookies } from "std/http/cookie.ts";
 /** @titleBy title */
 interface Tab {
   title: string;
@@ -17,9 +18,25 @@ export interface Props extends SectionHeaderProps {
   /** @hide true */
   tabIndex?: number;
 }
-export default function TabbedProductShelf(
-  { tabs, title, cta, tabIndex }: Props,
-) {
+
+export const loader = (props: Props, req: Request) => {
+  const cookies = getCookies(req.headers);
+  const vtexSegment = JSON.parse(atob(cookies["vtex_segment"]));
+  return {
+    ...props,
+    currencyCode: vtexSegment.currencyCode,
+    locale: vtexSegment.cultureInfo,
+  };
+};
+
+export default function TabbedProductShelf({
+  tabs,
+  title,
+  cta,
+  tabIndex,
+  currencyCode,
+  locale,
+}: SectionProps<typeof loader>) {
   const ti = typeof tabIndex === "number"
     ? Math.min(Math.max(tabIndex, 0), tabs.length)
     : 0;
@@ -34,7 +51,7 @@ export default function TabbedProductShelf(
           mapProductToAnalyticsItem({
             index,
             product,
-            ...(useOffer(product.offers)),
+            ...useOffer(product.offers),
           })
         ) ?? [],
       },
@@ -51,14 +68,23 @@ export default function TabbedProductShelf(
               No Products found
             </div>
           )
-          : <ProductSlider products={products} itemListName={title} />}
+          : (
+            <ProductSlider
+              products={products}
+              itemListName={title}
+              currencyCode={currencyCode}
+              locale={locale}
+            />
+          )}
       </Section.Tabbed>
     </Section.Container>
   );
 }
-export const LoadingFallback = (
-  { title, cta }: LoadingFallbackProps<Props>,
-) => (
+
+export const LoadingFallback = ({
+  title,
+  cta,
+}: LoadingFallbackProps<Props>) => (
   <Section.Container>
     <Section.Header title={title} cta={cta} />
 

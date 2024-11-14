@@ -13,9 +13,9 @@ export interface Props {
 const formatShippingEstimate = (estimate: string) => {
   const [, time, type] = estimate.split(/(\d+)/);
 
-  if (type === "bd") return `${time} dias úteis`;
-  if (type === "d") return `${time} dias`;
-  if (type === "h") return `${time} horas`;
+  if (type === "bd") return `${time} business days`;
+  if (type === "d") return `${time} days`;
+  if (type === "h") return `${time} hours`;
 };
 
 export async function action(props: Props, req: Request, ctx: AppContext) {
@@ -25,7 +25,7 @@ export async function action(props: Props, req: Request, ctx: AppContext) {
     const result = await ctx.invoke("vtex/actions/cart/simulation.ts", {
       items: props.items,
       postalCode: `${form.get("postalCode") ?? ""}`,
-      country: "BRA",
+      country: "USA",
     }) as SimulationOrderForm | null;
 
     return { result };
@@ -53,22 +53,21 @@ export default function Results({ result }: ComponentProps<typeof action>) {
       {methods.map((method) => (
         <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
           <span class="text-button text-center">
-            Entrega {method.name}
+            {method.name}
           </span>
           <span class="text-button">
-            até {formatShippingEstimate(method.shippingEstimate)}
+            {formatShippingEstimate(method.shippingEstimate)}
           </span>
           <span class="text-base font-semibold text-right">
-            {method.price === 0 ? "Grátis" : (
-              formatPrice(method.price / 100, "BRL", "pt-BR")
+            {method.price === 0 ? "Free" : (
+              formatPrice(method.price / 100, "USD", "en-US")
             )}
           </span>
         </li>
       ))}
       <span class="text-xs font-thin">
-        Os prazos de entrega começam a contar a partir da confirmação do
-        pagamento e podem variar de acordo com a quantidade de produtos na
-        sacola.
+        Delivery times start counting from confirmation of the order payment and
+        may vary according to the quantity of products in the bag.
       </span>
     </ul>
   );

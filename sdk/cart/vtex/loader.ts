@@ -11,7 +11,7 @@ export const cartFrom = (form: Cart, url: string): Minicart => {
   const discounts =
     (totalizers?.find((item) => item.id === "Discounts")?.value || 0) * -1;
   const locale = form?.clientPreferencesData.locale ?? "pt-BR";
-  const currency = form?.storePreferencesData.currencyCode ?? "BRL";
+  const currency = form?.storePreferencesData.currencyCode ?? "USD";
   const coupon = form?.marketingData?.coupon ?? undefined;
 
   return {

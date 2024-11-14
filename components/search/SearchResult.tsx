@@ -12,6 +12,8 @@ import Drawer from "../ui/Drawer.tsx";
 import Sort from "./Sort.tsx";
 import { useDevice, useScript, useSection } from "@deco/deco/hooks";
 import { type SectionProps } from "@deco/deco";
+import { getCookies } from "std/http/cookie.ts";
+// import { CurrencyCode } from "apps/shopify/utils/enums.ts";
 export interface Layout {
   /**
    * @title Pagination
@@ -102,6 +104,8 @@ function PageResult(props: SectionProps<typeof loader>) {
             preload={index === 0}
             index={offset + index}
             class="h-full min-w-[160px] max-w-[300px]"
+            currencyCode={props.currencyCode}
+            locale={props.locale}
           />
         ))}
       </div>
@@ -298,9 +302,14 @@ function SearchResult({ page, ...props }: SectionProps<typeof loader>) {
   }
   return <Result {...props} page={page} />;
 }
+
 export const loader = (props: Props, req: Request) => {
+  const cookies = getCookies(req.headers);
+  const vtexSegment = JSON.parse(atob(cookies["vtex_segment"]));
   return {
     ...props,
+    currencyCode: vtexSegment.currencyCode,
+    locale: vtexSegment.cultureInfo,
     url: req.url,
   };
 };

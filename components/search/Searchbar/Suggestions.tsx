@@ -7,12 +7,21 @@ import Icon from "../../ui/Icon.tsx";
 import Slider from "../../ui/Slider.tsx";
 import { ACTION, NAME } from "./Form.tsx";
 import { type Resolved } from "@deco/deco";
+import { getCookies } from "std/http/cookie.ts";
 export interface Props {
   /**
    * @title Suggestions Integration
    * @todo: improve this typings ({query: string, count: number}) => Suggestions
    */
   loader: Resolved<Suggestion | null>;
+  /**
+   * @ignore
+   */
+  currencyCode?: string;
+  /**
+   * @ignore
+   */
+  locale?: string;
 }
 export const action = async (props: Props, req: Request, ctx: AppContext) => {
   const {
@@ -25,7 +34,7 @@ export const action = async (props: Props, req: Request, ctx: AppContext) => {
     ...loaderProps,
     query,
   })) as Suggestion | null;
-  return { suggestion };
+  return { suggestion, ...props };
 };
 export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   const {
@@ -37,11 +46,20 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
     ...loaderProps,
     query,
   })) as Suggestion | null;
-  return { suggestion };
+
+  const cookies = getCookies(req.headers);
+  const vtexSegment = JSON.parse(atob(cookies["vtex_segment"]));
+  return {
+    suggestion,
+    currencyCode: vtexSegment.currencyCode,
+    locale: vtexSegment.cultureInfo,
+  };
 };
-function Suggestions(
-  { suggestion }: ComponentProps<typeof loader, typeof action>,
-) {
+function Suggestions({
+  suggestion,
+  currencyCode,
+  locale,
+}: ComponentProps<typeof loader, typeof action>) {
   let { products = [], searches = [] } = suggestion ?? {};
   products ??= [];
 
@@ -87,6 +105,8 @@ function Suggestions(
                   product={product}
                   index={index}
                   itemListName="Suggeestions"
+                  currencyCode={currencyCode}
+                  locale={locale}
                 />
               </Slider.Item>
             ))}

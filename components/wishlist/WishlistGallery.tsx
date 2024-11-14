@@ -1,3 +1,4 @@
+import { getCookies } from "std/http/cookie.ts";
 import SearchResult, {
   Props as SearchResultProps,
 } from "../search/SearchResult.tsx";
@@ -18,12 +19,23 @@ function WishlistGallery(props: SectionProps<typeof loader>) {
       </div>
     );
   }
-  return <SearchResult {...props} />;
+  return (
+    <SearchResult
+      {...props}
+      currencyCode={props.currencyCode}
+      locale={props.locale}
+    />
+  );
 }
 export const loader = (props: Props, req: Request) => {
+  const cookies = getCookies(req.headers);
+  const vtexSegment = JSON.parse(atob(cookies["vtex_segment"]));
+
   return {
     ...props,
     url: req.url,
+    currencyCode: vtexSegment.currencyCode,
+    locale: vtexSegment.cultureInfo,
   };
 };
 export default WishlistGallery;

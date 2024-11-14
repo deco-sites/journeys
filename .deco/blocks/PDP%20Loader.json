@@ -1,11 +1,15 @@
 {
+  "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts",
   "data": {
+    "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts",
     "slug": {
-      "param": "slug",
-      "__resolveType": "website/functions/requestToParam.ts"
-    },
-    "__resolveType": "vtex/loaders/legacy/productDetailsPage.ts"
+      "__resolveType": "website/functions/requestToParam.ts",
+      "param": "slug"
+    }
   },
-  "extensions": [],
-  "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts"
+  "extensions": [
+    {
+      "__resolveType": "vtex/loaders/product/extensions/detailsPage.ts"
+    }
+  ]
 }

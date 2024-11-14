@@ -1,4 +1,4 @@
-import type { LoadingFallbackProps } from "@deco/deco";
+import type { LoadingFallbackProps, SectionProps } from "@deco/deco";
 import { useDevice, useScript } from "@deco/deco/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
@@ -23,9 +23,11 @@ import {
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
-import type { AppContext } from "../../apps/site.ts";
+import type { AppContext } from "apps/vtex/mod.ts";
 import { getCookies, setCookie } from "std/http/cookie.ts";
 import type { Lang, Langs } from "../../loaders/languages.ts";
+import { removeNonLatin1Chars } from "apps/utils/normalize.ts";
+import { Segment } from "apps/vtex/utils/types.ts";
 import { Place } from "apps/commerce/types.ts";
 
 export interface Logo {
@@ -46,11 +48,11 @@ export interface PreheaderProps {
    * @ignore
    */
   currentLang?: Lang;
-  alerts: Alert[];
+  alerts?: Alert[];
   /**
    * @ignore
    */
-  url: URL;
+  url?: URL;
   /**
    * @ignore
    */
@@ -91,6 +93,10 @@ export interface Props {
    * @description Usefull for lazy loading hidden elements, like hamburguer menus etc
    * @hide true */
   loading?: "eager" | "lazy";
+  /**
+   * @ignore
+   */
+  url?: string;
 }
 
 export function Alerts({ alerts }: { alerts: Alert[] }) {
@@ -153,9 +159,7 @@ export function Alerts({ alerts }: { alerts: Alert[] }) {
   );
 }
 
-const Desktop = (
-  { navItems, logo, searchbar, loading }: ReturnType<typeof loader>,
-) => (
+const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
       <div
@@ -186,7 +190,13 @@ const Desktop = (
         </ul>
 
         <div class="flex gap-8 items-center ml-auto">
-          <Icon id="search" size={17} />
+          <label
+            for={SEARCHBAR_POPUP_ID}
+            class="size-6 flex items-center justify-center cursor-pointer"
+            aria-label="search icon button"
+          >
+            <Icon id="search" size={17} />
+          </label>
           <Image
             src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/4a55a936-708c-46ad-983f-00bfc9ed0701/location-pointer-2961.png"
             width={17}
@@ -204,11 +214,14 @@ const Desktop = (
   </>
 );
 
-const Mobile = (
-  { logo, searchbar, navItems, loading, url, preheader }: ReturnType<
-    typeof loader
-  >,
-) => (
+const Mobile = ({
+  logo,
+  searchbar,
+  navItems,
+  loading,
+  url,
+  preheader,
+}: Props) => (
   <>
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
@@ -234,8 +247,8 @@ const Mobile = (
           header={url && (
             <Preheader
               url={new URL(url)}
-              alerts={preheader.alerts ?? []}
-              langs={preheader.langs}
+              alerts={preheader?.alerts ?? []}
+              langs={preheader?.langs}
             />
           )}
           drawer={SIDEMENU_DRAWER_ID}
@@ -300,7 +313,7 @@ const Mobile = (
   </>
 );
 
-export const loader = (props: Props, req: Request, ctx: AppContext) => {
+export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   const cookies = getCookies(req.headers);
   const langParamValue = new URL(req.url)?.searchParams?.get("language");
 
@@ -314,9 +327,50 @@ export const loader = (props: Props, req: Request, ctx: AppContext) => {
   }
 
   const currentCookieLang = langParamValue ?? cookies?.language ?? "";
-  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort(
-    (a) => (a?.value === currentCookieLang ? -1 : 1),
+  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort((a) =>
+    a?.value === currentCookieLang ? -1 : 1
   );
+
+  const vtexCookie = cookies["vtex_segment"];
+  if (!vtexCookie) {
+    return {
+      ...props,
+      preheader: { ...props.preheader, langs: langsOrderedWithSelectedFirst },
+      url: req.url,
+    };
+  }
+  const vtexSegment = JSON.parse(atob(vtexCookie));
+
+  const lang = langsOrderedWithSelectedFirst?.[0];
+  const salesChannelInfo = await ctx.invoke.vtex.loaders.logistics
+    .getSalesChannelById({
+      id: lang?.salesChannel,
+    });
+
+  const newVtexSegment = {
+    ...vtexSegment,
+    currencyCode: salesChannelInfo.CurrencyCode,
+    currencySymbol: salesChannelInfo.CurrencySymbol,
+    countryCode: salesChannelInfo.CountryCode,
+    cultureInfo: salesChannelInfo.CultureInfo,
+  };
+  const token = serialize(newVtexSegment);
+
+  setCookie(ctx.response.headers, {
+    value: token,
+    name: "vtex_segment",
+    path: "/",
+    secure: true,
+    httpOnly: true,
+  });
+
+  setCookie(ctx.response.headers, {
+    value: "sc=" + lang?.salesChannel,
+    name: "VTEXSC",
+    path: "/",
+    secure: true,
+    httpOnly: true,
+  });
 
   return {
     ...props,
@@ -325,7 +379,47 @@ export const loader = (props: Props, req: Request, ctx: AppContext) => {
   };
 };
 
-export default function Header(props: ReturnType<typeof loader>) {
+const serialize = ({
+  campaigns,
+  channel,
+  priceTables,
+  regionId,
+  utm_campaign,
+  utm_source,
+  utm_medium,
+  utmi_campaign,
+  utmi_page,
+  utmi_part,
+  currencyCode,
+  currencySymbol,
+  countryCode,
+  cultureInfo,
+  channelPrivacy,
+}: Partial<Segment>) => {
+  const seg = {
+    campaigns,
+    channel,
+    priceTables,
+    regionId,
+    utm_campaign: utm_campaign &&
+      removeNonLatin1Chars(utm_campaign).replace(/[\[\]{}()<>]/g, ""),
+    utm_source: utm_source &&
+      removeNonLatin1Chars(utm_source).replace(/[\[\]{}()<>]/g, ""),
+    utm_medium: utm_medium &&
+      removeNonLatin1Chars(utm_medium).replace(/[\[\]{}()<>]/g, ""),
+    utmi_campaign: utmi_campaign && removeNonLatin1Chars(utmi_campaign),
+    utmi_page: utmi_page && removeNonLatin1Chars(utmi_page),
+    utmi_part: utmi_part && removeNonLatin1Chars(utmi_part),
+    currencyCode,
+    currencySymbol,
+    countryCode,
+    cultureInfo,
+    channelPrivacy,
+  };
+  return btoa(JSON.stringify(seg));
+};
+
+export default function Header(props: SectionProps<typeof loader>) {
   const isDesktop = useDevice() === "desktop";
 
   return (

@@ -13,9 +13,11 @@ import ProductSelector from "./ProductVariantSelector.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
+  currencyCode: string;
+  locale: string;
 }
 
-function ProductInfo({ page }: Props) {
+function ProductInfo({ page, currencyCode, locale }: Props) {
   const id = useId();
 
   if (page === null) {
@@ -91,10 +93,10 @@ function ProductInfo({ page }: Props) {
       {/* Prices */}
       <div class="flex gap-3 pt-1">
         <span class="text-3xl font-semibold text-base-400">
-          {formatPrice(price, offers?.priceCurrency)}
+          {formatPrice(price, currencyCode, locale)}
         </span>
         <span class="line-through text-sm font-medium text-gray-400">
-          {formatPrice(listPrice, offers?.priceCurrency)}
+          {formatPrice(listPrice, currencyCode, locale)}
         </span>
       </div>
 

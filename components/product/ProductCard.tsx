@@ -5,6 +5,7 @@ import { clx } from "../../sdk/clx.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
+import { formatPrice } from "../../sdk/format.ts";
 
 interface Props {
   product: Product;
@@ -18,6 +19,8 @@ interface Props {
   index?: number;
 
   class?: string;
+  currencyCode: string;
+  locale: string;
 }
 
 const WIDTH = 287;
@@ -30,6 +33,8 @@ function ProductCard({
   itemListName,
   index,
   class: _class,
+  currencyCode,
+  locale,
 }: Props) {
   const { url, image: images, offers, isVariantOf } = product;
   const title = isVariantOf?.name ?? product.name;
@@ -53,10 +58,10 @@ function ProductCard({
     },
   });
 
-  const USDollar = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
+  // const USDollar = new Intl.NumberFormat("en-US", {
+  //   style: "currency",
+  //   currency: "USD",
+  // });
 
   return (
     <div
@@ -104,7 +109,7 @@ function ProductCard({
 
         <div class="flex gap-2">
           <span class="font-primary font-bold text-gray-100 text-sm">
-            {USDollar.format(price!)}
+            {formatPrice(price, currencyCode, locale)}
           </span>
         </div>
       </a>

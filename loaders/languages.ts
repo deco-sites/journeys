@@ -15,6 +15,7 @@ export interface Lang {
    * @description Value will be used for global language cookie on the site
    */
   value: string;
+  salesChannel: string;
   /**
    * @title Flag
    */

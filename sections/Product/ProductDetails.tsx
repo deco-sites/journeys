@@ -4,13 +4,17 @@ import ProductInfo from "../../components/product/ProductInfo.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import Section from "../../components/ui/Section.tsx";
 import { clx } from "../../sdk/clx.ts";
+import { getCookies } from "std/http/cookie.ts";
+import { type SectionProps } from "@deco/deco";
 
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 }
 
-export default function ProductDetails({ page }: Props) {
+export default function ProductDetails(
+  { page, currencyCode, locale }: SectionProps<typeof loader>,
+) {
   /**
    * Rendered when a not found is returned by any of the loaders run on this page
    */
@@ -42,11 +46,25 @@ export default function ProductDetails({ page }: Props) {
           <ImageGallerySlider page={page} />
         </div>
         <div class="sm:col-span-2">
-          <ProductInfo page={page} />
+          <ProductInfo
+            page={page}
+            currencyCode={currencyCode}
+            locale={locale}
+          />
         </div>
       </div>
     </div>
   );
 }
+
+export const loader = (props: Props, req: Request) => {
+  const cookies = getCookies(req.headers);
+  const vtexSegment = JSON.parse(atob(cookies["vtex_segment"]));
+  return {
+    ...props,
+    currencyCode: vtexSegment.currencyCode,
+    locale: vtexSegment.cultureInfo,
+  };
+};
 
 export const LoadingFallback = () => <Section.Placeholder height="635px" />;

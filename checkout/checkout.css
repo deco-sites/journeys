@@ -1,0 +1,211 @@
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src:
+    url(https://cdn.jsdelivr.net/fontsource/fonts/roboto-condensed@latest/latin-400-normal.woff2)
+    format("woff2"),
+    url(https://cdn.jsdelivr.net/fontsource/fonts/roboto-condensed@latest/latin-400-normal.woff)
+    format("woff");
+  unicode-range:
+    U+0000-00FF,
+    U+0131,
+    U+0152-0153,
+    U+02BB-02BC,
+    U+02C6,
+    U+02DA,
+    U+02DC,
+    U+0304,
+    U+0308,
+    U+0329,
+    U+2000-206F,
+    U+2074,
+    U+20AC,
+    U+2122,
+    U+2191,
+    U+2193,
+    U+2212,
+    U+2215,
+    U+FEFF,
+    U+FFFD;
+}
+
+/* roboto-condensed-latin-500-normal */
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src:
+    url(https://cdn.jsdelivr.net/fontsource/fonts/roboto-condensed@latest/latin-500-normal.woff2)
+    format("woff2"),
+    url(https://cdn.jsdelivr.net/fontsource/fonts/roboto-condensed@latest/latin-500-normal.woff)
+    format("woff");
+  unicode-range:
+    U+0000-00FF,
+    U+0131,
+    U+0152-0153,
+    U+02BB-02BC,
+    U+02C6,
+    U+02DA,
+    U+02DC,
+    U+0304,
+    U+0308,
+    U+0329,
+    U+2000-206F,
+    U+2074,
+    U+20AC,
+    U+2122,
+    U+2191,
+    U+2193,
+    U+2212,
+    U+2215,
+    U+FEFF,
+    U+FFFD;
+}
+
+/* roboto-condensed-latin-700-normal */
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src:
+    url(https://cdn.jsdelivr.net/fontsource/fonts/roboto-condensed@latest/latin-700-normal.woff2)
+    format("woff2"),
+    url(https://cdn.jsdelivr.net/fontsource/fonts/roboto-condensed@latest/latin-700-normal.woff)
+    format("woff");
+  unicode-range:
+    U+0000-00FF,
+    U+0131,
+    U+0152-0153,
+    U+02BB-02BC,
+    U+02C6,
+    U+02DA,
+    U+02DC,
+    U+0304,
+    U+0308,
+    U+0329,
+    U+2000-206F,
+    U+2074,
+    U+20AC,
+    U+2122,
+    U+2191,
+    U+2193,
+    U+2212,
+    U+2215,
+    U+FEFF,
+    U+FFFD;
+}
+
+body {
+  background-color: #ebebeb !important;
+}
+
+.logo {
+  width: 71px;
+}
+
+.main-header {
+  border: none !important;
+}
+
+.checkout-steps {
+  display: none;
+}
+
+.cart,
+.monetary {
+  color: #202020 !important;
+}
+
+.cart {
+  padding: 20px 28px 0 !important;
+}
+
+.cart th {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.cart thead::before {
+  content: "SHOPPING BAG";
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px 8px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.product-name [id^="product-name"] {
+  color: #666 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
+
+.product-name .seller {
+  font-size: 14px !important;
+  color: #202020 !important;
+}
+
+.v-custom-product-item-wrap {
+  padding-top: 12px !important;
+  padding-bottom: 0 !important;
+}
+
+.v-custom-product-item-wrap td {
+  align-self: flex-start !important;
+}
+
+.new-product-price {
+  font-size: 14px !important;
+  color: #202020 !important;
+}
+
+.btn-place-order-wrapper a {
+  background-color: #202020 !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  padding: 8px 36px !important;
+  border-radius: 0 !important;
+  text-transform: uppercase !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+#cart-coupon-add,
+#shipping-calculate-link,
+#cart-shipping-calculate,
+#go-to-shipping,
+#cart-choose-products {
+  border: none !important;
+  background-color: #202020 !important;
+  color: #fff !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+}
+
+.srp-description {
+  font-size: 14px !important;
+  color: #202020 !important;
+}
+
+.cart-more-options .srp-container .onda-v1 .blue,
+body a {
+  color: #202020 !important;
+}
+
+.cart-more-options .srp-container .onda-v1 .b--blue {
+  color: #202020 !important;
+  border: 1px solid #202020 !important;
+}
+
+[data-i18n="clientProfileData.identification"]::before {
+  background-color: #202020 !important;
+  border: 1px solid #202020 !important;
+}
+
+.quantity {
+  color: #202020 !important;
+}

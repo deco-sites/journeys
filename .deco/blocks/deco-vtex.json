@@ -2,7 +2,18 @@
   "__resolveType": "site/apps/deco/vtex.ts",
   "salesChannel": "1",
   "defaultSegment": {
-    "channelPrivacy": "public"
+    "channelPrivacy": "public",
+    "currencyCode": "USD"
+  },
+  "appKey": {
+    "name": "VTEX_APP_KEY",
+    "encrypted": "9463459deb9b39472c5a5301ebc9b44c2c59349e0b90c0a1a7ef882639908d2b",
+    "__resolveType": "website/loaders/secret.ts"
+  },
+  "appToken": {
+    "name": "VTEX_APP_TOKEN",
+    "encrypted": "a6f1b2c52b0895b989dd0ab67a0821a03038b34d41f553d96c37379728ef4061a5a62cec99586511a88334ecc7729e550b5ee190d3a59cbd8672f8f4a24f70a3759b298eddb5ddec259b1b24f41e35a095863a83a3aa8eb3da6283fd8d0935d9ef11ae98a36b63366f698c0a2bebadd19ca7c8598a1915baa3efd3304133320f729b89429c7e43761652a771e570964c",
+    "__resolveType": "website/loaders/secret.ts"
   },
   "platform": "vtex",
   "account": "demoaccount20",

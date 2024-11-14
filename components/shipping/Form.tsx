@@ -30,7 +30,7 @@ export default function Form({ items }: Props) {
           as="input"
           type="text"
           class="input input-bordered join-item w-48"
-          placeholder="00000000"
+          placeholder="00000"
           name="postalCode"
           maxLength={8}
           size={8}

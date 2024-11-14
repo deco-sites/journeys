@@ -10,9 +10,13 @@ import { splitArray } from "../../sdk/splitArray.ts";
 interface Props {
   products: Product[];
   itemListName?: string;
+  currencyCode: string;
+  locale: string;
 }
 
-function ProductSlider({ products, itemListName }: Props) {
+function ProductSlider(
+  { products, itemListName, currencyCode, locale }: Props,
+) {
   const id = useId();
   const device = useDevice();
 
@@ -43,6 +47,8 @@ function ProductSlider({ products, itemListName }: Props) {
                     product={product}
                     itemListName={itemListName}
                     class="w-full lg:max-w-72"
+                    currencyCode={currencyCode}
+                    locale={locale}
                   />
                 ))}
               </Slider.Item>
