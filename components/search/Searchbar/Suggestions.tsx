@@ -48,7 +48,10 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   })) as Suggestion | null;
 
   const cookies = getCookies(req.headers);
-  const vtexSegment = JSON.parse(atob(cookies["vtex_segment"]));
+  const vtexSegment = cookies?.["vtex_segment"]
+    ? JSON.parse(atob(cookies["vtex_segment"]))
+    : {};
+
   return {
     suggestion,
     currencyCode: vtexSegment.currencyCode,

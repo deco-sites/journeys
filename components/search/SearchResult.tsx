@@ -305,7 +305,10 @@ function SearchResult({ page, ...props }: SectionProps<typeof loader>) {
 
 export const loader = (props: Props, req: Request) => {
   const cookies = getCookies(req.headers);
-  const vtexSegment = JSON.parse(atob(cookies["vtex_segment"]));
+  const vtexSegment = cookies?.["vtex_segment"]
+    ? JSON.parse(atob(cookies["vtex_segment"]))
+    : {};
+
   return {
     ...props,
     currencyCode: vtexSegment.currencyCode,
