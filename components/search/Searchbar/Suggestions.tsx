@@ -7,7 +7,6 @@ import Icon from "../../ui/Icon.tsx";
 import Slider from "../../ui/Slider.tsx";
 import { ACTION, NAME } from "./Form.tsx";
 import { type Resolved } from "@deco/deco";
-import { getCookies } from "std/http/cookie.ts";
 export interface Props {
   /**
    * @title Suggestions Integration
@@ -47,15 +46,10 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
     query,
   })) as Suggestion | null;
 
-  const cookies = getCookies(req.headers);
-  const vtexSegment = cookies?.["vtex_segment"]
-    ? JSON.parse(atob(cookies["vtex_segment"]))
-    : {};
-
   return {
     suggestion,
-    currencyCode: vtexSegment.currencyCode,
-    locale: vtexSegment.cultureInfo,
+    currencyCode: await ctx.invoke.site.loaders.getCurrency(),
+    locale: await ctx.invoke.site.loaders.getLocale()
   };
 };
 function Suggestions({

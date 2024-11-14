@@ -12,7 +12,7 @@ import Drawer from "../ui/Drawer.tsx";
 import Sort from "./Sort.tsx";
 import { useDevice, useScript, useSection } from "@deco/deco/hooks";
 import { type SectionProps } from "@deco/deco";
-import { getCookies } from "std/http/cookie.ts";
+import { AppContext } from "../../apps/site.ts";
 // import { CurrencyCode } from "apps/shopify/utils/enums.ts";
 export interface Layout {
   /**
@@ -302,18 +302,14 @@ function SearchResult({ page, ...props }: SectionProps<typeof loader>) {
   }
   return <Result {...props} page={page} />;
 }
-
-export const loader = (props: Props, req: Request) => {
-  const cookies = getCookies(req.headers);
-  const vtexSegment = cookies?.["vtex_segment"]
-    ? JSON.parse(atob(cookies["vtex_segment"]))
-    : {};
+export const loader = async (props: Props, req: Request, ctx: AppContext) => {
 
   return {
     ...props,
-    currencyCode: vtexSegment.currencyCode,
-    locale: vtexSegment.cultureInfo,
+    currencyCode: await ctx.invoke.site.loaders.getCurrency(),
+    locale: await ctx.invoke.site.loaders.getLocale(),
     url: req.url,
   };
 };
+
 export default SearchResult;

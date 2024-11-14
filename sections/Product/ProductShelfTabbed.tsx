@@ -7,7 +7,7 @@ import Section, {
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import { type LoadingFallbackProps, SectionProps } from "@deco/deco";
-import { getCookies } from "std/http/cookie.ts";
+import { AppContext } from "../../apps/site.ts";
 /** @titleBy title */
 interface Tab {
   title: string;
@@ -19,16 +19,12 @@ export interface Props extends SectionHeaderProps {
   tabIndex?: number;
 }
 
-export const loader = (props: Props, req: Request) => {
-  const cookies = getCookies(req.headers);
-  const vtexSegment = cookies?.["vtex_segment"]
-    ? JSON.parse(atob(cookies["vtex_segment"]))
-    : {};
+export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
 
   return {
     ...props,
-    currencyCode: vtexSegment.currencyCode,
-    locale: vtexSegment.cultureInfo,
+    currencyCode: await ctx.invoke.site.loaders.getCurrency(),
+    locale: await ctx.invoke.site.loaders.getLocale()
   };
 };
 

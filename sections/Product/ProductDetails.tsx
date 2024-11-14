@@ -4,8 +4,8 @@ import ProductInfo from "../../components/product/ProductInfo.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import Section from "../../components/ui/Section.tsx";
 import { clx } from "../../sdk/clx.ts";
-import { getCookies } from "std/http/cookie.ts";
 import { type SectionProps } from "@deco/deco";
+import { AppContext } from "../../apps/site.ts";
 
 export interface Props {
   /** @title Integration */
@@ -57,16 +57,12 @@ export default function ProductDetails(
   );
 }
 
-export const loader = (props: Props, req: Request) => {
-  const cookies = getCookies(req.headers);
-  const vtexSegment = cookies?.["vtex_segment"]
-    ? JSON.parse(atob(cookies["vtex_segment"]))
-    : {};
+export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
 
   return {
     ...props,
-    currencyCode: vtexSegment.currencyCode,
-    locale: vtexSegment.cultureInfo,
+    currencyCode: await ctx.invoke.site.loaders.getCurrency(),
+    locale: await ctx.invoke.site.loaders.getLocale()
   };
 };
 

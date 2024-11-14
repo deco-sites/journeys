@@ -1,8 +1,8 @@
-import { getCookies } from "std/http/cookie.ts";
 import SearchResult, {
   Props as SearchResultProps,
 } from "../search/SearchResult.tsx";
 import { type SectionProps } from "@deco/deco";
+import { AppContext } from "../../apps/site.ts";
 export type Props = SearchResultProps;
 function WishlistGallery(props: SectionProps<typeof loader>) {
   const isEmpty = !props.page || props.page.products.length === 0;
@@ -27,17 +27,13 @@ function WishlistGallery(props: SectionProps<typeof loader>) {
     />
   );
 }
-export const loader = (props: Props, req: Request) => {
-  const cookies = getCookies(req.headers);
-  const vtexSegment = cookies?.["vtex_segment"]
-    ? JSON.parse(atob(cookies["vtex_segment"]))
-    : {};
+export const loader = async (props: Props, req: Request, ctx: AppContext) => {
 
   return {
     ...props,
+    currencyCode: await ctx.invoke.site.loaders.getCurrency(),
+    locale: await ctx.invoke.site.loaders.getLocale(),
     url: req.url,
-    currencyCode: vtexSegment.currencyCode,
-    locale: vtexSegment.cultureInfo,
   };
 };
 export default WishlistGallery;
