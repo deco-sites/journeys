@@ -1,8 +1,10 @@
 {
   "data": {
-    "__resolveType": "vtex/loaders/legacy/productListingPage.ts",
+    "__resolveType": "vtex/loaders/intelligentSearch/productListingPage.ts",
     "count": 12,
-    "sort": "OrderByPriceDESC"
+    "sort": "price:desc",
+    "fuzzy": "automatic",
+    "selectedFacets": []
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"
