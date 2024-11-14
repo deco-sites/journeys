@@ -21,6 +21,9 @@
       "__resolveType": "Header"
     },
     {
+      "__resolveType": "Text Bar"
+    },
+    {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
         "__resolveType": "site/sections/Product/ProductDetails.tsx",
@@ -39,13 +42,34 @@
             "sort": "OrderByPriceDESC"
           }
         },
-        "title": "BUY TOGETHER"
+        "title": "You May Also Like",
+        "titleStyle": "light"
       }
     },
     {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
-        "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+        "__resolveType": "site/sections/Product/ProductShelf.tsx",
+        "products": {
+          "__resolveType": "vtex/loaders/legacy/productList.ts",
+          "props": {
+            "sort": "OrderByPriceDESC"
+          }
+        },
+        "title": "Trending Hot",
+        "titleStyle": "light"
+      }
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Product/ShareSocialMedia.tsx"
+      }
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Product/Reviews.tsx"
       }
     },
     {

@@ -303,7 +303,6 @@ function SearchResult({ page, ...props }: SectionProps<typeof loader>) {
   return <Result {...props} page={page} />;
 }
 export const loader = async (props: Props, req: Request, ctx: AppContext) => {
-
   return {
     ...props,
     currencyCode: await ctx.invoke.site.loaders.getCurrency(),
@@ -311,5 +310,4 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
     url: req.url,
   };
 };
-
 export default SearchResult;

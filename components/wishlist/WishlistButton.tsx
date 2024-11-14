@@ -1,9 +1,8 @@
+import { useScript } from "@deco/deco/hooks";
 import { AnalyticsItem } from "apps/commerce/types.ts";
-import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Icon from "../ui/Icon.tsx";
-import { useScript } from "@deco/deco/hooks";
 interface Props {
   variant?: "full" | "icon";
   item: AnalyticsItem;
@@ -33,7 +32,7 @@ const onClick = (productID: string, productGroupID: string) => {
     window.alert(`Please login to add the product to your wishlist`);
   }
 };
-function WishlistButton({ item, variant = "full" }: Props) {
+function WishlistButton({ item }: Props) {
   // deno-lint-ignore no-explicit-any
   const productID = (item as any).item_id;
   const productGroupID = item.item_group_id ?? "";
@@ -54,17 +53,9 @@ function WishlistButton({ item, variant = "full" }: Props) {
         {...addToWishlistEvent}
         aria-label="Add to wishlist"
         hx-on:click={useScript(onClick, productID, productGroupID)}
-        class={clx(
-          "btn no-animation",
-          variant === "icon"
-            ? "btn-circle btn-ghost btn-sm"
-            : "btn-primary btn-outline gap-2 w-full",
-        )}
+        class="border border-[#f0f0f0] size-8 flex items-center justify-center rounded-full"
       >
-        <Icon id="favorite" class="[.htmx-request_&]:hidden" fill="none" />
-        {variant === "full" && (
-          <span class="[.htmx-request_&]:hidden">Add to wishlist</span>
-        )}
+        <Icon id="heart" class="[.htmx-request_&]:hidden" size={18} />
         <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
       </button>
       <script

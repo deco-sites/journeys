@@ -1,3 +1,4 @@
+import { type LoadingFallbackProps, SectionProps } from "@deco/deco";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSlider from "../../components/product/ProductSlider.tsx";
@@ -6,16 +7,23 @@ import Section, {
 } from "../../components/ui/Section.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
-import { type LoadingFallbackProps, SectionProps } from "@deco/deco";
 import { AppContext } from "../../apps/site.ts";
 
 export interface Props extends SectionHeaderProps {
   products: Product[] | null;
+  /**
+   * @default default
+   */
+  titleStyle?: "default" | "light";
 }
 
-export default function ProductShelf(
-  { products, title, currencyCode, locale }: SectionProps<typeof loader>,
-) {
+export default function ProductShelf({
+  products,
+  titleStyle = "default",
+  title,
+  currencyCode,
+  locale,
+}: SectionProps<typeof loader>) {
   if (!products || products.length === 0) {
     return null;
   }
@@ -30,7 +38,7 @@ export default function ProductShelf(
           mapProductToAnalyticsItem({
             index,
             product,
-            ...(useOffer(product.offers)),
+            ...useOffer(product.offers),
           })
         ),
       },
@@ -38,10 +46,21 @@ export default function ProductShelf(
   });
 
   return (
-    <Section.Container {...viewItemListEvent}>
-      <h1 class="text-lg/none py-3 font-primary uppercase font-bold text-center">
-        {title}
-      </h1>
+    <Section.Container
+      {...viewItemListEvent}
+      class="!py-2.5 !pt-5 md:mx-5 lg:mx-auto mb-6"
+    >
+      {titleStyle === "default"
+        ? (
+          <h1 class="text-lg/none font-primary uppercase font-bold text-center">
+            {title}
+          </h1>
+        )
+        : (
+          <h1 class="border-b border-[#cfcfcf] text-[#202020] text-lg py-1.5 text-center w-[80%] mx-auto">
+            {title}
+          </h1>
+        )}
 
       <ProductSlider
         products={products}
@@ -54,11 +73,10 @@ export default function ProductShelf(
 }
 
 export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
-
   return {
     ...props,
     currencyCode: await ctx.invoke.site.loaders.getCurrency(),
-    locale: await ctx.invoke.site.loaders.getLocale()
+    locale: await ctx.invoke.site.loaders.getLocale(),
   };
 };
 
@@ -67,6 +85,6 @@ export const LoadingFallback = (
 ) => (
   <Section.Container>
     <Section.Header title={title} cta={cta} />
-    <Section.Placeholder height="471px" />;
+    <Section.Placeholder height="471px" />
   </Section.Container>
 );

@@ -204,57 +204,7 @@
       ]
     },
     {
-      "__resolveType": "website/flags/multivariate/section.ts",
-      "variants": [
-        {
-          "value": {
-            "__resolveType": "site/sections/Content/TextBar.tsx",
-            "text": "Get $10 off $75 + Free Shipping with",
-            "linkBar": "#",
-            "linkText": "Journeys All Access! Sign Up Now!",
-            "linkUrl": "#"
-          },
-          "rule": {
-            "__resolveType": "website/matchers/multi.ts",
-            "op": "or",
-            "matchers": [
-              {
-                "__resolveType": "Matcher - Canada"
-              }
-            ]
-          }
-        },
-        {
-          "value": {
-            "__resolveType": "site/sections/Content/TextBar.tsx",
-            "text": "Obtiens 10$ de rabais sur 75$ d’achat et la livraison",
-            "linkBar": "#",
-            "linkText": "gratuite avec Journeys All Access! Inscris-toi!",
-            "linkUrl": "#"
-          },
-          "rule": {
-            "__resolveType": "website/matchers/multi.ts",
-            "op": "or",
-            "matchers": [
-              {
-                "__resolveType": "Matcher  - Canada/French"
-              }
-            ]
-          }
-        },
-        {
-          "value": {
-            "__resolveType": "site/sections/Content/TextBar.tsx",
-            "text": "Get $10 off $75 + Free Shipping with Journeys All Access!",
-            "linkBar": "#",
-            "linkText": "Sign Up",
-            "linkUrl": "#"
-          },
-          "rule": {
-            "__resolveType": "website/matchers/always.ts"
-          }
-        }
-      ]
+      "__resolveType": "Text Bar"
     },
     {
       "__resolveType": "website/flags/multivariate/section.ts",

@@ -1,3 +1,4 @@
+import { type Resolved } from "@deco/deco";
 import { Suggestion } from "apps/commerce/types.ts";
 import type { AppContext } from "../../../apps/site.ts";
 import { clx } from "../../../sdk/clx.ts";
@@ -6,7 +7,6 @@ import ProductCard from "../../product/ProductCard.tsx";
 import Icon from "../../ui/Icon.tsx";
 import Slider from "../../ui/Slider.tsx";
 import { ACTION, NAME } from "./Form.tsx";
-import { type Resolved } from "@deco/deco";
 export interface Props {
   /**
    * @title Suggestions Integration
@@ -33,7 +33,12 @@ export const action = async (props: Props, req: Request, ctx: AppContext) => {
     ...loaderProps,
     query,
   })) as Suggestion | null;
-  return { suggestion, ...props };
+  return {
+    ...props,
+    currencyCode: await ctx.invoke.site.loaders.getCurrency(),
+    locale: await ctx.invoke.site.loaders.getLocale(),
+    suggestion,
+  };
 };
 export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   const {
@@ -49,14 +54,15 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   return {
     suggestion,
     currencyCode: await ctx.invoke.site.loaders.getCurrency(),
-    locale: await ctx.invoke.site.loaders.getLocale()
+    locale: await ctx.invoke.site.loaders.getLocale(),
   };
 };
-function Suggestions({
-  suggestion,
-  currencyCode,
-  locale,
-}: ComponentProps<typeof loader, typeof action>) {
+function Suggestions(
+  { suggestion, currencyCode, locale }: ComponentProps<
+    typeof loader,
+    typeof action
+  >,
+) {
   let { products = [], searches = [] } = suggestion ?? {};
   products ??= [];
 
@@ -64,7 +70,7 @@ function Suggestions({
   const hasTerms = Boolean(searches.length);
   return (
     <div
-      class={clx(`overflow-y-scroll`, !hasProducts && !hasTerms && "hidden")}
+      class={clx("overflow-y-scroll", !hasProducts && !hasTerms && "hidden")}
     >
       <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
         <div class="flex flex-col gap-6">

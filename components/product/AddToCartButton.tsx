@@ -12,18 +12,31 @@ export interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
 }
 const onClick = () => {
   event?.stopPropagation();
+
   const button = event?.currentTarget as HTMLButtonElement | null;
   const container = button!.closest<HTMLDivElement>("div[data-cart-item]")!;
+  const selectedSku = document.getElementById(
+    "selected-sku",
+  ) as HTMLSelectElement;
+
+  if (!selectedSku.value) {
+    selectedSku.reportValidity();
+    return;
+  }
+
   const { item, platformProps } = JSON.parse(
     decodeURIComponent(container.getAttribute("data-cart-item")!),
   );
+  platformProps.orderItems[0].id = selectedSku.value;
+
   window.STOREFRONT.CART.addToCart(item, platformProps);
 };
+
 const onChange = () => {
   const input = event!.currentTarget as HTMLInputElement;
-  const productID = input!
-    .closest("div[data-cart-item]")!
-    .getAttribute("data-item-id")!;
+  const productID = input!.closest("div[data-cart-item]")!.getAttribute(
+    "data-item-id",
+  )!;
   const quantity = Number(input.value);
   if (!input.validity.valid) {
     return;
@@ -48,11 +61,11 @@ const onLoad = (id: string) => {
     input.value = quantity.toString();
     checkbox.checked = quantity > 0;
     // enable interactivity
-    container?.querySelectorAll<HTMLButtonElement>("button").forEach((node) =>
-      node.disabled = false
+    container?.querySelectorAll<HTMLButtonElement>("button").forEach(
+      (node) => (node.disabled = false),
     );
-    container?.querySelectorAll<HTMLButtonElement>("input").forEach((node) =>
-      node.disabled = false
+    container?.querySelectorAll<HTMLButtonElement>("input").forEach(
+      (node) => (node.disabled = false),
     );
   });
 };
@@ -120,14 +133,16 @@ function AddToCartButton(props: Props) {
 
       <button
         disabled
-        class={clx("flex-grow peer-checked:hidden", _class?.toString())}
+        class={clx("flex-grow cursor-pointer", _class?.toString())}
         hx-on:click={useScript(onClick)}
       >
-        Add to Cart
+        Add to Bag
       </button>
 
       {/* Quantity Input */}
-      <div class="flex-grow hidden peer-checked:flex">
+      {/* <input type='number' value={1} class='hidden' /> */}
+
+      <div class="flex-grow hidden">
         <QuantitySelector
           disabled
           min={0}

@@ -1,5 +1,5 @@
 {
-  "__resolveType": "shopify/loaders/ProductList.ts",
+  "__resolveType": "vtex/loaders/ProductList.ts",
   "props": {
     "sort": "",
     "query": "a",

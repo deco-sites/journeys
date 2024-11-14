@@ -1,11 +1,11 @@
-import { ProductDetailsPage } from "apps/commerce/types.ts";
+import type { SectionProps } from "@deco/deco";
+import { useDevice } from "@deco/deco/hooks";
+import type { ProductDetailsPage } from "apps/commerce/types.ts";
+import type { AppContext } from "../../apps/site.ts";
 import ImageGallerySlider from "../../components/product/Gallery.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import Section from "../../components/ui/Section.tsx";
-import { clx } from "../../sdk/clx.ts";
-import { type SectionProps } from "@deco/deco";
-import { AppContext } from "../../apps/site.ts";
 
 export interface Props {
   /** @title Integration */
@@ -15,6 +15,8 @@ export interface Props {
 export default function ProductDetails(
   { page, currencyCode, locale }: SectionProps<typeof loader>,
 ) {
+  const isMobile = useDevice() === "mobile";
+
   /**
    * Rendered when a not found is returned by any of the loaders run on this page
    */
@@ -32,37 +34,46 @@ export default function ProductDetails(
   }
 
   return (
-    <div class="container flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
-      <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
+    <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+                body {
+                    background-color: #ebebeb;
+                }
+              `,
+        }}
+      />
 
-      <div
-        class={clx(
-          "container grid",
-          "grid-cols-1 gap-2 py-0",
-          "sm:grid-cols-5 sm:gap-6",
-        )}
-      >
-        <div class="sm:col-span-3">
-          <ImageGallerySlider page={page} />
+      <div class="md:container flex flex-col mb-6 mx-auto">
+        <div class="max-lg:mx-5">
+          <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
         </div>
-        <div class="sm:col-span-2">
-          <ProductInfo
-            page={page}
-            currencyCode={currencyCode}
-            locale={locale}
-          />
+
+        <div class="lg:bg-white flex flex-col lg:flex-row lg:py-7 lg:px-5 md:mx-5 lg:mx-0">
+          {!isMobile && (
+            <div class="bg-white w-full lg:w-1/2 md:mb-6 lg:mb-0 max-lg:py-7 max-lg:px-2.5">
+              <ImageGallerySlider page={page} />
+            </div>
+          )}
+          <div class="bg-white w-full lg:w-[40%] xl:w-auto mx-auto">
+            <ProductInfo
+              page={page}
+              currencyCode={currencyCode}
+              locale={locale}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
 export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
-
   return {
     ...props,
     currencyCode: await ctx.invoke.site.loaders.getCurrency(),
-    locale: await ctx.invoke.site.loaders.getLocale()
+    locale: await ctx.invoke.site.loaders.getLocale(),
   };
 };
 

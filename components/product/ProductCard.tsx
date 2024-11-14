@@ -27,15 +27,17 @@ const WIDTH = 287;
 const HEIGHT = 287;
 const ASPECT_RATIO = `${WIDTH} / ${HEIGHT}`;
 
-function ProductCard({
-  product,
-  preload,
-  itemListName,
-  index,
-  class: _class,
-  currencyCode,
-  locale,
-}: Props) {
+function ProductCard(
+  {
+    product,
+    preload,
+    itemListName,
+    index,
+    class: _class,
+    currencyCode,
+    locale,
+  }: Props,
+) {
   const { url, image: images, offers, isVariantOf } = product;
   const title = isVariantOf?.name ?? product.name;
   const [front, _back] = images ?? [];
@@ -46,7 +48,7 @@ function ProductCard({
 
   const item = mapProductToAnalyticsItem({ product, price, listPrice, index });
 
-  {/* Add click event to dataLayer */}
+  /* Add click event to dataLayer */
   const event = useSendEvent({
     on: "click",
     event: {
@@ -64,24 +66,13 @@ function ProductCard({
   // });
 
   return (
-    <div
-      {...event}
-      class={clx("card card-compact group text-sm p-2", _class)}
-    >
-      <figure
-        class="relative bg-base-200 p-1.5 pt-0 rounded-none"
-        style={{ aspectRatio: ASPECT_RATIO }}
-      >
+    <div {...event} class={clx("card card-compact group text-sm p-2", _class)}>
+      <figure class="relative bg-base-200 p-1.5 pt-0 rounded-none">
         {/* Product Images */}
         <a
           href={relativeUrl}
           aria-label="view product"
-          class={clx(
-            "absolute top-0 left-0",
-            "grid grid-cols-1 grid-rows-1",
-            "w-full",
-            !inStock && "opacity-70",
-          )}
+          class={clx(!inStock && "opacity-70")}
         >
           <Image
             src={front.url!}
@@ -89,23 +80,16 @@ function ProductCard({
             width={WIDTH}
             height={HEIGHT}
             style={{ aspectRatio: ASPECT_RATIO }}
-            class={clx(
-              "object-cover",
-              "rounded-none w-full",
-              "col-span-full row-span-full",
-            )}
+            class="object-cover"
             sizes="(max-width: 640px) 50vw, 20vw"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
-            decoding="async"
           />
         </a>
       </figure>
 
       <a href={relativeUrl} class="p-1.5 pt-0">
-        <span class="font-primary text-sm text-gray-100">
-          {title}
-        </span>
+        <span class="font-primary text-sm text-gray-100">{title}</span>
 
         <div class="flex gap-2">
           <span class="font-primary font-bold text-gray-100 text-sm">

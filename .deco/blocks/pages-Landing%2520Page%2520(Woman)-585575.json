@@ -19,7 +19,7 @@
       "section": {
         "__resolveType": "site/sections/Product/SearchResult.tsx",
         "page": {
-          "__resolveType": "shopify/loaders/ProductListingPage.ts",
+          "__resolveType": "vtex/loaders/ProductListingPage.ts",
           "count": 12,
           "query": "women"
         },

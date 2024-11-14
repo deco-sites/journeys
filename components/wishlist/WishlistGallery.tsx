@@ -1,9 +1,10 @@
+import type { SectionProps } from "@deco/deco";
+import type { AppContext } from "../../apps/site.ts";
 import SearchResult, {
-  Props as SearchResultProps,
+  type Props as SearchResultProps,
 } from "../search/SearchResult.tsx";
-import { type SectionProps } from "@deco/deco";
-import { AppContext } from "../../apps/site.ts";
 export type Props = SearchResultProps;
+
 function WishlistGallery(props: SectionProps<typeof loader>) {
   const isEmpty = !props.page || props.page.products.length === 0;
   if (isEmpty) {
@@ -28,7 +29,6 @@ function WishlistGallery(props: SectionProps<typeof loader>) {
   );
 }
 export const loader = async (props: Props, req: Request, ctx: AppContext) => {
-
   return {
     ...props,
     currencyCode: await ctx.invoke.site.loaders.getCurrency(),

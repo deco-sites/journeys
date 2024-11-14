@@ -1,7 +1,12 @@
-import type { LoadingFallbackProps, SectionProps } from "@deco/deco";
+import type { LoadingFallbackProps } from "@deco/deco";
 import { useDevice, useScript } from "@deco/deco/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { Place } from "apps/commerce/types.ts";
+import { removeNonLatin1Chars } from "apps/utils/normalize.ts";
+import type { AppContext } from "apps/vtex/mod.ts";
+import type { Segment } from "apps/vtex/utils/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import { getCookies, setCookie } from "std/http/cookie.ts";
 import Bag from "../../components/header/Bag.tsx";
 import type { MenuItemProps } from "../../components/header/Menu.tsx";
 import Menu from "../../components/header/Menu.tsx";
@@ -22,13 +27,8 @@ import {
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
-import { clx } from "../../sdk/clx.ts";
-import type { AppContext } from "apps/vtex/mod.ts";
-import { getCookies, setCookie } from "std/http/cookie.ts";
 import type { Lang, Langs } from "../../loaders/languages.ts";
-import { removeNonLatin1Chars } from "apps/utils/normalize.ts";
-import { Segment } from "apps/vtex/utils/types.ts";
-import { Place } from "apps/commerce/types.ts";
+import { clx } from "../../sdk/clx.ts";
 
 export interface Logo {
   /** @title Image */
@@ -214,14 +214,9 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
   </>
 );
 
-const Mobile = ({
-  logo,
-  searchbar,
-  navItems,
-  loading,
-  url,
-  preheader,
-}: Props) => (
+const Mobile = (
+  { logo, searchbar, navItems, loading, url, preheader }: Props,
+) => (
   <>
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
@@ -327,11 +322,11 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   }
 
   const currentCookieLang = langParamValue ?? cookies?.language ?? "";
-  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort((a) =>
-    a?.value === currentCookieLang ? -1 : 1
+  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort(
+    (a) => (a?.value === currentCookieLang ? -1 : 1),
   );
 
-  const vtexCookie = cookies["vtex_segment"];
+  const vtexCookie = cookies.vtex_segment;
   if (!vtexCookie) {
     return {
       ...props,
@@ -343,9 +338,7 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
 
   const lang = langsOrderedWithSelectedFirst?.[0];
   const salesChannelInfo = await ctx.invoke.vtex.loaders.logistics
-    .getSalesChannelById({
-      id: lang?.salesChannel,
-    });
+    .getSalesChannelById({ id: lang?.salesChannel });
 
   const newVtexSegment = {
     ...vtexSegment,
@@ -365,7 +358,7 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   });
 
   setCookie(ctx.response.headers, {
-    value: "sc=" + lang?.salesChannel,
+    value: `sc=${lang?.salesChannel}`,
     name: "VTEXSC",
     path: "/",
     secure: true,
@@ -419,7 +412,7 @@ const serialize = ({
   return btoa(JSON.stringify(seg));
 };
 
-export default function Header(props: SectionProps<typeof loader>) {
+export default function Header(props: Awaited<ReturnType<typeof loader>>) {
   const isDesktop = useDevice() === "desktop";
 
   return (

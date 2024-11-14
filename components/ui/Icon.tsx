@@ -3,12 +3,17 @@ import type { JSX } from "preact";
 
 export type AvailableIcons =
   | "search"
+  | "heart"
   | "shopping-bag"
   | "menu"
   | "account_circle"
   | "close"
+  | "star"
   | "chevron-right"
+  | "afterpay"
   | "favorite"
+  | "plus"
+  | "minus"
   | "home_pin"
   | "call"
   | "local_shipping"
@@ -32,15 +37,9 @@ interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   size?: number;
 }
 
-function Icon(
-  { id, size = 24, width, height, ...otherProps }: Props,
-) {
+function Icon({ id, size = 24, width, height, ...otherProps }: Props) {
   return (
-    <svg
-      {...otherProps}
-      width={width ?? size}
-      height={height ?? size}
-    >
+    <svg {...otherProps} width={width ?? size} height={height ?? size}>
       <use href={asset(`/sprites.svg#${id}`)} />
     </svg>
   );
