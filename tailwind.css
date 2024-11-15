@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-
   /* Allow changing font family via CMS */
   html {
-    @apply font-primary
+    @apply font-primary;
   }
 
   /** Remove default styles from input[type=number] */
@@ -73,7 +72,6 @@
   40% {
     opacity: 1;
   }
-
 
   50% {
     opacity: 0;

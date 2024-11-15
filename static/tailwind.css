@@ -3637,6 +3637,9 @@ details.collapse summary::-webkit-details-marker {
 .relative {
   position: relative;
 }
+.sticky {
+  position: sticky;
+}
 .bottom-0 {
   bottom: 0px;
 }
@@ -6515,8 +6518,8 @@ details.collapse summary::-webkit-details-marker {
   display: none;
 }
 
-.htmx-request>.\[\.htmx-request\>\&\]\:w-6 {
-  width: 1.5rem;
+.htmx-request>.\[\.htmx-request\>\&\]\:w-4 {
+  width: 1rem;
 }
 
 .htmx-request .\[\.htmx-request_\&\]\:pointer-events-none {

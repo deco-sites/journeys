@@ -24,7 +24,7 @@ export interface StoreSelectorProps {
   /**
    * @ignore
    */
-  variant?: "stores" | "get-stores";
+  variant?: "stores" | "get-stores" | "clear-stores";
   /**
    * @ignore
    */
@@ -40,7 +40,7 @@ export const action = async (
   req: Request,
   ctx: AppContext,
 ) => {
-  if (props.variant === "stores") {
+  if (props.variant === "stores" || props.variant === "clear-stores") {
     const stores = await ctx.invoke.vtex.loaders.logistics.listPickupPoints();
 
     return {
@@ -71,15 +71,23 @@ export const action = async (
 
     console.log({ postalCode, countryCode });
 
-    const stores = await ctx.invoke.vtex.loaders.logistics
-      .listPickupPointsByLocation({
-        postalCode,
-        countryCode,
-      });
-    return {
-      ...props,
-      stores,
-    };
+    try {
+      const stores = await ctx.invoke.vtex.loaders.logistics
+        .listPickupPointsByLocation({
+          postalCode,
+          countryCode,
+        });
+      return {
+        ...props,
+        stores,
+      };
+    } catch (error) {
+      console.error("Error fetching pickup points:", error);
+      return {
+        ...props,
+        stores: [],
+      };
+    }
   }
 
   return { ...props };
@@ -89,13 +97,34 @@ export default function StoreSelector({
   currentLang,
   ...props
 }: StoreSelectorProps) {
+  if (props.variant === "clear-stores") {
+    const groupedStores = groupStoresByState({
+      places: props?.stores ?? [],
+      storesPerState: 3,
+      language: currentLang?.value,
+    });
+
+    return <StoreList groupedStores={groupedStores} />;
+  }
+
   if (props?.variant === "get-stores") {
-    return <StoreList stores={props.stores} error={props.error} />;
+    const componentUrl = useComponent(import.meta.url, {
+      variant: "clear-stores",
+    });
+
+    return (
+      <StoreList
+        stores={props.stores}
+        error={props.error}
+        parentComponentUrl={componentUrl}
+      />
+    );
   }
 
   if (props?.variant === "stores") {
     const groupedStores = groupStoresByState({
       places: props?.stores ?? [],
+      storesPerState: 3,
       language: currentLang?.value,
     });
     return (
@@ -161,7 +190,7 @@ export default function StoreSelector({
                       )}
                     >
                       <span class="[.htmx-request>&]:hidden">Search</span>
-                      <span class="[.htmx-request>&]:loading [.htmx-request>&]:w-6 [.htmx-request>&]:block hidden" />
+                      <span class="[.htmx-request>&]:loading [.htmx-request>&]:w-4 [.htmx-request>&]:block hidden" />
                     </button>
                   </form>
                 </div>
