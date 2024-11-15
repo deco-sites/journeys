@@ -256,8 +256,10 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
             </div>
           ))}
 
-      <div class='w-full fles justify-center mt-8'>
-          <ShippingSimulationForm items={[{ id: Number(product.sku), quantity: 1, seller: seller }]} />
+      <div class="w-full fles justify-center mt-8">
+        <ShippingSimulationForm
+          items={[{ id: Number(product.sku), quantity: 1, seller: seller }]}
+        />
       </div>
     </div>
   );

@@ -12,7 +12,227 @@
       }
     },
     {
-      "__resolveType": "Header"
+      "__resolveType": "website/flags/multivariate/section.ts",
+      "variants": [
+        {
+          "value": {
+            "__resolveType": "Header"
+          },
+          "rule": {
+            "__resolveType": "Matcher - Canada"
+          }
+        },
+        {
+          "value": {
+            "__resolveType": "site/sections/Header/Header.tsx",
+            "searchbar": {
+              "placeholder": "What are you looking for?",
+              "loader": {
+                "__resolveType": "resolved",
+                "data": null
+              }
+            },
+            "logo": {
+              "src": {
+                "__resolveType": "website/flags/multivariate/image.ts",
+                "variants": [
+                  {
+                    "value": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c70caee9-de64-4b56-af09-a17268a37761/logo-kidz-main.webp",
+                    "rule": {
+                      "__resolveType": "website/matchers/cookie.ts",
+                      "name": "store_variant",
+                      "value": "journeys_kidz"
+                    }
+                  },
+                  {
+                    "value": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/4da000a7-5db9-40c4-8766-2d9d0504d6ea/journeys-logo.webp",
+                    "rule": {
+                      "__resolveType": "website/matchers/always.ts"
+                    }
+                  }
+                ]
+              },
+              "alt": "Deco Storefront",
+              "width": 160,
+              "height": 40
+            },
+            "navItems": [
+              {
+                "children": [
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "Hello"
+                  },
+                  {
+                    "image": [],
+                    "children": [],
+                    "name": "World"
+                  }
+                ],
+                "@type": "SiteNavigationElement",
+                "subItems": [
+                  {
+                    "name": "ADIDAS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/adidas"
+                  },
+                  {
+                    "name": "CONVERSE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/converse"
+                  },
+                  {
+                    "name": "NEW BALANCE",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/new-balance"
+                  },
+                  {
+                    "name": "BIRKENSTOCK",
+                    "url": "/birkenstock",
+                    "isBrand": true,
+                    "subItemUrl": "/birkenstock"
+                  },
+                  {
+                    "name": "VANS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/vans"
+                  },
+                  {
+                    "name": "CROCS",
+                    "url": "",
+                    "isBrand": true,
+                    "subItemUrl": "/crocs"
+                  }
+                ],
+                "item": "Marques",
+                "itemUrl": "/"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "subItems": [
+                  {
+                    "name": "SHOP BY SHOE SIZE",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "SHOES",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "CLOTHING",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "ACCESSORIES",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "COLLECTIONS",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  }
+                ],
+                "item": "Femmes"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "subItems": [
+                  {
+                    "name": "SHOP BY SHOE SIZE",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "SHOES",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "CLOTHING",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "ACCESSORIES",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  },
+                  {
+                    "name": "COLLECTIONS",
+                    "url": "#",
+                    "subItemUrl": "#"
+                  }
+                ],
+                "item": "Hommes"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "subItems": [],
+                "item": "Enfants",
+                "itemUrl": "/kidz"
+              },
+              {
+                "subItems": [],
+                "item": "Soled",
+                "itemUrl": "/"
+              },
+              {
+                "subItems": [],
+                "item": "Nouveautés",
+                "itemUrl": "/"
+              },
+              {
+                "subItems": [],
+                "item": "Cadeaux",
+                "itemUrl": "/"
+              }
+            ],
+            "loading": "eager",
+            "preheader": {
+              "langs": {
+                "__resolveType": "Global Language Options"
+              },
+              "alerts": [
+                {
+                  "text": "Inscris-toi à Journeys All Access et obtiens 10$ de rabais sur 75$ d'achat ET L'EXPÉDITION GRATUITE",
+                  "href": "https://www.journeys.ca/fr/account/login"
+                },
+                {
+                  "text": "Acheter en ligne, Ramasser en magasin",
+                  "href": "https://www.journeys.ca/fr/pages/pickup"
+                },
+                {
+                  "text": "ÉCONOMISER AVEC LA CARTE SPC",
+                  "href": "https://www.journeys.ca/fr/promotions"
+                }
+              ],
+              "storeVariants": {
+                "__resolveType": "Store Variants "
+              }
+            }
+          },
+          "rule": {
+            "__resolveType": "Matcher  - Canada/French"
+          }
+        },
+        {
+          "value": {
+            "__resolveType": "Header"
+          },
+          "rule": {
+            "__resolveType": "website/matchers/always.ts"
+          }
+        }
+      ]
     },
     {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",

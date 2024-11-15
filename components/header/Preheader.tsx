@@ -18,6 +18,14 @@ export const action = (
   _req: Request,
   ctx: AppContext,
 ) => {
+  if (props.currentStoreVariant) {
+    setCookie(ctx.response.headers, {
+      name: "store_variant",
+      value: props.currentStoreVariant?.value?.replace(/\s+/g, "_") ?? "",
+      path: "/",
+      expires: new Date(Date.now() + ONE_YEAR_MS),
+    });
+  }
   if (props.currentLang) {
     setCookie(ctx.response.headers, {
       name: "language",
@@ -60,36 +68,63 @@ export default ({
       salesChannel: "3",
     },
   ],
+  storeVariants,
   ...props
 }: PreheaderProps) => {
   const [currentLang, ...otherLanguages] = langs;
 
-  const isKidzHome = props?.url?.pathname === "/kidz";
   const isDesktop = useDevice() === "desktop";
+  console.log(storeVariants);
 
   if (!isDesktop) {
     return (
       <div class="flex items-center text-white h-full uppercase">
-        <a
-          href="/"
-          class={clx(
-            "px-7 h-full flex items-center justify-center whitespace-nowrap",
-            isKidzHome ? "text-[#666] bg-[#cfcfcf]" : "text-[#202020] bg-white",
-          )}
-        >
-          Journeys
-        </a>
-        <a
-          href="/kidz"
-          class={clx(
-            "px-7 h-full flex items-center justify-center whitespace-nowrap",
-            isKidzHome ? "text-[#202020] bg-white" : "text-[#666] bg-[#cfcfcf]",
-          )}
-        >
-          Journeys Kidz
-        </a>
+        {storeVariants?.map((storeVariant) => (
+          <button
+            type="button"
+            class={clx(
+              "px-7 h-full flex items-center justify-center whitespace-nowrap uppercase",
+              storeVariant.active
+                ? "text-[#202020] bg-white"
+                : "text-[#666] bg-[#cfcfcf]",
+            )}
+            hx-post={useComponent(import.meta.url, {
+              ...props,
+              currentStoreVariant: storeVariant,
+            })}
+            hx-trigger="click"
+            hx-swap="none"
+            hx-on-htmx-after-request={`window.location.href = '${
+              storeVariant?.link ?? "/"
+            }'`}
+          >
+            {storeVariant?.title}
+          </button>
+        ))}
       </div>
     );
+    // return (
+    //   <div class="flex items-center text-white h-full uppercase">
+    //     <a
+    //       href="/"
+    //       class={clx(
+    //         "px-7 h-full flex items-center justify-center whitespace-nowrap",
+    //         isKidzHome ? "text-[#666] bg-[#cfcfcf]" : "text-[#202020] bg-white",
+    //       )}
+    //     >
+    //       Journeys
+    //     </a>
+    //     <a
+    //       href="/kidz"
+    //       class={clx(
+    //         "px-7 h-full flex items-center justify-center whitespace-nowrap",
+    //         isKidzHome ? "text-[#202020] bg-white" : "text-[#666] bg-[#cfcfcf]",
+    //       )}
+    //     >
+    //       Journeys Kidz
+    //     </a>
+    //   </div>
+    // );
   }
 
   return (
@@ -98,24 +133,26 @@ export default ({
       class="flex justify-between container h-full w-full"
     >
       <div class="flex items-center text-xs text-white uppercase">
-        <a
-          href="/"
-          class={clx(
-            "px-7 h-full flex items-center justify-center whitespace-nowrap",
-            !isKidzHome && "bg-[#666]",
-          )}
-        >
-          Journeys
-        </a>
-        <a
-          href="/kidz"
-          class={clx(
-            "px-7 h-full flex items-center justify-center whitespace-nowrap",
-            isKidzHome && "bg-[#666]",
-          )}
-        >
-          Journeys Kidz
-        </a>
+        {storeVariants?.map((storeVariant) => (
+          <button
+            type="button"
+            class={clx(
+              "px-7 h-full flex items-center justify-center whitespace-nowrap uppercase",
+              storeVariant.active && "bg-[#666]",
+            )}
+            hx-post={useComponent(import.meta.url, {
+              ...props,
+              currentStoreVariant: storeVariant,
+            })}
+            hx-trigger="click"
+            hx-swap="none"
+            hx-on-htmx-after-request={`window.location.href = '${
+              storeVariant?.link ?? "/"
+            }'`}
+          >
+            {storeVariant?.title}
+          </button>
+        ))}
       </div>
 
       <Alerts alerts={props?.alerts ?? []} />
