@@ -69,7 +69,7 @@ export interface PreheaderProps {
   /**
    * @ignore
    */
-  stores?: Place[];
+  selectedStore?: Place;
 }
 
 /**
@@ -256,9 +256,7 @@ const Mobile = ({
           header={url && (
             <Preheader
               url={new URL(url)}
-              alerts={preheader?.alerts ?? []}
-              langs={preheader?.langs}
-              storeVariants={preheader?.storeVariants ?? []}
+              {...preheader}
             />
           )}
           drawer={SIDEMENU_DRAWER_ID}
@@ -325,6 +323,7 @@ const Mobile = ({
 
 export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   const cookies = getCookies(req.headers);
+  const selectedStore: Place = JSON.parse(cookies?.["selected-store"] ?? "{}");
   const langParamValue = new URL(req.url)?.searchParams?.get("language");
 
   if (langParamValue) {
@@ -356,6 +355,7 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
         ...props.preheader,
         langs: langsOrderedWithSelectedFirst,
         storeVariants,
+        selectedStore,
       },
       url: req.url,
     };
@@ -399,6 +399,7 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
       ...props.preheader,
       langs: langsOrderedWithSelectedFirst,
       storeVariants,
+      selectedStore,
     },
     url: req.url,
   };
@@ -460,9 +461,7 @@ export default function Header(props: Awaited<ReturnType<typeof loader>>) {
             {props.url && isDesktop && (
               <Preheader
                 url={new URL(props.url)}
-                alerts={props.preheader.alerts ?? []}
-                langs={props.preheader.langs}
-                storeVariants={props.preheader?.storeVariants ?? []}
+                {...props.preheader}
               />
             )}
           </div>

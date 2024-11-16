@@ -89,3 +89,7 @@
   border-right: 0.28571429em solid transparent;
   border-left: 0.28571429em solid transparent;
 }
+
+.contents-sections section {
+  display: contents;
+}

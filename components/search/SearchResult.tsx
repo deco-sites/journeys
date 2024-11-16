@@ -158,9 +158,9 @@ function PageResult(props: SectionProps<typeof loader>) {
   );
 }
 const setPageQuerystring = (page: string, id: string) => {
-  const element = document.getElementById(id)?.querySelector(
-    "[data-product-list]",
-  );
+  const element = document
+    .getElementById(id)
+    ?.querySelector("[data-product-list]");
   if (!element) {
     return;
   }
@@ -219,7 +219,13 @@ function Result(props: SectionProps<typeof loader>) {
   );
   return (
     <>
-      <div id={container} {...viewItemListEvent} class="w-full">
+      <div
+        id={container}
+        {...viewItemListEvent}
+        class="w-full"
+        // hx-trigger="store-did-update from:body"
+        // hx-get={useSection()}
+      >
         {partial
           ? <PageResult {...props} />
           : (

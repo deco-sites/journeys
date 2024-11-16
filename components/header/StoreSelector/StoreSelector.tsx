@@ -15,6 +15,8 @@ import {
   STORE_SELECTOR_DRAWER_ID,
 } from "../../../constants.ts";
 import { getCookies } from "std/http/cookie.ts";
+import { useSection } from "@deco/deco/hooks";
+// import { SelectedContainer } from "./SelectedContainer.tsx";
 
 export interface StoreSelectorProps {
   /**
@@ -24,7 +26,7 @@ export interface StoreSelectorProps {
   /**
    * @ignore
    */
-  variant?: "stores" | "get-stores" | "clear-stores";
+  variant?: "stores" | "get-stores" | "clear-stores" | "store-did-update";
   /**
    * @ignore
    */
@@ -33,6 +35,10 @@ export interface StoreSelectorProps {
    * @ignore
    */
   error?: string;
+  /**
+   * @ignore
+   */
+  selectedStore?: Place;
 }
 
 export const action = async (
@@ -40,6 +46,18 @@ export const action = async (
   req: Request,
   ctx: AppContext,
 ) => {
+  if (props.variant === "store-did-update") {
+    const cookies = getCookies(req.headers);
+    const selectedStore: Place = JSON.parse(
+      cookies?.["selected-store"] ?? "{}",
+    );
+
+    return {
+      ...props,
+      selectedStore,
+    };
+  }
+
   if (props.variant === "stores" || props.variant === "clear-stores") {
     const stores = await ctx.invoke.vtex.loaders.logistics.listPickupPoints();
 
@@ -97,6 +115,7 @@ export default function StoreSelector({
   currentLang,
   ...props
 }: StoreSelectorProps) {
+  // console.log("props", props);
   if (props.variant === "clear-stores") {
     const groupedStores = groupStoresByState({
       places: props?.stores ?? [],
@@ -194,6 +213,7 @@ export default function StoreSelector({
                     </button>
                   </form>
                 </div>
+                {/* <SelectedContainer selectedStore={props?.selectedStore} /> */}
                 <div
                   id="stores-data"
                   class={clx(
@@ -214,6 +234,11 @@ export default function StoreSelector({
     );
   }
 
+  if (props?.variant === "store-did-update") {
+    console.log("store-did-update", props.selectedStore?.name);
+    return <StoreLabel name={props?.selectedStore?.name} />;
+  }
+
   return (
     <label
       class="flex items-center gap-1 group cursor-pointer"
@@ -227,14 +252,30 @@ export default function StoreSelector({
       htmlFor={STORE_SELECTOR_DRAWER_ID}
     >
       <Icon id="Location" width={12} height={12} class="text-white" />
-      <span
-        class="text-white group-hover:underline transition-all duration-300 font-primary"
-        style={{
-          fontSize: "10.71px",
-        }}
-      >
-        Find Your Store
-      </span>
+
+      <div class="contents contents-sections">
+        <StoreLabel name={props?.selectedStore?.name} />
+      </div>
     </label>
+  );
+}
+
+function StoreLabel({ name }: { name?: string }) {
+  return (
+    <span
+      class="text-white group-hover:underline transition-all duration-300 font-primary"
+      style={{
+        fontSize: "10.71px",
+      }}
+      hx-trigger="store-did-update from:body"
+      hx-get={useComponent(import.meta.url, {
+        variant: "store-did-update",
+        href: `${useSection().split("?")[0]}?k=${Math.random()}`, // hack to force a reload
+      })}
+      hx-target="this"
+      hx-swap="outerHTML transition:true"
+    >
+      {name ? `Your Store: ${name}` : "Find Your Store"}
+    </span>
   );
 }

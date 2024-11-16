@@ -14,7 +14,7 @@ interface StoreListProps {
   parentComponentUrl?: string;
 }
 
-function StoreItem({ store }: { store: Place }) {
+export function StoreItem({ store }: { store: Place }) {
   return (
     <li key={store["@id"]}>
       <div class="store" data-id={store["@id"]} id={`store-${store["@id"]}`}>
@@ -72,15 +72,39 @@ function StoreItem({ store }: { store: Place }) {
             <div class="item-actions">
               <button
                 type="button"
-                // href={`/store/${store?.name
-                //   ?.toLowerCase()
-                //   .replace(/\s+/g, "-")}`}
                 style={{
                   transition: "all cubic-bezier(0.62, 0.28, 0.23, 0.99) 0.4s",
                 }}
                 class="border border-gray-300 uppercase text-neutral btn-sm hover:bg-[#e6e6e6] hover:border-[#b0b0b0]"
+                hx-on:click={useScript((store: Place) => {
+                  const url = new URL(globalThis.window.location.href);
+                  if (url.searchParams.has("filter.pickupPoint")) {
+                    url.searchParams.set("filter.shipping", "pickup-in-point");
+                    url.searchParams.set(
+                      "filter.pickupPoint",
+                      `demoaccount20_${store["@id"]}`,
+                    );
+                    url.searchParams.set(
+                      "filter.zip-code",
+                      `${store?.address?.postalCode}`,
+                    );
+                    url.searchParams.set(
+                      "filter.coordinates",
+                      `${store?.longitude},${store?.latitude}`,
+                    );
+                    globalThis.window.history.replaceState({}, "", url.href);
+                  }
+                  console.log("store", store);
+                  const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
+                  document.cookie = `selected-store=${
+                    JSON.stringify(store)
+                  }; path=/; max-age=${ONE_YEAR_MS}`;
+                  document.body.dispatchEvent(
+                    new CustomEvent("store-did-update"),
+                  );
+                }, store)}
               >
-                Make my store <span></span>
+                Make my store
               </button>
             </div>
           </div>
