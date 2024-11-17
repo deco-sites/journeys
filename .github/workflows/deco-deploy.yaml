@@ -25,3 +25,5 @@ jobs:
 
       - name: Deco Deploy
         uses: deco-cx/deploy@v0
+        with:
+          deno-version: 2.x
