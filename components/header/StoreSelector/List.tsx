@@ -12,6 +12,10 @@ interface StoreListProps {
    * @ignore
    */
   parentComponentUrl?: string;
+  /**
+   * @ignore
+   */
+  selectedStore?: Place;
 }
 
 export function StoreItem({ store }: { store: Place }) {
@@ -97,11 +101,16 @@ export function StoreItem({ store }: { store: Place }) {
                   console.log("store", store);
                   const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
                   document.cookie = `selected-store=${
-                    JSON.stringify(store)
+                    JSON.stringify(
+                      store,
+                    )
                   }; path=/; max-age=${ONE_YEAR_MS}`;
                   document.body.dispatchEvent(
                     new CustomEvent("store-did-update"),
                   );
+                  document
+                    .querySelector("#PostalCodeContainer")
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }, store)}
               >
                 Make my store
@@ -114,12 +123,13 @@ export function StoreItem({ store }: { store: Place }) {
   );
 }
 
-function ClearSearchStores(
-  { parentComponentUrl, autoClear = false }: {
-    parentComponentUrl?: string;
-    autoClear?: boolean;
-  },
-) {
+function ClearSearchStores({
+  parentComponentUrl,
+  autoClear = false,
+}: {
+  parentComponentUrl?: string;
+  autoClear?: boolean;
+}) {
   if (!parentComponentUrl) {
     return null;
   }
@@ -174,7 +184,8 @@ export default function StoreList({
   stores = [],
   error,
   parentComponentUrl,
-}: StoreListProps) {
+}: //selectedStore, //TODO melhore o compenente indicando alguma mudanca a partir de existir uma loja selecionada
+  StoreListProps) {
   if (Object.keys(groupedStores).length > 0) {
     return (
       <div class="flex flex-col gap-4 w-full px-4 mt-4">

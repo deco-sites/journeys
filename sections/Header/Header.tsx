@@ -65,7 +65,7 @@ export interface PreheaderProps {
   /**
    * @ignore
    */
-  variant?: "stores" | "get-stores";
+  variant?: "stores" | "search-stores";
   /**
    * @ignore
    */
