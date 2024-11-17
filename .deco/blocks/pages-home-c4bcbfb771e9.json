@@ -439,11 +439,13 @@
         },
         "cta": "/mono",
         "products": {
-          "__resolveType": "vtex/loaders/legacy/productList.ts",
+          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
           "props": {
             "count": 6,
             "term": "shoe",
-            "sort": "OrderByPriceDESC"
+            "sort": "price:desc",
+            "fuzzy": "automatic",
+            "query": "shoe"
           }
         }
       }
