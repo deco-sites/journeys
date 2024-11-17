@@ -419,35 +419,81 @@
     {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
-        "__resolveType": "site/sections/Product/ProductShelf.tsx",
-        "title": {
-          "__resolveType": "website/flags/multivariate/message.ts",
-          "variants": [
-            {
-              "value": "Nouveautés",
-              "rule": {
-                "__resolveType": "Matcher  - Canada/French"
+        "__resolveType": "website/flags/multivariate/section.ts",
+        "variants": [
+          {
+            "value": {
+              "__resolveType": "site/sections/Product/ProductShelf.tsx",
+              "title": {
+                "__resolveType": "website/flags/multivariate/message.ts",
+                "variants": [
+                  {
+                    "value": "Nouveautés",
+                    "rule": {
+                      "__resolveType": "Matcher  - Canada/French"
+                    }
+                  },
+                  {
+                    "value": "New Arrivals",
+                    "rule": {
+                      "__resolveType": "website/matchers/always.ts"
+                    }
+                  }
+                ]
+              },
+              "cta": "/mono",
+              "products": {
+                "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
+                "props": {
+                  "count": 6,
+                  "term": "shoe",
+                  "sort": "price:desc",
+                  "fuzzy": "automatic",
+                  "query": "chaussures"
+                }
               }
             },
-            {
-              "value": "New Arrivals",
-              "rule": {
-                "__resolveType": "website/matchers/always.ts"
-              }
+            "rule": {
+              "__resolveType": "Matcher  - Canada/French"
             }
-          ]
-        },
-        "cta": "/mono",
-        "products": {
-          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
-          "props": {
-            "count": 6,
-            "term": "shoe",
-            "sort": "price:desc",
-            "fuzzy": "automatic",
-            "query": "shoe"
+          },
+          {
+            "value": {
+              "__resolveType": "site/sections/Product/ProductShelf.tsx",
+              "title": {
+                "__resolveType": "website/flags/multivariate/message.ts",
+                "variants": [
+                  {
+                    "value": "Nouveautés",
+                    "rule": {
+                      "__resolveType": "Matcher  - Canada/French"
+                    }
+                  },
+                  {
+                    "value": "New Arrivals",
+                    "rule": {
+                      "__resolveType": "website/matchers/always.ts"
+                    }
+                  }
+                ]
+              },
+              "cta": "/mono",
+              "products": {
+                "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
+                "props": {
+                  "count": 6,
+                  "term": "shoe",
+                  "sort": "price:desc",
+                  "fuzzy": "automatic",
+                  "query": "shoe"
+                }
+              }
+            },
+            "rule": {
+              "__resolveType": "website/matchers/always.ts"
+            }
           }
-        }
+        ]
       }
     },
     {
