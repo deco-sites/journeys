@@ -3,7 +3,9 @@
   "salesChannel": "1",
   "defaultSegment": {
     "channelPrivacy": "public",
-    "currencyCode": "USD"
+    "currencyCode": "USD",
+    "cultureInfo": "en-US",
+    "countryCode": "USA"
   },
   "appKey": {
     "__resolveType": "website/loaders/secret.ts",
