@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-
   /* Allow changing font family via CMS */
   html {
-    @apply font-primary
+    @apply font-primary;
   }
 
   /** Remove default styles from input[type=number] */
@@ -74,7 +73,6 @@
     opacity: 1;
   }
 
-
   50% {
     opacity: 0;
     transform: translateY(-100%);
@@ -90,4 +88,8 @@
   border-top: 0.28571429em dashed;
   border-right: 0.28571429em solid transparent;
   border-left: 0.28571429em solid transparent;
+}
+
+.contents-sections section {
+  display: contents;
 }

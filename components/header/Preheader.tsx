@@ -74,7 +74,6 @@ export default ({
   const [currentLang, ...otherLanguages] = langs;
 
   const isDesktop = useDevice() === "desktop";
-  console.log(storeVariants);
 
   if (!isDesktop) {
     return (
@@ -158,7 +157,10 @@ export default ({
       <Alerts alerts={props?.alerts ?? []} />
 
       <div class="justify-end items-center hidden gap-2 lg:flex flex-shrink-0 relative">
-        <StoreSelector currentLang={currentLang} />
+        <StoreSelector
+          currentLang={currentLang}
+          selectedStore={props?.selectedStore}
+        />
         <div className="dropdown">
           <div
             tabIndex={0}
