@@ -29,6 +29,7 @@ import {
 } from "../../constants.ts";
 import type { Lang, Langs } from "../../loaders/languages.ts";
 import { clx } from "../../sdk/clx.ts";
+import { StoreVariant, StoreVariants } from "../../loaders/storeVariant.ts";
 
 export interface Logo {
   /** @title Image */
@@ -41,6 +42,11 @@ export interface Logo {
 
 export interface PreheaderProps {
   /**
+   * @title Store variants
+   */
+  storeVariants?: StoreVariants;
+  alerts?: Alert[];
+  /**
    * @title Language Options
    */
   langs?: Langs;
@@ -48,7 +54,10 @@ export interface PreheaderProps {
    * @ignore
    */
   currentLang?: Lang;
-  alerts?: Alert[];
+  /**
+   * @ignore
+   */
+  currentStoreVariant?: StoreVariant;
   /**
    * @ignore
    */
@@ -56,11 +65,11 @@ export interface PreheaderProps {
   /**
    * @ignore
    */
-  variant?: "stores" | "get-stores";
+  variant?: "stores" | "search-stores";
   /**
    * @ignore
    */
-  stores?: Place[];
+  selectedStore?: Place;
 }
 
 /**
@@ -214,9 +223,14 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
   </>
 );
 
-const Mobile = (
-  { logo, searchbar, navItems, loading, url, preheader }: Props,
-) => (
+const Mobile = ({
+  logo,
+  searchbar,
+  navItems,
+  loading,
+  url,
+  preheader,
+}: Props) => (
   <>
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
@@ -242,8 +256,7 @@ const Mobile = (
           header={url && (
             <Preheader
               url={new URL(url)}
-              alerts={preheader?.alerts ?? []}
-              langs={preheader?.langs}
+              {...preheader}
             />
           )}
           drawer={SIDEMENU_DRAWER_ID}
@@ -310,6 +323,7 @@ const Mobile = (
 
 export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   const cookies = getCookies(req.headers);
+  const selectedStore: Place = JSON.parse(cookies?.["selected-store"] ?? "{}");
   const langParamValue = new URL(req.url)?.searchParams?.get("language");
 
   if (langParamValue) {
@@ -321,16 +335,28 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
     });
   }
 
+  const storeVariants = props.preheader?.storeVariants?.map((storeVariant) => ({
+    ...storeVariant,
+    active:
+      storeVariant?.value?.replace(/\s+/g, "_") === cookies?.store_variant ||
+      (!cookies?.store_variant && storeVariant?.default),
+  }));
+
   const currentCookieLang = langParamValue ?? cookies?.language ?? "";
-  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort(
-    (a) => (a?.value === currentCookieLang ? -1 : 1),
+  const langsOrderedWithSelectedFirst = props?.preheader?.langs?.sort((a) =>
+    a?.value === currentCookieLang ? -1 : 1
   );
 
   const vtexCookie = cookies.vtex_segment;
   if (!vtexCookie) {
     return {
       ...props,
-      preheader: { ...props.preheader, langs: langsOrderedWithSelectedFirst },
+      preheader: {
+        ...props.preheader,
+        langs: langsOrderedWithSelectedFirst,
+        storeVariants,
+        selectedStore,
+      },
       url: req.url,
     };
   }
@@ -338,7 +364,9 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
 
   const lang = langsOrderedWithSelectedFirst?.[0];
   const salesChannelInfo = await ctx.invoke.vtex.loaders.logistics
-    .getSalesChannelById({ id: lang?.salesChannel });
+    .getSalesChannelById({
+      id: lang?.salesChannel,
+    });
 
   const newVtexSegment = {
     ...vtexSegment,
@@ -367,7 +395,12 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
 
   return {
     ...props,
-    preheader: { ...props.preheader, langs: langsOrderedWithSelectedFirst },
+    preheader: {
+      ...props.preheader,
+      langs: langsOrderedWithSelectedFirst,
+      storeVariants,
+      selectedStore,
+    },
     url: req.url,
   };
 };
@@ -428,8 +461,7 @@ export default function Header(props: Awaited<ReturnType<typeof loader>>) {
             {props.url && isDesktop && (
               <Preheader
                 url={new URL(props.url)}
-                alerts={props.preheader.alerts ?? []}
-                langs={props.preheader.langs}
+                {...props.preheader}
               />
             )}
           </div>

@@ -1,0 +1,16 @@
+{
+  "__resolveType": "site/loaders/storeVariant.ts",
+  "variants": [
+    {
+      "title": "Journeys",
+      "link": "/",
+      "default": true,
+      "value": "journeys"
+    },
+    {
+      "title": "Journeys kidz",
+      "link": "/kidz",
+      "value": "journeys_kidz"
+    }
+  ]
+}

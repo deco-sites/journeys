@@ -15,6 +15,8 @@ import {
   STORE_SELECTOR_DRAWER_ID,
 } from "../../../constants.ts";
 import { getCookies } from "std/http/cookie.ts";
+import { useSection } from "@deco/deco/hooks";
+import SelectedContainer from "./SelectedContainer.tsx";
 
 export interface StoreSelectorProps {
   /**
@@ -24,7 +26,7 @@ export interface StoreSelectorProps {
   /**
    * @ignore
    */
-  variant?: "stores" | "get-stores";
+  variant?: "stores" | "search-stores" | "clear-stores" | "store-header-label";
   /**
    * @ignore
    */
@@ -33,6 +35,10 @@ export interface StoreSelectorProps {
    * @ignore
    */
   error?: string;
+  /**
+   * @ignore
+   */
+  selectedStore?: Place;
 }
 
 export const action = async (
@@ -40,16 +46,33 @@ export const action = async (
   req: Request,
   ctx: AppContext,
 ) => {
-  if (props.variant === "stores") {
+  if (props.variant === "store-header-label") {
+    const cookies = getCookies(req.headers);
+    const selectedStore: Place = JSON.parse(
+      cookies?.["selected-store"] ?? "{}",
+    );
+
+    return {
+      ...props,
+      selectedStore,
+    };
+  }
+
+  if (props.variant === "stores" || props.variant === "clear-stores") {
     const stores = await ctx.invoke.vtex.loaders.logistics.listPickupPoints();
+    const cookies = getCookies(req.headers);
+    const selectedStore: Place = JSON.parse(
+      cookies?.["selected-store"] ?? "{}",
+    );
 
     return {
       ...props,
       stores,
+      selectedStore,
     };
   }
 
-  if (props.variant === "get-stores") {
+  if (props.variant === "search-stores") {
     const form = await req.formData();
     const postalCode = form.get("PostalCode")?.toString()?.replace(/\s+/g, "");
     const cookies = getCookies(req.headers);
@@ -71,15 +94,23 @@ export const action = async (
 
     console.log({ postalCode, countryCode });
 
-    const stores = await ctx.invoke.vtex.loaders.logistics
-      .listPickupPointsByLocation({
-        postalCode,
-        countryCode,
-      });
-    return {
-      ...props,
-      stores,
-    };
+    try {
+      const stores = await ctx.invoke.vtex.loaders.logistics
+        .listPickupPointsByLocation({
+          postalCode,
+          countryCode,
+        });
+      return {
+        ...props,
+        stores,
+      };
+    } catch (error) {
+      console.error("Error fetching pickup points:", error);
+      return {
+        ...props,
+        stores: [],
+      };
+    }
   }
 
   return { ...props };
@@ -89,13 +120,35 @@ export default function StoreSelector({
   currentLang,
   ...props
 }: StoreSelectorProps) {
-  if (props?.variant === "get-stores") {
-    return <StoreList stores={props.stores} error={props.error} />;
+  // Trechos de HTML que são renderizados de acordo com a propriedade variant no evento do HTMX
+  if (props.variant === "clear-stores") {
+    const groupedStores = groupStoresByState({
+      places: props?.stores ?? [],
+      storesPerState: 3,
+      language: currentLang?.value,
+    });
+
+    return <StoreList groupedStores={groupedStores} />;
+  }
+
+  if (props?.variant === "search-stores") {
+    const componentUrl = useComponent(import.meta.url, {
+      variant: "clear-stores",
+    });
+
+    return (
+      <StoreList
+        stores={props.stores}
+        error={props.error}
+        parentComponentUrl={componentUrl}
+      />
+    );
   }
 
   if (props?.variant === "stores") {
     const groupedStores = groupStoresByState({
       places: props?.stores ?? [],
+      storesPerState: 3,
       language: currentLang?.value,
     });
     return (
@@ -116,13 +169,16 @@ export default function StoreSelector({
                   maxWidth: "425px",
                 }}
               >
-                <div class="flex flex-col gap-4 w-full px-4 mt-2">
+                <div
+                  class="flex flex-col gap-4 w-full px-4 mt-2"
+                  id="PostalCodeContainer"
+                >
                   <h3 class="text-lg font-primary font-medium">Find a store</h3>
                   <form
                     class="flex gap-2 items-end"
                     hx-encoding="application/x-www-form-urlencoded"
                     hx-post={useComponent(import.meta.url, {
-                      variant: "get-stores",
+                      variant: "search-stores",
                     })}
                     hx-target="#stores-data"
                     hx-trigger="submit"
@@ -161,10 +217,11 @@ export default function StoreSelector({
                       )}
                     >
                       <span class="[.htmx-request>&]:hidden">Search</span>
-                      <span class="[.htmx-request>&]:loading [.htmx-request>&]:w-6 [.htmx-request>&]:block hidden" />
+                      <span class="[.htmx-request>&]:loading [.htmx-request>&]:w-4 [.htmx-request>&]:block hidden" />
                     </button>
                   </form>
                 </div>
+                <SelectedContainer selectedStore={props?.selectedStore} />
                 <div
                   id="stores-data"
                   class={clx(
@@ -172,7 +229,10 @@ export default function StoreSelector({
                     "htmx-request:opacity-50",
                   )}
                 >
-                  <StoreList groupedStores={groupedStores} />
+                  <StoreList
+                    groupedStores={groupedStores}
+                    selectedStore={props?.selectedStore}
+                  />
                 </div>
               </div>
             </Drawer.Aside>
@@ -183,6 +243,11 @@ export default function StoreSelector({
         </div>
       </>
     );
+  }
+
+  if (props?.variant === "store-header-label") {
+    console.log("store-did-update", props.selectedStore?.name);
+    return <StoreLabel name={props?.selectedStore?.name} />;
   }
 
   return (
@@ -198,14 +263,30 @@ export default function StoreSelector({
       htmlFor={STORE_SELECTOR_DRAWER_ID}
     >
       <Icon id="Location" width={12} height={12} class="text-white" />
-      <span
-        class="text-white group-hover:underline transition-all duration-300 font-primary"
-        style={{
-          fontSize: "10.71px",
-        }}
-      >
-        Find Your Store
-      </span>
+
+      <div class="contents contents-sections">
+        <StoreLabel name={props?.selectedStore?.name} />
+      </div>
     </label>
+  );
+}
+
+function StoreLabel({ name }: { name?: string }) {
+  return (
+    <span
+      class="text-white group-hover:underline transition-all duration-300 font-primary"
+      style={{
+        fontSize: "10.71px",
+      }}
+      hx-trigger="store-did-update from:body"
+      hx-get={useComponent(import.meta.url, {
+        variant: "store-header-label",
+        href: `${useSection().split("?")[0]}?k=${Math.random()}`, // hack to force a reload
+      })}
+      hx-target="this"
+      hx-swap="outerHTML transition:true"
+    >
+      {name ? `Your Store: ${name}` : "Find Your Store"}
+    </span>
   );
 }

@@ -10,6 +10,7 @@ import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Icon from "../ui/Icon.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
 import OutOfStock from "./OutOfStock.tsx";
+import ShippingSimulationForm from "../shipping/Form.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -185,13 +186,6 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
           : <OutOfStock productID={productID} />}
       </div>
 
-      {/* Shipping Simulation */}
-      {
-        /* <div class='mt-8'>
-                <ShippingSimulationForm items={[{ id: Number(product.sku), quantity: 1, seller: seller }]} />
-            </div> */
-      }
-
       {/* Description card */}
       {description &&
         (isDesktop
@@ -261,6 +255,12 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
               })}
             </div>
           ))}
+
+      <div class="w-full fles justify-center mt-8">
+        <ShippingSimulationForm
+          items={[{ id: Number(product.sku), quantity: 1, seller: seller }]}
+        />
+      </div>
     </div>
   );
 }
