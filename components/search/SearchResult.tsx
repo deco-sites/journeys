@@ -93,7 +93,7 @@ function PageResult(props: SectionProps<typeof loader>) {
         class={clx(
           "grid items-center",
           "grid-cols-2 gap-2",
-          "sm:grid-cols-4 sm:gap-10",
+          "sm:grid-cols-3 sm:gap-3",
           "w-full",
         )}
       >
@@ -103,7 +103,7 @@ function PageResult(props: SectionProps<typeof loader>) {
             product={product}
             preload={index === 0}
             index={offset + index}
-            class="h-full min-w-[160px] max-w-[300px]"
+            class="h-full min-w-[160px] max-w-[300px] bg-white rounded-none"
             currencyCode={props.currencyCode}
             locale={props.locale}
           />
@@ -190,6 +190,18 @@ function Result(props: SectionProps<typeof loader>) {
   const perPage = pageInfo?.recordPerPage || products.length;
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
+  const searchParams = new URLSearchParams(page?.pageInfo?.nextPage || "");
+  const items = searchParams.has("q")
+    ? [
+      {
+        name: searchParams.get("q"),
+        item: "/s?q=" + searchParams.get("q"),
+      },
+    ]
+    : page?.breadcrumb.itemListElement;
+  const lastItem = items[items.length - 1];
+  const isProductListingPage = !!page;
+
   const viewItemListEvent = useSendEvent({
     on: "view",
     event: {
@@ -209,16 +221,28 @@ function Result(props: SectionProps<typeof loader>) {
       },
     },
   });
-  const results = (
-    <span class="text-sm font-normal">
-      {page.pageInfo.recordPerPage} of {page.pageInfo.records} results
-    </span>
-  );
+  // const results = (
+  //   <span class="text-sm font-normal">
+  //     {page.pageInfo.recordPerPage} of {page.pageInfo.records} results
+  //   </span>
+  // );
   const sortBy = sortOptions.length > 0 && (
-    <Sort sortOptions={sortOptions} url={url} />
+    <div class="flex items-center gap-2 text-sm">
+      Sort:
+      <Sort sortOptions={sortOptions} url={url} />
+    </div>
   );
   return (
     <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+                body {
+                    background-color: #ebebeb;
+                }
+              `,
+        }}
+      />
       <div
         id={container}
         {...viewItemListEvent}
@@ -229,7 +253,7 @@ function Result(props: SectionProps<typeof loader>) {
         {partial
           ? <PageResult {...props} />
           : (
-            <div class="container flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
+            <div class="container lg:!max-w-[992px] flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
               <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
 
               {device === "mobile" && (
@@ -253,7 +277,7 @@ function Result(props: SectionProps<typeof loader>) {
                 >
                   <div class="flex sm:hidden justify-between items-end">
                     <div class="flex flex-col">
-                      {results}
+                      {/* {results} */}
                       {sortBy}
                     </div>
 
@@ -264,24 +288,47 @@ function Result(props: SectionProps<typeof loader>) {
                 </Drawer>
               )}
 
-              <div class="grid place-items-center grid-cols-1 sm:grid-cols-[250px_1fr]">
+              <div class="flex justify-between items-center bg-white mb-3 px-3">
+                {isProductListingPage && (
+                  <div class="flex flex-col sm:items-end sm:flex-row gap-1">
+                    <a href={lastItem?.item} class="uppercase text-xl">
+                      {lastItem?.item?.includes("/s?q=")
+                        ? (
+                          <div>
+                            RESULTS FOR "<h1 class="inline">
+                              {lastItem?.name}
+                            </h1>{" "}
+                            (
+                            <span>{page?.pageInfo?.records ?? 0}</span>{" "}
+                            products)"
+                          </div>
+                        )
+                        : (
+                          <h1>
+                            {lastItem?.name} (z
+                            <span>{page?.pageInfo?.records ?? 0}</span>{" "}
+                            products)
+                          </h1>
+                        )}
+                    </a>
+                  </div>
+                )}
                 {device === "desktop" && (
-                  <aside class="place-self-start flex flex-col gap-9">
-                    <span class="text-base font-semibold h-12 flex items-center">
-                      Filters
-                    </span>
-
+                  <div class="flex justify-between items-center">
+                    {/* {results} */}
+                    <div>{sortBy}</div>
+                  </div>
+                )}
+              </div>
+              <div class="grid place-items-center grid-cols-1 sm:grid-cols-[250px_1fr] gap-3">
+                {device === "desktop" && (
+                  <aside class="place-self-start flex flex-col gap-9 bg-white w-full px-2 pt-3 pb-7
+                ">
                     <Filters filters={filters} />
                   </aside>
                 )}
 
                 <div class="flex flex-col gap-9">
-                  {device === "desktop" && (
-                    <div class="flex justify-between items-center">
-                      {results}
-                      <div>{sortBy}</div>
-                    </div>
-                  )}
                   <PageResult {...props} />
                 </div>
               </div>

@@ -3814,6 +3814,9 @@ details.collapse summary::-webkit-details-marker {
 .mb-2 {
   margin-bottom: 0.5rem;
 }
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -4897,6 +4900,9 @@ details.collapse summary::-webkit-details-marker {
 .pb-4 {
   padding-bottom: 1rem;
 }
+.pb-7 {
+  padding-bottom: 1.75rem;
+}
 .pb-\[15px\] {
   padding-bottom: 15px;
 }
@@ -4941,6 +4947,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .pt-20 {
   padding-top: 5rem;
+}
+.pt-3 {
+  padding-top: 0.75rem;
 }
 .pt-36 {
   padding-top: 9rem;
@@ -6058,8 +6067,8 @@ details.collapse summary::-webkit-details-marker {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .sm\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .sm\:grid-cols-\[112px_1fr_112px\] {
@@ -6114,6 +6123,10 @@ details.collapse summary::-webkit-details-marker {
     gap: 5rem;
   }
 
+  .sm\:gap-3 {
+    gap: 0.75rem;
+  }
+
   .sm\:gap-4 {
     gap: 1rem;
   }
@@ -6130,10 +6143,6 @@ details.collapse summary::-webkit-details-marker {
     overflow-y: auto;
   }
 
-  .sm\:p-0 {
-    padding: 0px;
-  }
-
   .sm\:p-10 {
     padding: 2.5rem;
   }
@@ -6146,6 +6155,11 @@ details.collapse summary::-webkit-details-marker {
   .sm\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+  }
+
+  .sm\:py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .sm\:py-10 {
@@ -6336,6 +6350,10 @@ details.collapse summary::-webkit-details-marker {
 
   .lg\:w-full {
     width: 100%;
+  }
+
+  .lg\:\!max-w-\[992px\] {
+    max-width: 992px !important;
   }
 
   .lg\:max-w-3xl {

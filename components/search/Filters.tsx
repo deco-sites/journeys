@@ -21,9 +21,11 @@ function ValueItem(
 ) {
   return (
     <a href={url} rel="nofollow" class="flex items-center gap-2">
-      <div aria-checked={selected} class="checkbox" />
+      <div aria-checked={selected} class="checkbox rounded-none" />
       <span class="text-sm">{label}</span>
-      {quantity > 0 && <span class="text-sm text-base-400">({quantity})</span>}
+      {quantity > 0 && (
+        <span class="text-sm text-gray-100 font-primary">({quantity})</span>
+      )}
     </a>
   );
 }
@@ -33,7 +35,7 @@ function FilterValues({ key, values }: FilterToggle) {
   const flexDirection = avatars ? "flex-row items-center" : "flex-col";
 
   return (
-    <ul class={clx(`flex flex-wrap gap-2`, flexDirection)}>
+    <ul class={clx(`flex flex-wrap gap-2 px-4`, flexDirection)}>
       {values.map((item) => {
         const { url, selected, value } = item;
 
@@ -67,12 +69,14 @@ function FilterValues({ key, values }: FilterToggle) {
 
 function Filters({ filters }: Props) {
   return (
-    <ul class="flex flex-col gap-6 p-4 sm:p-0">
+    <ul class="flex flex-col gap-6 p-4 sm:py-0 sm:px-0">
       {filters
         .filter(isToggle)
         .map((filter) => (
           <li class="flex flex-col gap-4">
-            <span>{filter.label}</span>
+            <span class="text-base font-semibold font-primary">
+              {filter.label}
+            </span>
             <FilterValues {...filter} />
           </li>
         ))}
