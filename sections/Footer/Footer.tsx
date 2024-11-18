@@ -35,8 +35,8 @@ function Footer({
   social = [],
   policies = [],
   paymentMethods = [],
-  logo,
-  trademark,
+  // logo,
+  // trademark,
 }: Props) {
   return (
     <footer
@@ -104,13 +104,13 @@ function Footer({
               </li>
             ))}
           </ul>
-
+{/* 
           <div class="flex flex-nowrap items-center justify-between sm:justify-center gap-4">
             <div>
               <img loading="lazy" src={logo} />
             </div>
             <span class="text-xs font-normal text-base-400">{trademark}</span>
-          </div>
+          </div> */}
 
           {
             /* <div class="flex flex-nowrap items-center justify-center gap-4">
