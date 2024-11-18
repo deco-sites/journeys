@@ -273,11 +273,12 @@
         "products": {
           "__resolveType": "vtex/loaders/legacy/productList.ts",
           "props": {
-            "sort": "OrderByPriceDESC"
+            "sort": "OrderByPriceASC",
+            "collection": "137"
           }
         },
         "title": "Trending Hot",
-        "titleStyle": "light"
+        "titleStyle": "default"
       }
     },
     {
