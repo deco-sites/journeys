@@ -71,3 +71,28 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
       : null,
   };
 };
+
+export const useMultipleOffers = (aggregateOffer?: AggregateOffer) => {
+  const offers = aggregateOffer?.offers.map((offer) => {
+    const listPrice = offer?.priceSpecification.find((spec) =>
+      spec.priceType === "https://schema.org/ListPrice"
+    );
+    const installment = offer?.priceSpecification.reduce(bestInstallment, null);
+    const seller = offer?.seller;
+    const price = offer?.price;
+    const availability = offer?.availability;
+
+    return {
+      price,
+      listPrice: listPrice?.price,
+      availability,
+      seller,
+      sellerName: offer?.sellerName,
+      installments: installment && price
+        ? installmentToString(installment, price)
+        : null,
+    };
+  });
+
+  return offers;
+};

@@ -5,7 +5,7 @@ import Gallery from "../../components/product/Gallery.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
-import { useOffer } from "../../sdk/useOffer.ts";
+import { useMultipleOffers, useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Icon from "../ui/Icon.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
@@ -48,9 +48,10 @@ function ProductInfo({
     price = 0,
     listPrice = 0,
     seller = "1",
-    sellerName,
     availability,
   } = useOffer(offers);
+
+  const offerss = useMultipleOffers(offers);
 
   const itemsSimulation = [
     { id: Number(product.sku), quantity: 1, seller: seller },
@@ -63,10 +64,14 @@ function ProductInfo({
       : []),
   ];
 
-  const allSellers = [
-    { id: seller, name: sellerName },
-    ...(mockSellers || []),
-  ];
+  const allSellers = offerss?.map(({ seller, sellerName }) => ({
+    id: seller,
+    name: sellerName,
+  }));
+  // const allSellers = [
+  //   { id: seller, name: sellerName },
+  //   ...(mockSellers || []),
+  // ];
 
   console.log({ allSellers });
 
