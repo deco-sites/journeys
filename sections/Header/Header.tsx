@@ -206,11 +206,12 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
           >
             <Icon id="search" size={17} />
           </label>
-          <a href="/account">
+          <a href="/account" title="Go to my account">
             <Image
               src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d42ce836-76b5-41fd-a500-314061658361/user-6769-(1).png"
               width={17}
               height={17}
+              alt="user icon"
             />
           </a>
           <Bag />

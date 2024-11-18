@@ -238,9 +238,11 @@ export default function StoreSelector({
             </Drawer.Aside>
           }
         />
-        <div id="stores-data" class="hidden">
+        {
+          /* <div id="stores-data" class="hidden">
           {JSON.stringify(groupedStores)}
-        </div>
+        </div> */
+        }
       </>
     );
   }

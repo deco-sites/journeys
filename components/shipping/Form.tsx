@@ -13,6 +13,9 @@ export default function Form({ items }: Props) {
 
   return (
     <div class="flex flex-col gap-2">
+      <div class="hidden">
+        {Results}
+      </div>
       <div class="flex flex-col">
         <span class="text-[#616B6B] text-sm pt-5 border-t-[1px] border-gray-300 font-primary">
           Please provide your ZIP code to check the delivery times.
