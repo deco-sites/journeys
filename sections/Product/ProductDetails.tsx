@@ -53,7 +53,7 @@ export default function ProductDetails(
           <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
         </div>
 
-        <div class="lg:bg-white flex flex-col lg:flex-row lg:py-7 lg:px-5 md:mx-5 lg:mx-0">
+        <div class="lg:bg-white flex flex-col lg:flex-row lg:py-7 lg:px-5 lg:mx-0">
           {!isMobile && (
             <div class="bg-white w-full lg:w-1/2 md:mb-6 lg:mb-0 max-lg:py-7 max-lg:px-2.5">
               <ImageGallerySlider page={page} />

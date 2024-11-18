@@ -56,26 +56,25 @@ function ProductSlider(
           </Slider>
         </div>
 
-        <div class="col-start-1 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative bottom-[15%]">
-          <Slider.PrevButton class="flex btn btn-outline btn-sm btn-circle no-animation">
-            <Icon id="chevron-right" class="rotate-180" />
+        <div class="col-start-1 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative -left-[15%] bottom-[15%]">
+          <Slider.PrevButton class="flex btn btn-circle no-animation bg-transparent border-0">
+            <Icon id="chevron-right" size={40} class="text-[#aaa] rotate-180" />
           </Slider.PrevButton>
         </div>
 
-        <div class="col-start-3 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative bottom-[15%]">
-          <Slider.NextButton class="flex btn btn-outline btn-sm btn-circle no-animation">
-            <Icon id="chevron-right" />
+        <div class="col-start-3 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative -right-[15%] bottom-[15%]">
+          <Slider.NextButton class="flex btn btn-circle no-animation bg-transparent border-0">
+            <Icon id="chevron-right" size={40} class="text-[#aaa]" />
           </Slider.NextButton>
         </div>
 
         <div class="flex flex-grow" />
 
         <div class="flex gap-2 justify-center items-center">
-          {productsPerPage.map((_: Product[], index: number) => (
+          {products.map((_, index) => (
             <Slider.Dot
               class="group size-2.5 p-[3px] rounded-full border border-gray-400 disabled:bg-gray-400"
               index={index}
-              key={index}
             />
           ))}
         </div>

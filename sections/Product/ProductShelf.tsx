@@ -48,7 +48,7 @@ export default function ProductShelf({
   return (
     <Section.Container
       {...viewItemListEvent}
-      class="!py-2.5 !pt-5 md:mx-5 lg:mx-auto mb-6"
+      class="!py-2.5 !pt-5 mx-auto mb-6"
     >
       {titleStyle === "default"
         ? (

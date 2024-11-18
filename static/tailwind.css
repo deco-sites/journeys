@@ -3645,6 +3645,12 @@ details.collapse summary::-webkit-details-marker {
 .sticky {
   position: sticky;
 }
+.-left-\[15\%\] {
+  left: -15%;
+}
+.-right-\[15\%\] {
+  right: -15%;
+}
 .bottom-0 {
   bottom: 0px;
 }
@@ -4733,6 +4739,9 @@ details.collapse summary::-webkit-details-marker {
   --tw-bg-opacity: 1;
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
 }
+.bg-transparent {
+  background-color: transparent;
+}
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -5200,6 +5209,10 @@ details.collapse summary::-webkit-details-marker {
   --tw-text-opacity: 1;
   color: rgb(167 168 170 / var(--tw-text-opacity));
 }
+.text-\[\#aaa\] {
+  --tw-text-opacity: 1;
+  color: rgb(170 170 170 / var(--tw-text-opacity));
+}
 .text-\[\#c30b21\] {
   --tw-text-opacity: 1;
   color: rgb(195 11 33 / var(--tw-text-opacity));
@@ -5259,6 +5272,10 @@ details.collapse summary::-webkit-details-marker {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-zinc-200 {
+  --tw-text-opacity: 1;
+  color: rgb(228 228 231 / var(--tw-text-opacity));
 }
 .text-zinc-400 {
   --tw-text-opacity: 1;
@@ -6232,11 +6249,6 @@ details.collapse summary::-webkit-details-marker {
   .md\:mx-10 {
     margin-left: 2.5rem;
     margin-right: 2.5rem;
-  }
-
-  .md\:mx-5 {
-    margin-left: 1.25rem;
-    margin-right: 1.25rem;
   }
 
   .md\:mb-6 {

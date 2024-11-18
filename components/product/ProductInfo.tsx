@@ -1,17 +1,17 @@
-import { useDevice } from "@deco/deco/hooks";
-import { Place, ProductDetailsPage } from "apps/commerce/types.ts";
+import { useDevice, useScript } from "@deco/deco/hooks";
+import type { Place, ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Gallery from "../../components/product/Gallery.tsx";
+import { SellersByLocation } from "../../loaders/listSellersByLocation.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useMultipleOffers, useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
+import ShippingSimulationForm from "../shipping/Form.tsx";
 import Icon from "../ui/Icon.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
 import OutOfStock from "./OutOfStock.tsx";
-import ShippingSimulationForm from "../shipping/Form.tsx";
-import { SellersByLocation } from "../../loaders/listSellersByLocation.ts";
 import StoreAvailability from "./StoreAvailability.tsx";
 
 interface Props {
@@ -131,6 +131,7 @@ function ProductInfo({
           </span>
         )}
         <span
+          id="product-price"
           class={clx(
             "text-xl",
             hasDiscount ? "text-[#d41d18]" : "text-[#202020]",
@@ -187,6 +188,28 @@ function ProductInfo({
             title="selected-sku"
             id="selected-sku"
             class="appearance-none border border-[#A7A8AA] text-[#202020] h-10 py-2 px-5 w-full text-sm rounded outline-0"
+            data-skus={JSON.stringify(
+              Object.fromEntries(
+                isVariantOf?.hasVariant.map(({ productID, offers }) => {
+                  const price = useOffer(offers).price ?? 0;
+
+                  return [productID, formatPrice(price, currencyCode, locale)];
+                }) ?? [],
+              ),
+            )}
+            hx-on:change={useScript(() => {
+              const select = document.getElementById(
+                "selected-sku",
+              ) as HTMLSelectElement;
+              const productPrice = document.getElementById(
+                "product-price",
+              ) as HTMLSpanElement;
+
+              const price =
+                JSON.parse(select.dataset.skus ?? "{}")[select.value];
+
+              productPrice.innerText = price;
+            })}
             required
           >
             <option value="" selected disabled>
@@ -240,6 +263,15 @@ function ProductInfo({
           )
           : <OutOfStock productID={productID} />}
       </div>
+
+      {/* Shipping Simulation */}
+      {
+        /* <div class="w-full fles justify-center mt-8">
+        <ShippingSimulationForm
+          items={[{ id: Number(product.sku), quantity: 1, seller: seller }]}
+        />
+      </div> */
+      }
 
       {/* Description card */}
       {description &&
