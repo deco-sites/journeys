@@ -26,7 +26,6 @@ function ProductInfo({
   page,
   currencyCode,
   locale,
-  sellers: mockSellers,
   selectedStore,
 }: Props) {
   const id = useId();
@@ -53,21 +52,16 @@ function ProductInfo({
 
   const offerss = useMultipleOffers(offers);
 
-  const itemsSimulation = [
-    { id: Number(product.sku), quantity: 1, seller: seller },
-    ...(mockSellers?.length
-      ? mockSellers.map(({ id }) => ({
-        id: Number(product.sku),
-        quantity: 1,
-        seller: id ?? seller,
-      }))
-      : []),
-  ];
-
   const allSellers = offerss?.map(({ seller, sellerName }) => ({
     id: seller,
     name: sellerName,
   }));
+
+  const itemsSimulation = offerss?.map(({ seller }) => ({
+    id: Number(product.sku),
+    quantity: 1,
+    seller: seller ?? "",
+  })) ?? [{ id: Number(product.sku), quantity: 1, seller: seller }];
   // const allSellers = [
   //   { id: seller, name: sellerName },
   //   ...(mockSellers || []),

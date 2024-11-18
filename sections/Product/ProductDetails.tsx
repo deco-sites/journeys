@@ -14,7 +14,7 @@ export interface Props {
 }
 
 export default function ProductDetails(
-  { page, currencyCode, locale, selectedStore, ...props }: SectionProps<
+  { page, currencyCode, locale, selectedStore }: SectionProps<
     typeof loader
   >,
 ) {
@@ -64,7 +64,6 @@ export default function ProductDetails(
               page={page}
               currencyCode={currencyCode}
               locale={locale}
-              sellers={props.sellers}
               selectedStore={selectedStore}
             />
           </div>
@@ -75,10 +74,10 @@ export default function ProductDetails(
 }
 
 export const loader = async (props: Props, req: Request, ctx: AppContext) => {
-  const mockSellers = await ctx.invoke.site.loaders.listSellersByLocation({
-    postalCode: "11530",
-    countryCode: "USA",
-  });
+  // const mockSellers = await ctx.invoke.site.loaders.listSellersByLocation({
+  //   postalCode: "11530",
+  //   countryCode: "USA",
+  // });
 
   const cookies = getCookies(req.headers);
   const selectedStore: Place = JSON.parse(cookies?.["selected-store"] ?? "{}");
@@ -96,7 +95,6 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
     ...props,
     currencyCode: await ctx.invoke.site.loaders.getCurrency(),
     locale: await ctx.invoke.site.loaders.getLocale(),
-    sellers: mockSellers?.[0]?.sellers,
     selectedStore,
   };
 };
