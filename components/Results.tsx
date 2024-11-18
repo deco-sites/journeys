@@ -3,8 +3,8 @@
  */
 import { AppContext } from "apps/vtex/mod.ts";
 import type { SimulationOrderForm, SKU, Sla } from "apps/vtex/utils/types.ts";
-import { formatPrice } from "../../sdk/format.ts";
-import { ComponentProps } from "../../sections/Component.tsx";
+import { formatPrice } from "../sdk/format.ts";
+import { ComponentProps } from "../sections/Component.tsx";
 
 export interface Props {
   items: SKU[];

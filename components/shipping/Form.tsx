@@ -6,7 +6,7 @@ export interface Props {
   items: SKU[];
 }
 
-const Results = import.meta.resolve("./TestResults.tsx");
+const Results = import.meta.resolve("../Results.tsx");
 
 export default function Form({ items }: Props) {
   const slot = useId();
