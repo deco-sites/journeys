@@ -80,11 +80,22 @@ export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
   };
 };
 
-export const LoadingFallback = (
-  { title, cta }: LoadingFallbackProps<Props>,
-) => (
-  <Section.Container>
-    <Section.Header title={title} cta={cta} />
+export const LoadingFallback = ({
+  title,
+  titleStyle,
+}: LoadingFallbackProps<Props>) => (
+  <Section.Container class="!py-2.5 !pt-5 md:mx-5 lg:mx-auto mb-6">
+    {titleStyle === "default"
+      ? (
+        <h1 class="text-lg/none font-primary uppercase font-bold text-center">
+          {title}
+        </h1>
+      )
+      : (
+        <h1 class="border-b border-[#cfcfcf] text-[#202020] text-lg py-1.5 text-center w-[80%] mx-auto">
+          {title}
+        </h1>
+      )}
     <Section.Placeholder height="471px" />
   </Section.Container>
 );

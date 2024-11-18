@@ -257,9 +257,11 @@
       "section": {
         "__resolveType": "site/sections/Product/ProductShelf.tsx",
         "products": {
-          "__resolveType": "vtex/loaders/legacy/productList.ts",
-          "props": {
-            "sort": "OrderByPriceDESC"
+          "__resolveType": "vtex/loaders/legacy/relatedProductsLoader.ts",
+          "crossSelling": "showtogether",
+          "slug": {
+            "__resolveType": "website/functions/requestToParam.ts",
+            "param": "slug"
           }
         },
         "title": "You May Also Like",
@@ -271,9 +273,11 @@
       "section": {
         "__resolveType": "site/sections/Product/ProductShelf.tsx",
         "products": {
-          "__resolveType": "vtex/loaders/legacy/productList.ts",
-          "props": {
-            "sort": "OrderByPriceDESC"
+          "__resolveType": "vtex/loaders/legacy/relatedProductsLoader.ts",
+          "crossSelling": "whosawalsosaw",
+          "slug": {
+            "__resolveType": "website/functions/requestToParam.ts",
+            "param": "slug"
           }
         },
         "title": "Trending Hot",
