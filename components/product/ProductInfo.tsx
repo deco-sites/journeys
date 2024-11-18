@@ -245,7 +245,7 @@ function ProductInfo({
       {description &&
         (isDesktop
           ? (
-            <div class="tabs tabs-lifted lg:px-6">
+            <div class="tabs tabs-lifted">
               {Object.entries(descriptionSection).map(
                 ([name, description], index) => (
                   <>
@@ -314,7 +314,7 @@ function ProductInfo({
             </div>
           ))}
 
-      <div class="w-full fles justify-center mt-8">
+      <div class="w-full fles justify-center">
         <ShippingSimulationForm items={itemsSimulation} />
       </div>
 

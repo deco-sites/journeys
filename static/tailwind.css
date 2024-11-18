@@ -6443,11 +6443,6 @@ details.collapse summary::-webkit-details-marker {
     padding-right: 1.25rem;
   }
 
-  .lg\:px-6 {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
