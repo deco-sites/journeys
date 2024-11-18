@@ -63,6 +63,9 @@ export default function StoreAvailability({
       id="store-availability"
       {...hookHtmxProps()}
     >
+      <div class="hidden">
+        {StoreSelector}
+      </div>
       <SelectedContainer selectedStore={selectedStore} variant="product" />
     </div>
   );
