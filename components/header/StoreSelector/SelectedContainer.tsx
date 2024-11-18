@@ -70,7 +70,7 @@ function Item({ store }: { store: Place }) {
                   transition: "all cubic-bezier(0.62, 0.28, 0.23, 0.99) 0.4s",
                 }}
                 class="border border-gray-300 uppercase text-neutral btn-sm hover:bg-[#e6e6e6] hover:border-[#b0b0b0]"
-                hx-on:click={useScript((store: Place) => {
+                hx-on:click={useScript(() => {
                   const url = new URL(globalThis.window.location.href);
                   if (url.searchParams.has("filter.pickupPoint")) {
                     url.searchParams.delete("filter.shipping");
@@ -79,12 +79,11 @@ function Item({ store }: { store: Place }) {
                     url.searchParams.delete("filter.coordinates");
                     globalThis.window.history.replaceState({}, "", url.href);
                   }
-                  console.log("store", store);
                   document.cookie = "selected-store=; path=/; max-age=0";
                   document.body.dispatchEvent(
                     new CustomEvent("store-did-update"),
                   );
-                }, store)}
+                })}
               >
                 Remove my store
               </button>

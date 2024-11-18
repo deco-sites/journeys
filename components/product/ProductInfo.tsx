@@ -11,14 +11,21 @@ import Icon from "../ui/Icon.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
 import OutOfStock from "./OutOfStock.tsx";
 import ShippingSimulationForm from "../shipping/Form.tsx";
+import { SellersByLocation } from "../../loaders/listSellersByLocation.ts";
 
 interface Props {
   page: ProductDetailsPage | null;
   currencyCode: string;
   locale: string;
+  sellers?: SellersByLocation;
 }
 
-function ProductInfo({ page, currencyCode, locale }: Props) {
+function ProductInfo({
+  page,
+  currencyCode,
+  locale,
+  sellers: mockSellers,
+}: Props) {
   const id = useId();
 
   if (page === null) {
@@ -30,12 +37,27 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
 
   const { breadcrumbList, product } = page;
   const { productID, offers, isVariantOf } = product;
+  // console.log({product})
   const description = product.description || isVariantOf?.description;
   const title = isVariantOf?.name ?? product.name;
 
-  const { price = 0, listPrice = 0, seller = "1", availability } = useOffer(
-    offers,
-  );
+  const {
+    price = 0,
+    listPrice = 0,
+    seller = "1",
+    availability,
+  } = useOffer(offers);
+
+  const itemsSimulation = [
+    { id: Number(product.sku), quantity: 1, seller: seller },
+    ...(mockSellers?.sellers
+      ? mockSellers.sellers.map(({ id }) => ({
+        id: Number(product.sku),
+        quantity: 1,
+        seller: id ?? seller,
+      }))
+      : []),
+  ];
 
   const hasDiscount = listPrice > price;
 
@@ -85,6 +107,9 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
       class="flex flex-col lg:max-w-lg max-lg:p-7"
       id={id}
     >
+      <div id="product-info" class="hidden">
+        {JSON.stringify(product)}
+      </div>
       {/* Product Name */}
       <h1 class="text-2xl font-bold text-[#383838] mb-1">{title}</h1>
 
@@ -108,10 +133,10 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
         <div class="flex items-center ml-auto">
           <Icon id="star" class="text-black" size={22} />
           <Icon id="star" class="text-black" size={22} />
-          <Icon id="star" class="text-[#c4c4c4]" size={22} />
-          <Icon id="star" class="text-[#c4c4c4]" size={22} />
-          <Icon id="star" class="text-[#c4c4c4]" size={22} />
-          <span class="ml-1 text-sm text-[#202020]">1</span>
+          <Icon id="star" class="text-black" size={22} />
+          <Icon id="star" class="text-black" size={22} />
+          <Icon id="star" class="text-black" size={22} />
+          <span class="ml-1 text-sm text-[#202020]"></span>
         </div>
       </div>
 
@@ -158,8 +183,8 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
             </option>
             {isVariantOf?.hasVariant?.map(
               ({ additionalProperty, productID }) => {
-                const size = additionalProperty?.find(({ name }) =>
-                  name === "Size"
+                const size = additionalProperty?.find(
+                  ({ name }) => name === "Size",
                 )?.value;
 
                 if (!size) return null;
@@ -191,7 +216,10 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
         (isDesktop
           ? (
             <div role="tablist" class="tabs tabs-lifted lg:px-6">
-              {Object.entries(descriptionSection).map(([name, description]) => (
+              {Object.entries(descriptionSection).map((
+                [name, description],
+                index,
+              ) => (
                 <>
                   <input
                     type="radio"
@@ -203,7 +231,7 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
                       "--tab-border-color": "#a8a8a8",
                       "--tab-radius": "0",
                     }}
-                    checked
+                    checked={index === 0}
                   />
                   <div
                     role="tabpanel"
@@ -258,7 +286,7 @@ function ProductInfo({ page, currencyCode, locale }: Props) {
 
       <div class="w-full fles justify-center mt-8">
         <ShippingSimulationForm
-          items={[{ id: Number(product.sku), quantity: 1, seller: seller }]}
+          items={itemsSimulation}
         />
       </div>
     </div>

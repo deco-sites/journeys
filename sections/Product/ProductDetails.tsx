@@ -1,11 +1,11 @@
 import type { SectionProps } from "@deco/deco";
 import { useDevice } from "@deco/deco/hooks";
 import type { ProductDetailsPage } from "apps/commerce/types.ts";
-import type { AppContext } from "../../apps/site.ts";
 import ImageGallerySlider from "../../components/product/Gallery.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import Section from "../../components/ui/Section.tsx";
+import type { AppContext } from "../../apps/site.ts";
 
 export interface Props {
   /** @title Integration */
@@ -13,7 +13,7 @@ export interface Props {
 }
 
 export default function ProductDetails(
-  { page, currencyCode, locale }: SectionProps<typeof loader>,
+  { page, currencyCode, locale, sellers }: SectionProps<typeof loader>,
 ) {
   const isMobile = useDevice() === "mobile";
 
@@ -61,6 +61,7 @@ export default function ProductDetails(
               page={page}
               currencyCode={currencyCode}
               locale={locale}
+              sellers={sellers}
             />
           </div>
         </div>
@@ -70,10 +71,16 @@ export default function ProductDetails(
 }
 
 export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
+  const mockSellers = await ctx.invoke.site.loaders.listSellersByLocation({
+    postalCode: "11530",
+    countryCode: "USA",
+  });
+
   return {
     ...props,
     currencyCode: await ctx.invoke.site.loaders.getCurrency(),
     locale: await ctx.invoke.site.loaders.getLocale(),
+    sellers: mockSellers,
   };
 };
 
