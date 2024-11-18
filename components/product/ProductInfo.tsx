@@ -12,13 +12,13 @@ import AddToCartButton from "./AddToCartButton.tsx";
 import OutOfStock from "./OutOfStock.tsx";
 import ShippingSimulationForm from "../shipping/Form.tsx";
 import { SellersByLocation } from "../../loaders/listSellersByLocation.ts";
-import SelectedContainer from "../header/StoreSelector/SelectedContainer.tsx";
+import StoreAvailability from "./StoreAvailability.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
   currencyCode: string;
   locale: string;
-  sellers?: SellersByLocation;
+  sellers?: SellersByLocation["sellers"];
   selectedStore?: Place;
 }
 
@@ -48,19 +48,27 @@ function ProductInfo({
     price = 0,
     listPrice = 0,
     seller = "1",
+    sellerName,
     availability,
   } = useOffer(offers);
 
   const itemsSimulation = [
     { id: Number(product.sku), quantity: 1, seller: seller },
-    ...(mockSellers?.sellers
-      ? mockSellers.sellers.map(({ id }) => ({
+    ...(mockSellers?.length
+      ? mockSellers.map(({ id }) => ({
         id: Number(product.sku),
         quantity: 1,
         seller: id ?? seller,
       }))
       : []),
   ];
+
+  const allSellers = [
+    { id: seller, name: sellerName },
+    ...(mockSellers || []),
+  ];
+
+  console.log({ allSellers });
 
   const hasDiscount = listPrice > price;
 
@@ -200,6 +208,25 @@ function ProductInfo({
         </div>
       )}
 
+      <div class="flex flex-col gap-2 border border-[#A7A8AA] rounded-sm mb-7">
+        <ul>
+          {allSellers?.map(({ id, name }, index) => (
+            <li class="p-2">
+              <label class="label cursor-pointer justify-start gap-2">
+                <input
+                  type="radio"
+                  name="radio-10"
+                  class="radio checked:bg-black"
+                  checked={index === 0}
+                  value={id ?? ""}
+                />
+                <span class="label-text uppercase">{name}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {/* Add to Cart and Favorites button */}
       <div class="flex flex-col gap-2 mb-8">
         {availability === "https://schema.org/InStock"
@@ -220,29 +247,30 @@ function ProductInfo({
         (isDesktop
           ? (
             <div class="tabs tabs-lifted lg:px-6">
-              {Object.entries(descriptionSection).map((
-                [name, description],
-                index,
-              ) => (
-                <>
-                  <input
-                    type="radio"
-                    name="description_tabs"
-                    class="tab after:whitespace-nowrap rounded-none checked:text-[#202020] text-[#666] hover:bg-[#ebebeb] uppercase"
-                    aria-label={name}
-                    style={{
-                      "--tab-border-color": "#a8a8a8",
-                      "--tab-radius": "0",
-                    }}
-                    checked={index === 0}
-                  />
-                  <div
-                    role="tabpanel"
-                    class="tab-content px-2.5 py-7"
-                    dangerouslySetInnerHTML={{ __html: description as string }}
-                  />
-                </>
-              ))}
+              {Object.entries(descriptionSection).map(
+                ([name, description], index) => (
+                  <>
+                    <input
+                      type="radio"
+                      name="description_tabs"
+                      class="tab after:whitespace-nowrap rounded-none checked:text-[#202020] text-[#666] hover:bg-[#ebebeb] uppercase"
+                      aria-label={name}
+                      style={{
+                        "--tab-border-color": "#a8a8a8",
+                        "--tab-radius": "0",
+                      }}
+                      checked={index === 0}
+                    />
+                    <div
+                      role="tabpanel"
+                      class="tab-content px-2.5 py-7"
+                      dangerouslySetInnerHTML={{
+                        __html: description as string,
+                      }}
+                    />
+                  </>
+                ),
+              )}
             </div>
           )
           : (
@@ -288,15 +316,10 @@ function ProductInfo({
           ))}
 
       <div class="w-full fles justify-center mt-8">
-        <ShippingSimulationForm
-          items={itemsSimulation}
-        />
+        <ShippingSimulationForm items={itemsSimulation} />
       </div>
-      <div class="w-full fles justify-center mt-8">
-        {selectedStore && (
-          <SelectedContainer selectedStore={selectedStore} variant="product" />
-        )}
-      </div>
+
+      <StoreAvailability selectedStore={selectedStore} />
     </div>
   );
 }

@@ -14,7 +14,7 @@ export interface Props {
 }
 
 export default function ProductDetails(
-  { page, currencyCode, locale, sellers, selectedStore }: SectionProps<
+  { page, currencyCode, locale, selectedStore, ...props }: SectionProps<
     typeof loader
   >,
 ) {
@@ -64,7 +64,7 @@ export default function ProductDetails(
               page={page}
               currencyCode={currencyCode}
               locale={locale}
-              sellers={sellers}
+              sellers={props.sellers}
               selectedStore={selectedStore}
             />
           </div>
@@ -96,7 +96,7 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
     ...props,
     currencyCode: await ctx.invoke.site.loaders.getCurrency(),
     locale: await ctx.invoke.site.loaders.getLocale(),
-    sellers: mockSellers,
+    sellers: mockSellers?.[0]?.sellers,
     selectedStore,
   };
 };

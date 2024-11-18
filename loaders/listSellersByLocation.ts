@@ -23,7 +23,7 @@ export type SellersByLocation = {
 export default async function loader(
   props: Props,
   _req: Request,
-): Promise<SellersByLocation> {
+): Promise<SellersByLocation[]> {
   const { geoCoordinates, postalCode, countryCode, regionId } = props;
 
   // Construir o caminho da URL com regionId se ele existir
