@@ -92,6 +92,7 @@ export default function GallerySlider(props: Props) {
                   height={HEIGHT}
                   // Preload LCP image for better web vitals
                   preload={index === 0}
+                  fetchPriority={index === 0 ? "high" : "auto"}
                   loading={index === 0 ? "eager" : "lazy"}
                 />
               </Slider.Item>
