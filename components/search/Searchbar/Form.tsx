@@ -77,7 +77,7 @@ export default function Searchbar(
   return (
     <>
       <div class="contents">
-        <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} class="join">
+        <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} class="join w-full">
           <button
             type="submit"
             class="btn join-item btn-square no-animation"
