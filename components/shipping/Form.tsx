@@ -12,7 +12,7 @@ export default function Form({ items }: Props) {
   return (
     <div class="flex flex-col gap-2">
       <div class="flex flex-col">
-        <span class="text-[#616B6B] text-sm pt-5 border-t-[1px] border-gray-300">
+        <span class="text-[#616B6B] text-sm pt-5 border-t-[1px] border-gray-300 font-primary">
           Please provide your ZIP code to check the delivery times.
         </span>
       </div>
@@ -29,14 +29,18 @@ export default function Form({ items }: Props) {
         <input
           as="input"
           type="text"
-          class="input input-bordered join-item w-48"
+          class="input input-bordered join-item w-48 rounded-none"
           placeholder="00000"
           name="postalCode"
           maxLength={8}
           size={8}
         />
-        <button type="submit" class="btn join-item no-animation">
+        <button
+          type="submit"
+          class="btn join-item no-animation rounded-none  bg-black text-white hover:bg-black"
+        >
           <span class="[.htmx-request_&]:hidden inline">Calculate</span>
+          <span class="[.htmx-request_&]:inline hidden ">Calculating...</span>
           <span class="[.htmx-request_&]:inline hidden loading loading-spinner loading-xs" />
         </button>
       </form>

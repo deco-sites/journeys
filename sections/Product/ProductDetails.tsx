@@ -1,11 +1,12 @@
 import type { SectionProps } from "@deco/deco";
 import { useDevice } from "@deco/deco/hooks";
-import type { ProductDetailsPage } from "apps/commerce/types.ts";
+import type { Place, ProductDetailsPage } from "apps/commerce/types.ts";
 import ImageGallerySlider from "../../components/product/Gallery.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import Section from "../../components/ui/Section.tsx";
 import type { AppContext } from "../../apps/site.ts";
+import { getCookies } from "std/http/cookie.ts";
 
 export interface Props {
   /** @title Integration */
@@ -13,7 +14,9 @@ export interface Props {
 }
 
 export default function ProductDetails(
-  { page, currencyCode, locale, sellers }: SectionProps<typeof loader>,
+  { page, currencyCode, locale, sellers, selectedStore }: SectionProps<
+    typeof loader
+  >,
 ) {
   const isMobile = useDevice() === "mobile";
 
@@ -62,6 +65,7 @@ export default function ProductDetails(
               currencyCode={currencyCode}
               locale={locale}
               sellers={sellers}
+              selectedStore={selectedStore}
             />
           </div>
         </div>
@@ -70,17 +74,30 @@ export default function ProductDetails(
   );
 }
 
-export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
+export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   const mockSellers = await ctx.invoke.site.loaders.listSellersByLocation({
     postalCode: "11530",
     countryCode: "USA",
   });
+
+  const cookies = getCookies(req.headers);
+  const selectedStore: Place = JSON.parse(cookies?.["selected-store"] ?? "{}");
+  // const { pickupPoints } = await simulationInvoke(
+  //   selectedStoreZIP || postalCode,
+  // )
+
+  // const allStores = await ctx.invoke("site/loaders/listStockByStore.ts", {
+  //   skuId: parseInt(props.page.product.sku),
+  // });
+
+  // console.log({ allStores });
 
   return {
     ...props,
     currencyCode: await ctx.invoke.site.loaders.getCurrency(),
     locale: await ctx.invoke.site.loaders.getLocale(),
     sellers: mockSellers,
+    selectedStore,
   };
 };
 

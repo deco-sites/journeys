@@ -9,12 +9,12 @@ export default function Reviews() {
             <div class="flex items-center mb-0.5">
               <Icon id="star" class="text-black" size={26} />
               <Icon id="star" class="text-black" size={26} />
-              <Icon id="star" class="text-[#c4c4c4]" size={26} />
-              <Icon id="star" class="text-[#c4c4c4]" size={26} />
-              <Icon id="star" class="text-[#c4c4c4]" size={26} />
+              <Icon id="star" class="text-black" size={26} />
+              <Icon id="star" class="text-black" size={26} />
+              <Icon id="star" class="text-black" size={26} />
             </div>
 
-            <span class="font-bold">2 STARS</span>
+            <span class="font-bold">5 STARS</span>
             <span>
               <a href="#/" class="font-bold underline">
                 Write a Review
@@ -40,22 +40,22 @@ export default function Reviews() {
           <div class="flex items-center mb-2">
             <Icon id="star" class="text-black" size={26} />
             <Icon id="star" class="text-black" size={26} />
-            <Icon id="star" class="text-[#c4c4c4]" size={26} />
-            <Icon id="star" class="text-[#c4c4c4]" size={26} />
-            <Icon id="star" class="text-[#c4c4c4]" size={26} />
+            <Icon id="star" class="text-black" size={26} />
+            <Icon id="star" class="text-black" size={26} />
+            <Icon id="star" class="text-black" size={26} />
           </div>
 
           <span class="text-[#383838] font-bold text-xl block mb-0.5">
-            Too narrow!
+            Perfect for any occasion!
           </span>
           <span class="text-xs text-[#707070] block mb-1.5">
             amy • December 11, 2023
           </span>
           <span class="max-w-[600px] text-sm">
-            I ordered these for my daughter who has an average to thin foot, and
-            always a size 8.... She could hardly get her foot into these, and
-            when she did- they were PAINFUL... be aware these are super narrow.
-            They are cute though.
+            I bought these for my daughter who has an average-sized foot, and
+            always wears a size 8... She loved the perfect fit and the comfort
+            these shoes provide. Plus, they are incredibly stylish and go with
+            any outfit. Highly recommended!
           </span>
         </div>
       </div>

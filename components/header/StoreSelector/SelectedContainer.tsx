@@ -6,6 +6,7 @@ import { useComponent } from "../../../sections/Component.tsx";
 
 export interface Props {
   selectedStore?: Place;
+  variant?: "product";
 }
 
 function Item({ store }: { store: Place }) {
@@ -114,15 +115,82 @@ const hookHtmxProps = () => ({
   }),
 });
 
-export default function SelectedContainer({ selectedStore }: Props) {
+export default function SelectedContainer({ selectedStore, variant }: Props) {
+  if (
+    variant === "product" && Object.keys(selectedStore ?? {}).length &&
+    selectedStore
+  ) {
+    return (
+      <div key={selectedStore["@id"]}>
+        <div
+          class="store"
+          data-id={selectedStore["@id"]}
+          id={`store-${selectedStore["@id"]}`}
+        >
+          <div
+            class="store-inner border border-[#a8a8a8] "
+            itemScope
+            itemType="http://schema.org/LocalBusiness"
+          >
+            <div class="store-heading bg-gray-200 text-[#707070] px-2 py-3">
+              <h4 class="font-primary flex items-center gap-2">
+                <span itemProp="name">
+                  {selectedStore?.name?.split("-")?.[0]?.trim()}
+                </span>
+              </h4>
+            </div>
+            <div class="flex flex-col gap-2 px-2 pt-2 pb-3">
+              <div
+                class="store-address font-primary text-sm"
+                itemProp="address"
+                itemScope
+                itemType="http://schema.org/PostalAddress"
+              >
+                <div class="panel-row" itemProp="streetAddress">
+                  {selectedStore?.address?.streetAddress}
+                </div>
+                <div class="panel-row">
+                  <span itemProp="addressLocality">
+                    {selectedStore.address?.addressLocality}
+                  </span>
+                  ,{" "}
+                  <span itemProp="addressRegion">
+                    {selectedStore.address?.addressRegion}
+                  </span>{" "}
+                  <span itemProp="postalCode">
+                    {selectedStore.address?.postalCode}
+                  </span>
+                </div>
+                <div class="panel-row" itemProp="addressCountry">
+                  {selectedStore.address?.addressCountry}
+                </div>
+
+                <div class="panel-row">
+                  <a
+                    class="link-map text-[#666666] text-sm font-primary"
+                    href={`https://maps.google.com/maps?q=${
+                      encodeURIComponent(
+                        `${selectedStore.address?.streetAddress} ${selectedStore.address?.addressLocality}, ${selectedStore.address?.addressRegion} ${selectedStore.address?.postalCode}`,
+                      )
+                    }`}
+                    target="_blank"
+                    title="map opens in a new window"
+                  >
+                    <span></span>Map or Directions
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (!Object.keys(selectedStore ?? {}).length) {
     return (
-      <div
-        id="store-selected-container"
-        {...hookHtmxProps()}
-      />
-    ) // hx-trigger="store-did-update from:body"
-    ; // hx-get={useComponent(import.meta.url, {
+      <div id="store-selected-container" {...hookHtmxProps()} /> // hx-trigger="store-did-update from:body"
+    ); // hx-get={useComponent(import.meta.url, {
     //   href: `${useSection().split("?")[0]}?k=${Math.random()}`, // hack to force a reload
     // })}
     // hx-target="this"

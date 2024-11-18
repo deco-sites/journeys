@@ -5179,10 +5179,6 @@ details.collapse summary::-webkit-details-marker {
   --tw-text-opacity: 1;
   color: rgb(195 11 33 / var(--tw-text-opacity));
 }
-.text-\[\#c4c4c4\] {
-  --tw-text-opacity: 1;
-  color: rgb(196 196 196 / var(--tw-text-opacity));
-}
 .text-\[\#d41d18\] {
   --tw-text-opacity: 1;
   color: rgb(212 29 24 / var(--tw-text-opacity));
@@ -5841,6 +5837,11 @@ details.collapse summary::-webkit-details-marker {
 .hover\:bg-base-200:hover {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
+}
+
+.hover\:bg-black:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-gradient-to-r:hover {

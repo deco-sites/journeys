@@ -1,5 +1,5 @@
 import { useDevice } from "@deco/deco/hooks";
-import { ProductDetailsPage } from "apps/commerce/types.ts";
+import { Place, ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Gallery from "../../components/product/Gallery.tsx";
 import { clx } from "../../sdk/clx.ts";
@@ -12,12 +12,14 @@ import AddToCartButton from "./AddToCartButton.tsx";
 import OutOfStock from "./OutOfStock.tsx";
 import ShippingSimulationForm from "../shipping/Form.tsx";
 import { SellersByLocation } from "../../loaders/listSellersByLocation.ts";
+import SelectedContainer from "../header/StoreSelector/SelectedContainer.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
   currencyCode: string;
   locale: string;
   sellers?: SellersByLocation;
+  selectedStore?: Place;
 }
 
 function ProductInfo({
@@ -25,6 +27,7 @@ function ProductInfo({
   currencyCode,
   locale,
   sellers: mockSellers,
+  selectedStore,
 }: Props) {
   const id = useId();
 
@@ -174,6 +177,7 @@ function ProductInfo({
           />
 
           <select
+            title="selected-sku"
             id="selected-sku"
             class="appearance-none border border-[#A7A8AA] text-[#202020] h-10 py-2 px-5 w-full text-sm rounded outline-0"
             required
@@ -215,7 +219,7 @@ function ProductInfo({
       {description &&
         (isDesktop
           ? (
-            <div role="tablist" class="tabs tabs-lifted lg:px-6">
+            <div class="tabs tabs-lifted lg:px-6">
               {Object.entries(descriptionSection).map((
                 [name, description],
                 index,
@@ -224,7 +228,6 @@ function ProductInfo({
                   <input
                     type="radio"
                     name="description_tabs"
-                    role="tab"
                     class="tab after:whitespace-nowrap rounded-none checked:text-[#202020] text-[#666] hover:bg-[#ebebeb] uppercase"
                     aria-label={name}
                     style={{
@@ -288,6 +291,11 @@ function ProductInfo({
         <ShippingSimulationForm
           items={itemsSimulation}
         />
+      </div>
+      <div class="w-full fles justify-center mt-8">
+        {selectedStore && (
+          <SelectedContainer selectedStore={selectedStore} variant="product" />
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { type ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
+// import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
 import Section from "../../components/ui/Section.tsx";
 
 /** @titleBy title */
@@ -112,10 +112,12 @@ function Footer({
             <span class="text-xs font-normal text-base-400">{trademark}</span>
           </div>
 
-          <div class="flex flex-nowrap items-center justify-center gap-4">
+          {
+            /* <div class="flex flex-nowrap items-center justify-center gap-4">
             <span class="text-sm font-normal text-base-400">Powered by</span>
             <PoweredByDeco />
-          </div>
+          </div> */
+          }
         </div>
       </div>
     </footer>
