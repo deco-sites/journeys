@@ -72,7 +72,7 @@ function Suggestions(
     <div
       class={clx("overflow-y-scroll", !hasProducts && !hasTerms && "hidden")}
     >
-      <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
+      <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr] p-6">
         <div class="flex flex-col gap-6">
           <span class="font-medium text-xl" role="heading" aria-level={3}>
             Sugestions

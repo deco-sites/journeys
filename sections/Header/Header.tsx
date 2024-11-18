@@ -206,16 +206,13 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
           >
             <Icon id="search" size={17} />
           </label>
-          <Image
-            src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/4a55a936-708c-46ad-983f-00bfc9ed0701/location-pointer-2961.png"
-            width={17}
-            height={17}
-          />
-          <Image
-            src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d42ce836-76b5-41fd-a500-314061658361/user-6769-(1).png"
-            width={17}
-            height={17}
-          />
+          <a href="/account">
+            <Image
+              src="https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d42ce836-76b5-41fd-a500-314061658361/user-6769-(1).png"
+              width={17}
+              height={17}
+            />
+          </a>
           <Bag />
         </div>
       </div>
