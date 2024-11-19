@@ -55,7 +55,7 @@
     "directives": []
   },
   "commerce": {
-    "platform": "other"
+    "platform": "vtex"
   },
   "platform": "vtex",
   "__resolveType": "site/apps/site.ts",
