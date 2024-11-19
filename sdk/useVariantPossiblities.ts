@@ -2,7 +2,7 @@ import type { ProductLeaf, PropertyValue } from "apps/commerce/types.ts";
 
 export type Possibilities = Record<
   string,
-  Record<string, { url: string; image?: string; skuId: string } | undefined>
+  Record<string, { url: string; image?: string; skuId?: string } | undefined>
 >;
 
 const hash = ({ name, value }: PropertyValue) => `${name}::${value}`;
@@ -42,7 +42,7 @@ export const useVariantPossibilities = (
         : isSelectable
         ? possibilities[name][value] ||
           { url: validUrl, image: firstImageUrl, skuId: productID }
-        : possibilities[name][value];
+        : possibilities[name][value] || { image: firstImageUrl, url: validUrl };
     }
   }
 

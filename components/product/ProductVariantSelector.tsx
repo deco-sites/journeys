@@ -66,6 +66,9 @@ function VariantSelector({ product, propsToShow }: Props) {
   if (filteredNames.length === 0) {
     return null;
   }
+
+  console.log("possibilities", possibilities);
+  console.log("filteredNames", filteredNames);
   return (
     <ul
       class="flex flex-col gap-4"
@@ -74,7 +77,7 @@ function VariantSelector({ product, propsToShow }: Props) {
       hx-sync="this:replace"
     >
       <div id="variant-selector-info" class="hidden">
-        {JSON.stringify(filteredNames)}
+        {JSON.stringify(possibilities)}
       </div>
       {filteredNames.map((name) => (
         <li class="flex flex-col gap-2">
@@ -93,6 +96,10 @@ function VariantSelector({ product, propsToShow }: Props) {
                   <li>
                     <label
                       class="cursor-pointer grid grid-cols-1 grid-rows-1 place-items-center"
+                      data-variant-value={value}
+                      data-variant-name={name}
+                      data-variant-sku={link?.skuId}
+                      data-href={relativeLink}
                       hx-get={useSection({ href: relativeLink })}
                     >
                       {/* Checkbox for radio button on the frontend */}
