@@ -51,7 +51,7 @@ export default function ProductShelf({
     <Section.Container
       {...viewItemListEvent}
       class={`!py-2.5 !pt-5 md:mx-5 lg:mx-auto mb-6 ${
-        variant === "productPage" ? "max-w-[992px]" : ""
+        variant === "productPage" ? "max-w-[992px] xxl:max-w-[1560px]" : ""
       }`}
     >
       {titleStyle === "default"
@@ -91,7 +91,7 @@ export const LoadingFallback = ({
 }: LoadingFallbackProps<Props>) => (
   <Section.Container
     class={`!py-2.5 !pt-5 md:mx-5 lg:mx-auto mb-6 ${
-      variant === "productPage" ? "max-w-[992px]" : ""
+      variant === "productPage" ? "max-w-[992px] xxl:max-w-[1560px]" : ""
     }`}
   >
     {titleStyle === "default"

@@ -1,6 +1,6 @@
 export default function ShareSocialMedia() {
   return (
-    <div class="md:max-w-[992px] mx-auto mb-6">
+    <div class="md:max-w-[992px] xxl:max-w-[1560px] mx-auto mb-6">
       <div class="bg-white py-2.5">
         <div class="max-w-7xl mx-auto flex flex-col items-center text-[#202020]">
           <div class="border-b border-[#cfcfcf] text-center w-[80%] mx-auto">

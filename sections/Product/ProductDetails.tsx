@@ -38,7 +38,7 @@ export default function ProductDetails(
 
   return (
     <>
-      <div class="md:max-w-[1256px] flex flex-col mb-6 mx-auto">
+      <div class="md:max-w-[992px] xxl:max-w-[1560px] flex flex-col mb-6 mx-auto">
         <div class="max-lg:mx-5">
           <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
         </div>
@@ -93,6 +93,6 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
 export const LoadingFallback = () => (
   <Section.Placeholder
     height="635px"
-    class="md:max-w-[992px] flex flex-col mb-6 mx-auto bg-white"
+    class="md:max-w-[992px] xxl:max-w-[1560px] flex flex-col mb-6 mx-auto bg-white"
   />
 );

@@ -7,6 +7,9 @@ export default {
   theme: {
     container: { center: true },
     extend: {
+      screens: {
+        "xxl": "1600px",
+      },
       animation: {
         sliding: "sliding 30s linear infinite",
         slide: "slide 6s infinite",

@@ -609,6 +609,12 @@ html {
     max-width: 1536px;
   }
 }
+@media (min-width: 1600px) {
+
+  .container {
+    max-width: 1600px;
+  }
+}
 .alert {
   display: grid;
   width: 100%;
@@ -5711,6 +5717,13 @@ details.collapse summary::-webkit-details-marker {
       max-width: 1536px;
     }
   }
+
+  @media (min-width: 1600px) {
+
+    .xl\:container {
+      max-width: 1600px;
+    }
+  }
 }
 
 .htmx-request>.\[\.htmx-request\>\&\]\:loading {
@@ -6213,10 +6226,6 @@ details.collapse summary::-webkit-details-marker {
     margin-top: 5rem;
   }
 
-  .md\:max-w-\[1256px\] {
-    max-width: 1256px;
-  }
-
   .md\:max-w-\[50\%\] {
     max-width: 50%;
   }
@@ -6522,6 +6531,13 @@ details.collapse summary::-webkit-details-marker {
 
   .xl\:w-auto {
     width: auto;
+  }
+}
+
+@media (min-width: 1600px) {
+
+  .xxl\:max-w-\[1560px\] {
+    max-width: 1560px;
   }
 }
 

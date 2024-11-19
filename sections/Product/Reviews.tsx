@@ -2,7 +2,7 @@ import Icon from "../../components/ui/Icon.tsx";
 
 export default function Reviews() {
   return (
-    <div class="md:max-w-[992px] mx-auto">
+    <div class="md:max-w-[992px] xxl:max-w-[1560px] mx-auto">
       <div class="bg-white">
         <div class="max-w-7xl mx-auto pt-14 pb-20 px-4 flex flex-col text-[#202020]">
           <div class="flex flex-col items-center mb-4 gap-0.5">
