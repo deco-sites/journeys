@@ -29,9 +29,10 @@ const onClick = () => {
   );
 
   console.log("onClick", { item, platformProps });
-  if (selectedSku?.value) {
-    platformProps.orderItems[0].id = selectedSku.value;
-  }
+  // if (selectedSku?.value) {
+  //   platformProps.orderItems.find((item) => item.id === selectedSku?.value)!.id =
+  //     selectedSku.value;
+  // }
 
   window.STOREFRONT.CART.addToCart(item, platformProps);
 };

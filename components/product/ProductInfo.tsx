@@ -16,8 +16,9 @@ import OutOfStock from "./OutOfStock.tsx";
 import ShippingSimulationForm from "../shipping/Form.tsx";
 import { SellersByLocation } from "../../loaders/listSellersByLocation.ts";
 import StoreAvailability from "./StoreAvailability.tsx";
-import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
-import { relative } from "../../sdk/url.ts";
+// import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
+// import { relative } from "../../sdk/url.ts";
+import VariantSelector from "./ProductVariantSelector.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -105,16 +106,16 @@ function ProductInfo({ page, currencyCode, locale, selectedStore }: Props) {
   };
 
   //Checks if the variant name is "title"/"default title" and if so, the SKU Selector div doesn't render
-  const hasValidVariants = isVariantOf?.hasVariant?.some(
-    (variant) =>
-      variant?.name?.toLowerCase() !== "title" &&
-      variant?.name?.toLowerCase() !== "default title",
-  ) ?? false;
+  // const hasValidVariants = isVariantOf?.hasVariant?.some(
+  //   (variant) =>
+  //     variant?.name?.toLowerCase() !== "title" &&
+  //     variant?.name?.toLowerCase() !== "default title",
+  // ) ?? false;
 
-  const possibilities = useVariantPossibilities(
-    isVariantOf?.hasVariant || [],
-    product,
-  );
+  // const possibilities = useVariantPossibilities(
+  //   isVariantOf?.hasVariant || [],
+  //   product,
+  // );
 
   return (
     <div
@@ -181,8 +182,12 @@ function ProductInfo({ page, currencyCode, locale, selectedStore }: Props) {
         </a>
       </div>
 
+      <div class="relative mb-4">
+        <VariantSelector product={product} propsToShow={["Size"]} />
+      </div>
       {/* Sku Selector */}
-      {(hasValidVariants &&
+      {
+        /* {(hasValidVariants &&
         Object.entries(possibilities["Size"] || {}).length > 1) && (
         <div class="relative mb-4">
           <Icon
@@ -213,7 +218,8 @@ function ProductInfo({ page, currencyCode, locale, selectedStore }: Props) {
             )}
           </select>
         </div>
-      )}
+      )} */
+      }
       {
         /* <script
         type="module"
