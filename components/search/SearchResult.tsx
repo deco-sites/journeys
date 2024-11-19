@@ -320,7 +320,7 @@ function Result(props: SectionProps<typeof loader>) {
                   </div>
                 )}
               </div>
-              <div class="grid place-items-center grid-cols-1 sm:grid-cols-[250px_1fr] gap-3">
+              <div class="grid grid-cols-1 sm:grid-cols-[250px_1fr] gap-3">
                 {device === "desktop" && (
                   <aside class="place-self-start flex flex-col gap-9 bg-white w-full px-2 pt-3 pb-7
                 ">
