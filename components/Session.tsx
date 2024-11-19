@@ -259,6 +259,13 @@ interface Props {
 export default function Session(
   { minicart, wishlist, user, mode = "lazy" }: Props,
 ) {
+  // return (
+  //   <>
+  //     <div>Session</div>
+  //   </>
+  // );
+  console.log("Session", { minicart, wishlist, user });
+
   if (mode === "lazy") {
     return (
       <>
@@ -279,6 +286,7 @@ export default function Session(
       </>
     );
   }
+
   return (
     <>
       {/* Minicart Drawer */}

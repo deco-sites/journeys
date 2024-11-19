@@ -67,7 +67,7 @@ function ProductInfo({ page, currencyCode, locale, selectedStore }: Props) {
   //   ...(mockSellers || []),
   // ];
 
-  console.log({ allSellers });
+  // console.log({ allSellers });
 
   const hasDiscount = listPrice > price;
 

@@ -64,6 +64,7 @@ export default function ProductDetails(
 }
 
 export const loader = async (props: Props, req: Request, ctx: AppContext) => {
+  // console.log("loader product details", { props });
   // const mockSellers = await ctx.invoke.site.loaders.listSellersByLocation({
   //   postalCode: "11530",
   //   countryCode: "USA",
@@ -92,6 +93,6 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
 export const LoadingFallback = () => (
   <Section.Placeholder
     height="635px"
-    class="md:max-w-[992px] flex flex-col mb-6 mx-auto"
+    class="md:max-w-[992px] flex flex-col mb-6 mx-auto bg-white"
   />
 );
