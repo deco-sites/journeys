@@ -481,11 +481,11 @@
               "products": {
                 "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
                 "props": {
-                  "count": 6,
                   "term": "shoe",
-                  "sort": "price:desc",
+                  "sort": "price:asc",
                   "fuzzy": "automatic",
-                  "query": "shoe"
+                  "query": "shoe",
+                  "count": 6
                 }
               }
             },
