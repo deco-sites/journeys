@@ -19,7 +19,7 @@ const onClick = () => {
     "selected-sku",
   ) as HTMLSelectElement;
 
-  if (!selectedSku.value) {
+  if (selectedSku && !selectedSku.value) {
     selectedSku.reportValidity();
     return;
   }

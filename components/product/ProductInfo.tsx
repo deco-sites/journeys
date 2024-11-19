@@ -1,4 +1,7 @@
-import { useDevice } from "@deco/deco/hooks";
+import {
+  useDevice,
+  // useScript, useSection
+} from "@deco/deco/hooks";
 import { Place, ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Gallery from "../../components/product/Gallery.tsx";
@@ -13,6 +16,8 @@ import OutOfStock from "./OutOfStock.tsx";
 import ShippingSimulationForm from "../shipping/Form.tsx";
 import { SellersByLocation } from "../../loaders/listSellersByLocation.ts";
 import StoreAvailability from "./StoreAvailability.tsx";
+import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
+import { relative } from "../../sdk/url.ts";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -22,12 +27,7 @@ interface Props {
   selectedStore?: Place;
 }
 
-function ProductInfo({
-  page,
-  currencyCode,
-  locale,
-  selectedStore,
-}: Props) {
+function ProductInfo({ page, currencyCode, locale, selectedStore }: Props) {
   const id = useId();
 
   if (page === null) {
@@ -55,7 +55,7 @@ function ProductInfo({
   const allSellers = offerss?.map(({ seller, sellerName }) => ({
     id: seller,
     name: sellerName,
-  }));
+  })) || [];
 
   const itemsSimulation = offerss?.map(({ seller }) => ({
     id: Number(product.sku),
@@ -110,6 +110,11 @@ function ProductInfo({
       variant?.name?.toLowerCase() !== "title" &&
       variant?.name?.toLowerCase() !== "default title",
   ) ?? false;
+
+  const possibilities = useVariantPossibilities(
+    isVariantOf?.hasVariant || [],
+    product,
+  );
 
   return (
     <div
@@ -177,7 +182,8 @@ function ProductInfo({
       </div>
 
       {/* Sku Selector */}
-      {hasValidVariants && (
+      {(hasValidVariants &&
+        Object.entries(possibilities["Size"] || {}).length > 1) && (
         <div class="relative mb-4">
           <Icon
             id="chevron-right"
@@ -188,44 +194,69 @@ function ProductInfo({
             title="selected-sku"
             id="selected-sku"
             class="appearance-none border border-[#A7A8AA] text-[#202020] h-10 py-2 px-5 w-full text-sm rounded outline-0"
-            required
+            // hx-target="closest section"
+            // hx-swap="outerHTML"
+            // hx-sync="this:replace"
+            // hx-get={useSection()}
           >
-            <option value="" selected disabled>
-              Select size
-            </option>
-            {isVariantOf?.hasVariant?.map(
-              ({ additionalProperty, productID }) => {
-                const size = additionalProperty?.find(
-                  ({ name }) => name === "Size",
-                )?.value;
-
-                if (!size) return null;
-
-                return <option value={productID}>{size}</option>;
-              },
+            <option value="">Select size</option>
+            {Object.entries(possibilities["Size"] || {}).map(
+              ([size, value]) => (
+                <option
+                  value={value?.url ?? ""}
+                  selected={relative(value?.url) === relative(product.url)}
+                  // hx-get={useSection({ href: relative(value?.url) })}
+                >
+                  {size}
+                </option>
+              ),
             )}
           </select>
         </div>
       )}
+      {
+        /* <script
+        type="module"
+        dangerouslySetInnerHTML={{
+          __html: useScript(() => {
+            document.addEventListener("htmx:load", function () {
+              const selectElement = document.getElementById(
+                "selected-sku",
+              ) as HTMLSelectElement;
 
-      <div class="flex flex-col gap-2 border border-[#A7A8AA] rounded-sm mb-7">
-        <ul>
-          {allSellers?.map(({ id, name }, index) => (
-            <li class="p-2">
-              <label class="label cursor-pointer justify-start gap-2">
-                <input
-                  type="radio"
-                  name="radio-10"
-                  class="radio checked:bg-black"
-                  checked={index === 0}
-                  value={id ?? ""}
-                />
-                <span class="label-text uppercase">{name}</span>
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
+              console.log({ selectElement });
+              selectElement.addEventListener("htmx:configRequest", (evt) => {
+                const customEvent = evt as CustomEvent;
+                console.log("Antes:", customEvent.detail.parameters);
+                customEvent.detail.parameters["href"] = selectElement.value;
+                console.log("Depois:", customEvent.detail.parameters);
+              });
+            });
+          }),
+        }}
+      /> */
+      }
+
+      {allSellers?.length > 1 && (
+        <div class="flex flex-col gap-2 border border-[#A7A8AA] rounded-sm mb-7">
+          <ul>
+            {allSellers?.map(({ id, name }, index) => (
+              <li class="p-2">
+                <label class="label cursor-pointer justify-start gap-2">
+                  <input
+                    type="radio"
+                    name="radio-10"
+                    class="radio checked:bg-black"
+                    checked={index === 0}
+                    value={id ?? ""}
+                  />
+                  <span class="label-text uppercase">{name}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Add to Cart and Favorites button */}
       <div class="flex flex-col gap-2 mb-8">
