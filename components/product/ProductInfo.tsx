@@ -117,11 +117,10 @@ function ProductInfo({
       class="flex flex-col lg:max-w-lg max-lg:p-7"
       id={id}
     >
-      {
-        /* <div id="product-info" class="hidden">
+      <div id="product-info" class="hidden">
         {JSON.stringify(product)}
-      </div> */
-      }
+      </div>
+
       {/* Product Name */}
       <h1 class="text-2xl font-bold text-[#383838] mb-1">{title}</h1>
 

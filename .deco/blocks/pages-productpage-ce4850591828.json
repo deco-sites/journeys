@@ -18,6 +18,10 @@
       }
     },
     {
+      "__resolveType": "site/sections/Theme/Background.tsx",
+      "color": "#ebebeb"
+    },
+    {
       "__resolveType": "website/flags/multivariate/section.ts",
       "variants": [
         {
@@ -265,7 +269,8 @@
           }
         },
         "title": "You May Also Like",
-        "titleStyle": "light"
+        "titleStyle": "light",
+        "variant": "productPage"
       }
     },
     {
@@ -280,7 +285,8 @@
           }
         },
         "title": "Trending Hot",
-        "titleStyle": "default"
+        "titleStyle": "default",
+        "variant": "productPage"
       }
     },
     {

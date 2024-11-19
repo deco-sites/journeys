@@ -15,6 +15,7 @@ export interface Props extends SectionHeaderProps {
    * @default default
    */
   titleStyle?: "default" | "light";
+  variant?: "default" | "productPage";
 }
 
 export default function ProductShelf({
@@ -23,6 +24,7 @@ export default function ProductShelf({
   title,
   currencyCode,
   locale,
+  variant = "default",
 }: SectionProps<typeof loader>) {
   if (!products || products.length === 0) {
     return null;
@@ -48,7 +50,9 @@ export default function ProductShelf({
   return (
     <Section.Container
       {...viewItemListEvent}
-      class="!py-2.5 !pt-5 md:mx-5 lg:mx-auto mb-6"
+      class={`!py-2.5 !pt-5 md:mx-5 lg:mx-auto mb-6 ${
+        variant === "productPage" ? "max-w-[992px]" : ""
+      }`}
     >
       {titleStyle === "default"
         ? (
@@ -83,8 +87,13 @@ export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
 export const LoadingFallback = ({
   title,
   titleStyle,
+  variant,
 }: LoadingFallbackProps<Props>) => (
-  <Section.Container class="!py-2.5 !pt-5 md:mx-5 lg:mx-auto mb-6">
+  <Section.Container
+    class={`!py-2.5 !pt-5 md:mx-5 lg:mx-auto mb-6 ${
+      variant === "productPage" ? "max-w-[992px]" : ""
+    }`}
+  >
     {titleStyle === "default"
       ? (
         <h1 class="text-lg/none font-primary uppercase font-bold text-center">

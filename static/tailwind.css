@@ -3941,9 +3941,9 @@ details.collapse summary::-webkit-details-marker {
   width: 2rem;
   height: 2rem;
 }
-.size-\[100px\] {
-  width: 100px;
-  height: 100px;
+.size-\[73px\] {
+  width: 73px;
+  height: 73px;
 }
 .h-10 {
   height: 2.5rem;
@@ -4216,6 +4216,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .max-w-\[80px\] {
   max-width: 80px;
+}
+.max-w-\[992px\] {
+  max-width: 992px;
 }
 .max-w-fit {
   max-width: -moz-fit-content;
@@ -4591,6 +4594,10 @@ details.collapse summary::-webkit-details-marker {
 }
 .border-t-\[1px\] {
   border-top-width: 1px;
+}
+.border-\[\#707070\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(112 112 112 / var(--tw-border-opacity));
 }
 .border-\[\#A7A8AA\] {
   --tw-border-opacity: 1;
@@ -5605,47 +5612,6 @@ details.collapse summary::-webkit-details-marker {
 
 @media (min-width: 768px) {
 
-  .md\:container {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  @media (min-width: 640px) {
-
-    .md\:container {
-      max-width: 640px;
-    }
-  }
-
-  @media (min-width: 768px) {
-
-    .md\:container {
-      max-width: 768px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-
-    .md\:container {
-      max-width: 1024px;
-    }
-  }
-
-  @media (min-width: 1280px) {
-
-    .md\:container {
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px) {
-
-    .md\:container {
-      max-width: 1536px;
-    }
-  }
-
   .md\:btn-sm {
     height: 2rem;
     min-height: 2rem;
@@ -6251,6 +6217,10 @@ details.collapse summary::-webkit-details-marker {
     max-width: 50%;
   }
 
+  .md\:max-w-\[992px\] {
+    max-width: 992px;
+  }
+
   .md\:max-w-none {
     max-width: none;
   }
@@ -6341,6 +6311,10 @@ details.collapse summary::-webkit-details-marker {
     margin-bottom: 0px;
   }
 
+  .lg\:ml-\[73px\] {
+    margin-left: 73px;
+  }
+
   .lg\:flex {
     display: flex;
   }
@@ -6361,12 +6335,16 @@ details.collapse summary::-webkit-details-marker {
     width: 50%;
   }
 
-  .lg\:w-\[359px\] {
-    width: 359px;
+  .lg\:w-3\/5 {
+    width: 60%;
   }
 
-  .lg\:w-\[40\%\] {
-    width: 40%;
+  .lg\:w-\[30\%\] {
+    width: 30%;
+  }
+
+  .lg\:w-\[359px\] {
+    width: 359px;
   }
 
   .lg\:w-full {

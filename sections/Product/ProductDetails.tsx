@@ -38,28 +38,18 @@ export default function ProductDetails(
 
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-                body {
-                    background-color: #ebebeb;
-                }
-              `,
-        }}
-      />
-
-      <div class="md:container flex flex-col mb-6 mx-auto">
+      <div class="md:max-w-[992px] flex flex-col mb-6 mx-auto">
         <div class="max-lg:mx-5">
           <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
         </div>
 
         <div class="lg:bg-white flex flex-col lg:flex-row lg:py-7 lg:px-5 md:mx-5 lg:mx-0">
           {!isMobile && (
-            <div class="bg-white w-full lg:w-1/2 md:mb-6 lg:mb-0 max-lg:py-7 max-lg:px-2.5">
+            <div class="bg-white w-full lg:w-3/5 md:mb-6 lg:mb-0 max-lg:py-7 max-lg:px-2.5">
               <ImageGallerySlider page={page} />
             </div>
           )}
-          <div class="bg-white w-full lg:w-[40%] xl:w-auto mx-auto">
+          <div class="bg-white w-full lg:w-[30%] xl:w-auto mx-auto">
             <ProductInfo
               page={page}
               currencyCode={currencyCode}
@@ -99,4 +89,9 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   };
 };
 
-export const LoadingFallback = () => <Section.Placeholder height="635px" />;
+export const LoadingFallback = () => (
+  <Section.Placeholder
+    height="635px"
+    class="md:max-w-[992px] flex flex-col mb-6 mx-auto"
+  />
+);
