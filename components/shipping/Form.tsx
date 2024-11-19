@@ -42,12 +42,18 @@ export async function action(props: Props, req: Request, ctx: AppContext) {
 }
 
 export function Results({ result }: { result?: SimulationOrderForm | null }) {
-  const methods = result?.logisticsInfo?.reduce(
-    (initial, { slas }) => [...initial, ...slas],
-    [] as Sla[],
-  ) ?? [];
+  const methodsBySeller = result?.logisticsInfo?.reduce((acc, { slas, itemIndex }) => {
+    // @ts-ignore
+    const seller = result.items[itemIndex]?.seller ?? "Journeys";
+    console.log({seller})
+    if (!acc[seller]) {
+      acc[seller] = [];
+    }
+    acc[seller].push(...slas);
+    return acc;
+  }, {} as Record<string, Sla[]>) ?? {};
 
-  if (!methods.length) {
+  if (!Object.keys(methodsBySeller).length) {
     return (
       <div class="p-2">
         <span>CEP inválido</span>
@@ -60,17 +66,26 @@ export function Results({ result }: { result?: SimulationOrderForm | null }) {
       <div class="hidden" id="shipping-result">
         {JSON.stringify(result)}
       </div>
-      {methods.map((method) => (
-        <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
-          <span class="text-button text-center">{method.name}</span>
-          <span class="text-button">
-            {formatShippingEstimate(method.shippingEstimate)}
-          </span>
-          <span class="text-base font-semibold text-right">
-            {method.price === 0
-              ? "Free"
-              : formatPrice(method.price / 100, "USD", "en-US")}
-          </span>
+      {Object.entries(methodsBySeller).map(([seller, methods]) => (
+        <li key={seller} class="flex flex-col gap-2">
+          {
+            Object.entries(methodsBySeller).length > 1 && (
+              <span class="font-bold">Seller: {seller}</span>
+            )
+          }
+          {methods.map((method) => (
+            <div class="flex justify-between items-center border-base-200 not-first-child:border-t">
+              <span class="text-button text-center">{method.name}</span>
+              <span class="text-button">
+                {formatShippingEstimate(method.shippingEstimate)}
+              </span>
+              <span class="text-base font-semibold text-right">
+                {method.price === 0
+                  ? "Free"
+                  : formatPrice(method.price / 100, "USD", "en-US")}
+              </span>
+            </div>
+          ))}
         </li>
       ))}
       <span class="text-xs font-thin">
