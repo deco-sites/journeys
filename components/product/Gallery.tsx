@@ -6,14 +6,14 @@ import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import Slider from "../ui/Slider.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
-
+import ProductVariantSelector from "./ProductVariantSelector.tsx";
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 }
 
-const WIDTH = 600;
-const HEIGHT = 600;
+const WIDTH = 478;
+const HEIGHT = 478;
 const ASPECT_RATIO = `${WIDTH} / ${HEIGHT}`;
 
 /**
@@ -59,15 +59,15 @@ export default function GallerySlider(props: Props) {
         {!isMobile && (
           <ul
             class="carousel carousel-vertical gap-2 max-w-full overflow-x-auto sm:overflow-y-auto shrink-0"
-            style={{ maxHeight: "532px" }}
+            style={{ maxHeight: "478px" }}
           >
             {images.map((img, index) => (
-              <li class="carousel-item size-[100px]">
+              <li class="carousel-item size-[73px]">
                 <Slider.Dot index={index}>
                   <Image
                     class="group-disabled:border-base-400 border rounded object-cover w-full h-full aspect-square"
-                    width={100}
-                    height={100}
+                    width={73}
+                    height={73}
                     src={img.url!}
                     alt={img.alternateName}
                   />
@@ -78,7 +78,7 @@ export default function GallerySlider(props: Props) {
         )}
 
         {/* Image Slider */}
-        <div class="relative h-min flex-grow min-w-0">
+        <div class="relative h-min flex-grow min-w-0 flex flex-col">
           <Slider class="carousel carousel-center gap-6 w-full">
             {images.map((img, index) => (
               <Slider.Item index={index} class="carousel-item w-full">
@@ -98,7 +98,6 @@ export default function GallerySlider(props: Props) {
               </Slider.Item>
             ))}
           </Slider>
-
           {
             /* <Slider.PrevButton
                         class='no-animation absolute left-2 top-1/2 btn btn-circle btn-outline disabled:invisible'
@@ -121,6 +120,9 @@ export default function GallerySlider(props: Props) {
         </div>
 
         <Slider.JS rootId={id} />
+      </div>
+      <div class="flex-grow lg:ml-[73px] mt-5">
+        <ProductVariantSelector product={product} propsToShow={["Color"]} />
       </div>
     </>
   );

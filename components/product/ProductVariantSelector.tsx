@@ -4,8 +4,11 @@ import { relative } from "../../sdk/url.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import { useSection } from "@deco/deco/hooks";
+import Image from "apps/website/components/Image.tsx";
+
 interface Props {
   product: Product;
+  propsToShow?: string[];
 }
 const colors: Record<string, string | undefined> = {
   "White": "white",
@@ -50,13 +53,14 @@ export const Ring = ({ value, checked = false, class: _class }: {
     </span>
   );
 };
-function VariantSelector({ product }: Props) {
+function VariantSelector({ product, propsToShow }: Props) {
   const { url, isVariantOf } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const possibilities = useVariantPossibilities(hasVariant, product);
   const relativeUrl = relative(url);
   const id = useId();
   const filteredNames = Object.keys(possibilities).filter((name) =>
+    propsToShow?.includes(name) &&
     name.toLowerCase() !== "title" && name.toLowerCase() !== "default title"
   );
   if (filteredNames.length === 0) {
@@ -69,14 +73,21 @@ function VariantSelector({ product }: Props) {
       hx-swap="outerHTML"
       hx-sync="this:replace"
     >
+      <div id="variant-selector-info" class="hidden">
+        {JSON.stringify(filteredNames)}
+      </div>
       {filteredNames.map((name) => (
         <li class="flex flex-col gap-2">
-          <span class="text-sm">{name}</span>
+          <span class="text-xs font-primary">
+            {name === "Color"
+              ? `${Object.keys(possibilities[name]).length} Colors Available:`
+              : name}
+          </span>
           <ul class="flex flex-row gap-4">
             {Object.entries(possibilities[name])
               .filter(([value]) => value)
               .map(([value, link]) => {
-                const relativeLink = relative(link);
+                const relativeLink = relative(link?.url);
                 const checked = relativeLink === relativeUrl;
                 return (
                   <li>
@@ -97,7 +108,17 @@ function VariantSelector({ product }: Props) {
                           "[.htmx-request_&]:opacity-0 transition-opacity",
                         )}
                       >
-                        <Ring value={value} checked={checked} />
+                        {name === "Color"
+                          ? (
+                            <Image
+                              width={85}
+                              height={85}
+                              src={possibilities[name][value]?.image || ""}
+                              alt={value}
+                              class={checked ? "border border-[#707070]" : ""}
+                            />
+                          )
+                          : <Ring value={value} checked={checked} />}
                       </div>
                       {/* Loading spinner */}
                       <div

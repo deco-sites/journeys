@@ -52,7 +52,8 @@ import * as $$$$$$27 from "./sections/Product/Wishlist.tsx";
 import * as $$$$$$28 from "./sections/Session.tsx";
 import * as $$$$$$29 from "./sections/Social/InstagramPosts.tsx";
 import * as $$$$$$30 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$31 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$31 from "./sections/Theme/Background.tsx";
+import * as $$$$$$32 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -100,7 +101,8 @@ const manifest = {
     "site/sections/Session.tsx": $$$$$$28,
     "site/sections/Social/InstagramPosts.tsx": $$$$$$29,
     "site/sections/Social/WhatsApp.tsx": $$$$$$30,
-    "site/sections/Theme/Theme.tsx": $$$$$$31,
+    "site/sections/Theme/Background.tsx": $$$$$$31,
+    "site/sections/Theme/Theme.tsx": $$$$$$32,
   },
   "matchers": {
     "site/matchers/language.ts": $$$$$$$0,

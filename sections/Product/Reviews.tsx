@@ -2,7 +2,7 @@ import Icon from "../../components/ui/Icon.tsx";
 
 export default function Reviews() {
   return (
-    <div class="md:container">
+    <div class="md:max-w-[992px] mx-auto">
       <div class="bg-white">
         <div class="max-w-7xl mx-auto pt-14 pb-20 px-4 flex flex-col text-[#202020]">
           <div class="flex flex-col items-center mb-4 gap-0.5">
@@ -24,7 +24,9 @@ export default function Reviews() {
           </div>
 
           <div class="flex flex-col mb-6 self-start">
+            <label htmlFor="sortSelect" class="sr-only">Sort Reviews</label>
             <select
+              id="sortSelect"
               class="appearance-none border border-[#ccc] text-[#202020] h-8 px-3 w-full text-sm outline-0"
               required
             >
