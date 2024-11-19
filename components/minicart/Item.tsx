@@ -66,7 +66,7 @@ function CartItem({ item, index, locale, currency }: Props) {
           <span class="line-through text-sm">
             {formatPrice(listPrice, currency, locale)}
           </span>
-          <span class="text-sm text-secondary">
+          <span class="text-sm text-primary">
             {isGift ? "Grátis" : formatPrice(price, currency, locale)}
           </span>
         </div>

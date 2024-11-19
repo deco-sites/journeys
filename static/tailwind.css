@@ -6213,6 +6213,10 @@ details.collapse summary::-webkit-details-marker {
     margin-top: 5rem;
   }
 
+  .md\:max-w-\[1256px\] {
+    max-width: 1256px;
+  }
+
   .md\:max-w-\[50\%\] {
     max-width: 50%;
   }

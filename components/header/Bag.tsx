@@ -22,7 +22,7 @@ function Bag() {
   return (
     <>
       <label
-        class="indicator items-baseline"
+        class="indicator items-baseline cursor-pointer"
         for={MINICART_DRAWER_ID}
         aria-label="open cart"
       >

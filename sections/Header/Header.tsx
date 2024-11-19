@@ -172,7 +172,7 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
       <div
-        class="absolute top-0 bg-base-100 container"
+        class="absolute top-0 bg-base-100 container p-4"
         style={{ marginTop: HEADER_HEIGHT_MOBILE }}
       >
         {loading === "lazy"
