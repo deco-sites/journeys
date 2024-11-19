@@ -72,6 +72,8 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
   };
 };
 
+export type Offer = ReturnType<typeof useOffer>;
+
 export const useMultipleOffers = (aggregateOffer?: AggregateOffer) => {
   const offers = aggregateOffer?.offers.map((offer) => {
     const listPrice = offer?.priceSpecification.find((spec) =>

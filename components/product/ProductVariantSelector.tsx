@@ -67,8 +67,8 @@ function VariantSelector({ product, propsToShow }: Props) {
     return null;
   }
 
-  console.log("possibilities", possibilities);
-  console.log("filteredNames", filteredNames);
+  // console.log("possibilities", possibilities);
+  // console.log("filteredNames", filteredNames);
   return (
     <ul
       class="flex flex-col gap-4"

@@ -33,6 +33,16 @@ const onClick = () => {
   //   platformProps.orderItems.find((item) => item.id === selectedSku?.value)!.id =
   //     selectedSku.value;
   // }
+  const $selectedSeller = document.querySelector<HTMLInputElement>(
+    'input[type="radio"][name="selectedSeller"]:checked',
+  )?.value;
+
+  if ($selectedSeller && platformProps?.orderItems[0]) {
+    console.log("selectedSeller", $selectedSeller);
+    platformProps.orderItems[0].seller = $selectedSeller;
+  }
+
+  console.log("onClick before", { item, platformProps });
 
   window.STOREFRONT.CART.addToCart(item, platformProps);
 };

@@ -5,8 +5,6 @@ import {
 import { Place, ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Gallery from "../../components/product/Gallery.tsx";
-import { clx } from "../../sdk/clx.ts";
-import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useMultipleOffers, useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
@@ -19,6 +17,8 @@ import StoreAvailability from "./StoreAvailability.tsx";
 // import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 // import { relative } from "../../sdk/url.ts";
 import VariantSelector from "./ProductVariantSelector.tsx";
+import { useComponent } from "../../sections/Component.tsx";
+import ProductPrice from "./ProductPrice.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -63,14 +63,6 @@ function ProductInfo({ page, currencyCode, locale, selectedStore }: Props) {
     quantity: 1,
     seller: seller ?? "",
   })) ?? [{ id: Number(product.sku), quantity: 1, seller: seller }];
-  // const allSellers = [
-  //   { id: seller, name: sellerName },
-  //   ...(mockSellers || []),
-  // ];
-
-  // console.log({ allSellers });
-
-  const hasDiscount = listPrice > price;
 
   const breadcrumb = {
     ...breadcrumbList,
@@ -132,20 +124,11 @@ function ProductInfo({ page, currencyCode, locale, selectedStore }: Props) {
 
       {/* Prices */}
       <div class="flex items-center gap-1 mb-4">
-        {hasDiscount && (
-          <span class="line-through text-xl text-[#707070]">
-            {formatPrice(listPrice, currencyCode, locale)}
-          </span>
-        )}
-        <span
-          class={clx(
-            "text-xl",
-            hasDiscount ? "text-[#d41d18]" : "text-[#202020]",
-          )}
-        >
-          {formatPrice(price, currencyCode, locale)}
-        </span>
-
+        <ProductPrice
+          offer={offerss?.[0]}
+          currencyCode={currencyCode}
+          locale={locale}
+        />
         {/* Rating */}
         <div class="flex items-center ml-auto">
           <Icon id="star" class="text-black" size={22} />
@@ -244,19 +227,34 @@ function ProductInfo({ page, currencyCode, locale, selectedStore }: Props) {
       }
 
       {allSellers?.length > 1 && (
-        <div class="flex flex-col gap-2 border border-[#A7A8AA] rounded-sm mb-7">
-          <ul>
-            {allSellers?.map(({ id, name }, index) => (
-              <li class="p-2">
+        <div class=" mb-7 flex flex-col gap-2">
+          <span class="text-sm text-[#202020] font-primary">
+            Shipping and sold by:
+          </span>
+          <ul class="flex flex-col border border-[#A7A8AA] rounded-sm">
+            {allSellers?.map(({ id, name }) => (
+              <li
+                class="p-2"
+                hx-target="#product-price"
+                hx-swap="outerHTML transition:true"
+                hx-get={useComponent(
+                  import.meta.resolve("./ProductPrice.tsx"),
+                  {
+                    offer: offerss?.find((offer) => offer.seller === id),
+                    currencyCode,
+                    locale,
+                  },
+                )}
+              >
                 <label class="label cursor-pointer justify-start gap-2">
                   <input
                     type="radio"
-                    name="radio-10"
+                    name="selectedSeller"
                     class="radio checked:bg-black"
-                    checked={index === 0}
+                    checked={seller === id}
                     value={id ?? ""}
                   />
-                  <span class="label-text uppercase">{name}</span>
+                  <span class="label-text uppercase font-primary">{name}</span>
                 </label>
               </li>
             ))}

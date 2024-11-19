@@ -25,7 +25,7 @@ const removeItemHandler = () => {
   }
 };
 function CartItem({ item, index, locale, currency }: Props) {
-  const { image, listPrice, price = Infinity, quantity } = item;
+  const { image, listPrice, price = Infinity, quantity, affiliation } = item;
   const isGift = price < 0.01;
   // deno-lint-ignore no-explicit-any
   const name = (item as any).item_name;
@@ -60,6 +60,13 @@ function CartItem({ item, index, locale, currency }: Props) {
             <Icon id="trash" size={24} />
           </button>
         </div>
+
+        {/* Seller */}
+        {affiliation !== "1" && (
+          <div class="text-xs text-[#202020] font-primary italic">
+            Shipping and sold by: {affiliation}
+          </div>
+        )}
 
         {/* Price Block */}
         <div class="flex items-center gap-2">
