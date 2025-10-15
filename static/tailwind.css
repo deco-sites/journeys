@@ -3625,9 +3625,6 @@ details.collapse summary::-webkit-details-marker {
 .pointer-events-auto {
   pointer-events: auto;
 }
-.visible {
-  visibility: visible;
-}
 .collapse {
   visibility: collapse;
 }
