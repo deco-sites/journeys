@@ -189,7 +189,13 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
       <div class="flex justify-center items-center w-full px-2.5 container">
         <div class="pr-9">
           <a href="/" aria-label="Store logo">
-            <Image src={logo.src} alt={logo.alt} width={91} height={38} />
+            <Image 
+              src={logo.src} 
+              alt={logo.alt} 
+              width={logo.width || 200} 
+              height={logo.height || 100} 
+              class="h-auto max-h-[38px]"
+            />
           </a>
         </div>
         <ul class="flex gap-8">
@@ -298,8 +304,8 @@ const Mobile = ({
           <Image
             src={logo.src}
             alt={logo.alt}
-            width={logo.width || 100}
-            height={logo.height || 13}
+            width={logo.width || 200}
+            height={logo.height || 100}
             class="w-auto max-w-full h-auto max-h-10 inline-block"
           />
         </a>

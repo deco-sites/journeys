@@ -4017,6 +4017,9 @@ details.collapse summary::-webkit-details-marker {
 .max-h-\[300px\] {
   max-height: 300px;
 }
+.max-h-\[38px\] {
+  max-height: 38px;
+}
 .max-h-\[55px\] {
   max-height: 55px;
 }
