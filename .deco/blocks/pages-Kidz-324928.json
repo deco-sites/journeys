@@ -27,7 +27,7 @@
                 "__resolveType": "website/flags/multivariate/image.ts",
                 "variants": [
                   {
-                    "value": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c70caee9-de64-4b56-af09-a17268a37761/logo-kidz-main.webp",
+                    "value": "https://decoims.com/journeys/c70caee9-de64-4b56-af09-a17268a37761/logo-kidz-main.webp",
                     "rule": {
                       "__resolveType": "website/matchers/cookie.ts",
                       "name": "store_variant",
@@ -35,7 +35,7 @@
                     }
                   },
                   {
-                    "value": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/4da000a7-5db9-40c4-8766-2d9d0504d6ea/journeys-logo.webp",
+                    "value": "https://decoims.com/journeys/4da000a7-5db9-40c4-8766-2d9d0504d6ea/journeys-logo.webp",
                     "rule": {
                       "__resolveType": "website/matchers/always.ts"
                     }
@@ -285,18 +285,18 @@
             "__resolveType": "site/sections/Images/Carousel.tsx",
             "images": [
               {
-                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/f938bb92-1103-49bc-ad3c-c7ddfa6945f3/c9583dff-9647-4dd5-9514-1b33acdc8bd2.jpg",
-                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/51b49ba5-1f37-4d6a-91c8-f7b355cb1b92/45e00479-715e-421b-a768-d54df4f9ce91.jpg",
+                "desktop": "https://decoims.com/journeys/f938bb92-1103-49bc-ad3c-c7ddfa6945f3/c9583dff-9647-4dd5-9514-1b33acdc8bd2.jpg",
+                "mobile": "https://decoims.com/journeys/51b49ba5-1f37-4d6a-91c8-f7b355cb1b92/45e00479-715e-421b-a768-d54df4f9ce91.jpg",
                 "alt": "Get Gifting with crocs"
               },
               {
-                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
-                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
+                "desktop": "https://decoims.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
+                "mobile": "https://decoims.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
                 "alt": "Birkenstock"
               },
               {
-                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
-                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
+                "desktop": "https://decoims.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
+                "mobile": "https://decoims.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
                 "alt": "Stand out this season"
               }
             ]
@@ -316,18 +316,18 @@
             "__resolveType": "site/sections/Images/Carousel.tsx",
             "images": [
               {
-                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/26c84523-535c-4d05-82b5-a60264a05434/e5090b7f-67eb-4b38-91d8-4ea17a8792c4.jpg",
-                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/10234eef-2581-4647-9a9f-476962f4908f/cb872da4-08c0-4f73-991d-b29a9a03892c.jpg",
+                "desktop": "https://decoims.com/journeys/26c84523-535c-4d05-82b5-a60264a05434/e5090b7f-67eb-4b38-91d8-4ea17a8792c4.jpg",
+                "mobile": "https://decoims.com/journeys/10234eef-2581-4647-9a9f-476962f4908f/cb872da4-08c0-4f73-991d-b29a9a03892c.jpg",
                 "alt": "Tasman"
               },
               {
-                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
-                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
+                "desktop": "https://decoims.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
+                "mobile": "https://decoims.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
                 "alt": "Birkenstock"
               },
               {
-                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
-                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
+                "desktop": "https://decoims.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
+                "mobile": "https://decoims.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
                 "alt": "Stand out this season"
               }
             ]
@@ -347,18 +347,18 @@
             "__resolveType": "site/sections/Images/Carousel.tsx",
             "images": [
               {
-                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/f938bb92-1103-49bc-ad3c-c7ddfa6945f3/c9583dff-9647-4dd5-9514-1b33acdc8bd2.jpg",
-                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/51b49ba5-1f37-4d6a-91c8-f7b355cb1b92/45e00479-715e-421b-a768-d54df4f9ce91.jpg",
+                "desktop": "https://decoims.com/journeys/f938bb92-1103-49bc-ad3c-c7ddfa6945f3/c9583dff-9647-4dd5-9514-1b33acdc8bd2.jpg",
+                "mobile": "https://decoims.com/journeys/51b49ba5-1f37-4d6a-91c8-f7b355cb1b92/45e00479-715e-421b-a768-d54df4f9ce91.jpg",
                 "alt": "Get Gifting with crocs"
               },
               {
-                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
-                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
+                "desktop": "https://decoims.com/journeys/7fb943ed-7a3e-4c88-98cd-4b12720c26b9/first.jpg",
+                "mobile": "https://decoims.com/journeys/c4562046-d793-43d8-9bdd-2d49f2e28411/second-mobile.jpg",
                 "alt": "Birkenstock"
               },
               {
-                "desktop": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
-                "mobile": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
+                "desktop": "https://decoims.com/journeys/ba20d8b7-f128-45dc-b0c1-246f94691058/third.jpg",
+                "mobile": "https://decoims.com/journeys/1873b7db-4ddd-4e03-ac80-c1a8cb4c041f/third-mobile.jpg",
                 "alt": "Stand out this season"
               }
             ]
@@ -373,28 +373,28 @@
       "__resolveType": "site/sections/Category/CategoryList.tsx",
       "categories": [
         {
-          "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/d8e46b35-46b5-42b4-8f03-b5a259824390/1_10262.jpg",
+          "image": "https://decoims.com/journeys/d8e46b35-46b5-42b4-8f03-b5a259824390/1_10262.jpg",
           "href": "#",
           "label": "SHOP GIRLS",
           "width": 400,
           "height": 400
         },
         {
-          "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c63ad60c-2f1c-425d-986e-0dbbd723bf52/1_10263.jpg",
+          "image": "https://decoims.com/journeys/c63ad60c-2f1c-425d-986e-0dbbd723bf52/1_10263.jpg",
           "href": "#",
           "label": "SHOP BOYS",
           "width": 400,
           "height": 400
         },
         {
-          "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/fd5cf587-1472-4e66-a873-f627c9792c57/1_10264.jpg",
+          "image": "https://decoims.com/journeys/fd5cf587-1472-4e66-a873-f627c9792c57/1_10264.jpg",
           "href": "#",
           "label": "SHOP BEST SELLERS",
           "width": 400,
           "height": 400
         },
         {
-          "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/9adb0334-b876-4d26-9a94-953fb9ecccb2/1_10265.jpg",
+          "image": "https://decoims.com/journeys/9adb0334-b876-4d26-9a94-953fb9ecccb2/1_10265.jpg",
           "href": "#",
           "label": "SHOP NEW ARRIVALS",
           "width": 400,
@@ -424,7 +424,7 @@
         "__resolveType": "site/sections/Content/CollectionList.tsx",
         "collections": [
           {
-            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/f69e7dec-28b9-4888-bb8a-951b85631ad7/1_10286.jpg",
+            "image": "https://decoims.com/journeys/f69e7dec-28b9-4888-bb8a-951b85631ad7/1_10286.jpg",
             "href": "#",
             "title": "BRIGHTEN THEIR SEASON WITH UGG",
             "label": "SHOP UGG",
@@ -432,7 +432,7 @@
             "height": 700
           },
           {
-            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/c9b88f45-69a5-4d47-acaa-8ce7c60bdafa/1_10287.jpg",
+            "image": "https://decoims.com/journeys/c9b88f45-69a5-4d47-acaa-8ce7c60bdafa/1_10287.jpg",
             "href": "#",
             "title": "LET YOUR STYLE SPARKLE",
             "label": "SHOP DR. MARTENS",
@@ -441,7 +441,7 @@
           },
           {
             "href": "#",
-            "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/journeys/332bcebe-4a24-4733-b219-b6c2070de044/1_10288.jpg",
+            "image": "https://decoims.com/journeys/332bcebe-4a24-4733-b219-b6c2070de044/1_10288.jpg",
             "title": "BOOT GIFTS THEY'LL LOVE",
             "label": "SHOP TIMBERLAND",
             "width": 700,
